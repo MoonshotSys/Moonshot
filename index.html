@@ -370,8 +370,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
   <div class="fchip" onclick="toggleFilter('bvp',this)">💥 BVP</div>
   <div class="fchip" onclick="toggleFilter('narr',this)">🔔 Narrative</div>
   <div class="fchip" onclick="toggleFilter('gascan',this)">🗑️ Gascans</div>
-  <div class="fchip" onclick="toggleFilter('hot',this)">🌡️ 80°+</div>
-  <div class="fchip" onclick="toggleFilter('windout',this)">🌬️ Wind Out</div>
+  <div class="fchip" onclick="toggleFilter('loaded',this)">💪 Loaded</div>
   <div class="fchip" onclick="toggleFilter('sb',this)">🏃 SB</div>
 </div>
 </div>
@@ -970,7 +969,9 @@ const batterSplits = {
   "Matt Chapman": { vsR:{hr:4,h:48,avg:0.253,slg:0.384,iso:0.132,k_pct:20.3,bb_pct:7.5,sb:0,cs:1,wrc:102}, vsL:{hr:2,h:18,avg:0.281,slg:0.469,iso:0.188,k_pct:20.5,bb_pct:17.9,sb:0,cs:0,wrc:150} },
   "Matt McLain": { vsR:{hr:5,h:35,avg:0.198,slg:0.345,iso:0.147,k_pct:25.9,bb_pct:9.6,sb:8,cs:1,wrc:75}, vsL:{hr:3,h:11,avg:0.234,slg:0.426,iso:0.191,k_pct:18.3,bb_pct:18.3,sb:2,cs:1,wrc:134} },
   "Matt Olson": { vsR:{hr:12,h:43,avg:0.276,slg:0.564,iso:0.288,k_pct:24.3,bb_pct:10.7,sb:1,cs:0,wrc:149}, vsL:{hr:8,h:30,avg:0.263,slg:0.561,iso:0.298,k_pct:21.3,bb_pct:8.7,sb:1,cs:0,wrc:145} },
-  "Max Muncy": { vsR:{hr:1,h:18,avg:0.257,slg:0.357,iso:0.100,k_pct:35.5,bb_pct:1.3,sb:1,cs:1,wrc:80}, vsL:{hr:1,h:7,avg:0.206,slg:0.471,iso:0.265,k_pct:29.3,bb_pct:14.6,sb:1,cs:0,wrc:127} },
+  "Max Muncy (LAD)": { vsR:{hr:11,h:44,avg:0.272,slg:0.525,iso:0.253,k_pct:23.8,bb_pct:13.8,sb:0,cs:0,wrc:154}, vsL:{hr:3,h:11,avg:0.229,slg:0.438,iso:0.208,k_pct:26.4,bb_pct:5.7,sb:0,cs:0,wrc:111} },
+  "Max Muncy": { vsR:{hr:11,h:44,avg:0.272,slg:0.525,iso:0.253,k_pct:23.8,bb_pct:13.8,sb:0,cs:0,wrc:154}, vsL:{hr:3,h:11,avg:0.229,slg:0.438,iso:0.208,k_pct:26.4,bb_pct:5.7,sb:0,cs:0,wrc:111} },
+  "Max Muncy (ATH)": { vsR:{hr:1,h:18,avg:0.257,slg:0.357,iso:0.100,k_pct:35.5,bb_pct:1.3,sb:1,cs:1,wrc:80}, vsL:{hr:1,h:7,avg:0.206,slg:0.471,iso:0.265,k_pct:29.3,bb_pct:14.6,sb:1,cs:0,wrc:127} },
   "Mike Trout": { vsR:{hr:12,h:41,avg:0.222,slg:0.454,iso:0.232,k_pct:23.7,bb_pct:20.3,sb:5,cs:0,wrc:137}, vsL:{hr:3,h:14,avg:0.237,slg:0.441,iso:0.203,k_pct:26.3,bb_pct:22.4,sb:1,cs:0,wrc:140} },
   "Mitch Garver": { vsR:{hr:2,h:5,avg:0.106,slg:0.234,iso:0.128,k_pct:35.1,bb_pct:17.5,sb:0,cs:0,wrc:54}, vsL:{hr:1,h:11,avg:0.282,slg:0.410,iso:0.128,k_pct:21.7,bb_pct:15.2,sb:0,cs:0,wrc:133} },
   "Mookie Betts": { vsR:{hr:4,h:18,avg:0.180,slg:0.320,iso:0.140,k_pct:11.9,bb_pct:7.3,sb:0,cs:1,wrc:63}, vsL:{hr:2,h:7,avg:0.184,slg:0.395,iso:0.211,k_pct:11.6,bb_pct:9.3,sb:0,cs:1,wrc:82} },
@@ -1247,7 +1248,9 @@ const batterBarrels = {
   "Matt Chapman": {pa:274,barrel_n:7,barrel_pct:4.9,ev_avg:87.5,ev_max:113.0,angle:"9.2",avg_hit_dist:130,avg_hr_dist:349,max_hr_dist:0,hard:29.4,med:45.2,soft:25.4,pull:40.6,center:34.0,oppo:25.4,xba:0.208,xslg:0.285,speed:23.7},
   "Matt McLain": {pa:238,barrel_n:10,barrel_pct:7.4,ev_avg:88.1,ev_max:110.5,angle:"20.3",avg_hit_dist:186,avg_hr_dist:398,max_hr_dist:0,hard:30.1,med:55.2,soft:14.7,pull:35.0,center:40.5,oppo:24.5,xba:0.233,xslg:0.384,speed:24.7},
   "Matt Olson": {pa:285,barrel_n:24,barrel_pct:15.5,ev_avg:93.0,ev_max:111.6,angle:"16.6",avg_hit_dist:184,avg_hr_dist:413,max_hr_dist:0,hard:40.4,med:43.8,soft:15.8,pull:37.0,center:37.9,oppo:25.1,xba:0.259,xslg:0.546,speed:21.2},
+  "Max Muncy (LAD)": {pa:225,barrel_n:21,barrel_pct:18.4,ev_avg:91.8,ev_max:110.1,angle:"14.3",avg_hit_dist:189,avg_hr_dist:407,max_hr_dist:0,hard:43.0,med:43.0,soft:13.9,pull:55.6,center:28.5,oppo:15.9,xba:0.274,xslg:0.567,speed:22.8},
   "Max Muncy": {pa:225,barrel_n:21,barrel_pct:18.4,ev_avg:91.8,ev_max:110.1,angle:"14.3",avg_hit_dist:189,avg_hr_dist:407,max_hr_dist:0,hard:43.0,med:43.0,soft:13.9,pull:55.6,center:28.5,oppo:15.9,xba:0.274,xslg:0.567,speed:22.8},
+  "Max Muncy (ATH)": {pa:96,barrel_n:7,barrel_pct:12.3,ev_avg:92.5,ev_max:111.4,angle:"10.5",avg_hit_dist:154,avg_hr_dist:383,max_hr_dist:0,hard:43.3,med:40.3,soft:16.4,pull:46.3,center:32.8,oppo:20.9,xba:0.224,xslg:0.391,speed:24.7},
   "Mike Trout": {pa:292,barrel_n:27,barrel_pct:20.5,ev_avg:91.4,ev_max:114.6,angle:"20.9",avg_hit_dist:204,avg_hr_dist:407,max_hr_dist:0,hard:45.2,med:40.5,soft:14.3,pull:41.1,center:33.3,oppo:25.6,xba:0.257,xslg:0.578,speed:24.1},
   "Mitch Garver": {pa:103,barrel_n:3,barrel_pct:7.5,ev_avg:91.2,ev_max:110.5,angle:"15.8",avg_hit_dist:182,avg_hr_dist:388,max_hr_dist:0,hard:28.6,med:55.4,soft:16.1,pull:58.9,center:28.6,oppo:12.5,xba:0.175,xslg:0.319,speed:20.5},
   "Mookie Betts": {pa:149,barrel_n:7,barrel_pct:10.6,ev_avg:91.2,ev_max:105.6,angle:"18.6",avg_hit_dist:204,avg_hr_dist:387,max_hr_dist:0,hard:36.4,med:55.4,soft:8.3,pull:38.8,center:42.2,oppo:19.0,xba:0.267,xslg:0.459,speed:21.0},
@@ -1520,7 +1523,9 @@ const batterAdv = {
   "Matt Chapman": {iso:0.146,slg:0.406,wrc:115,chase:28.7,hr:6},
   "Matt McLain": {iso:0.156,slg:0.362,wrc:89,chase:27.6,hr:8},
   "Matt Olson": {iso:0.293,slg:0.563,wrc:148,chase:30.7,hr:20},
-  "Max Muncy": {iso:0.154,slg:0.394,wrc:96,chase:40.3,hr:2},
+  "Max Muncy (LAD)": {iso:0.243,slg:0.505,wrc:144,chase:27.9,hr:14},
+  "Max Muncy": {iso:0.243,slg:0.505,wrc:144,chase:27.9,hr:14},
+  "Max Muncy (ATH)": {iso:0.154,slg:0.394,wrc:96,chase:40.3,hr:2},
   "Mike Trout": {iso:0.225,slg:0.451,wrc:138,chase:22.3,hr:15},
   "Mitch Garver": {iso:0.128,slg:0.314,wrc:89,chase:26.2,hr:3},
   "Mookie Betts": {iso:0.159,slg:0.341,wrc:69,chase:24.0,hr:6},
@@ -3619,9 +3624,9 @@ function getBAdvSplit(name) {
 }
 
 function calcHRIQ(batter, facingPH, battingSpot, g) {
-  const bb   = getBBrl(batter.name);
-  const bs   = getBSplit(batter.name);
-  const adv  = getBAdvSplit(batter.name);
+  const bb   = getBBrlT(batter.name, batter.team||'');
+  const bs   = getBSplitT(batter.name, batter.team||'');
+  const adv  = getBAdvT(batter.name, batter.team||'');
   const pitcherName = g ? (batter._side==='away' ? g.homeP : g.awayP) : '';
   const pH   = g ? (batter._side==='away' ? g.homePH : g.awayPH) : facingPH;
   const pbl  = getPBrl(pitcherName);
@@ -3869,25 +3874,6 @@ const PARK_DATA = {
   'ATH':{name:'Sutter Health Park',roof:'open',altitude:30,windReactivity:0.55,prevailingWind:'out',walls:{LF:{dist:330,height:8},LCF:{dist:375,height:8},CF:{dist:403,height:8},RCF:{dist:375,height:8},RF:{dist:325,height:8}}}
 };
 
-
-function calcGameEnvIQ(g) {
-  if(!g) return 50;
-  if(g.dome) return 53;
-  const park  = PARK_DATA[g.home]||{};
-  const temp  = g.temp||72, mph = g.windMph||0, dir = g.windDir||'neutral';
-  const wr    = park.windReactivity||0.5, hrF = park.hrFactor||1.0;
-  const alt   = park.altitude||0;
-  const tempScore = (temp - 72) * 0.55;
-  const effMph = Math.max(0, mph - 4);
-  const isOut  = dir==='out', isIn = dir==='in';
-  const wBase  = isOut?1.0:isIn?-1.0:(dir==='L-R'||dir==='R-L')?0.15:0.0;
-  const wTempMod = isOut&&temp>=80?1.15:isOut&&temp<=55?0.70:
-                   isIn&&temp<=50?1.20:isIn&&temp>=80?0.80:1.0;
-  const wScore = wBase * wTempMod * (effMph/12) * wr * 28;
-  const altBonus = alt>=5000?12:alt>=2000?6:alt>=1000?3:alt>=500?1:0;
-  const pfBonus  = (hrF - 1.0) * 50;
-  return Math.min(99, Math.max(1, Math.round(50 + tempScore + wScore + altBonus + pfBonus)));
-}
 
 function calcEnvIQ(batter, g) {
   if(!g) return 50;
@@ -4686,7 +4672,27 @@ function renderGame(g) {
 
   // ── GAME ENV IQ — avg of all batters weighted by pull tendency vs park ──
   // Game ENV: direct park+weather — continuous temp, no batter averaging
-  const gameEnvIQ = calcGameEnvIQ(g);
+  const gameEnvIQ = (()=>{
+    if(g.dome) return 53;
+    const park  = PARK_DATA[g.home]||{};
+    const temp  = g.temp||72, mph = g.windMph||0, dir = g.windDir||'neutral';
+    const wr    = park.windReactivity||0.5, hrF = park.hrFactor||1.0;
+    const alt   = park.altitude||0;
+    // Continuous temp: 72° = 0, each degree worth 0.55 pts
+    const tempScore = (temp - 72) * 0.55;
+    // Wind: ignore ≤4mph (negligible), scale above that
+    const effMph = Math.max(0, mph - 4);
+    const isOut  = dir==='out', isIn = dir==='in';
+    const wBase  = isOut?1.0:isIn?-1.0:(dir==='L-R'||dir==='R-L')?0.15:0.0;
+    const wTempMod = isOut&&temp>=80?1.15:isOut&&temp<=55?0.70:
+                     isIn&&temp<=50?1.20:isIn&&temp>=80?0.80:1.0;
+    const wScore = wBase * wTempMod * (effMph/12) * wr * 28;
+    // Altitude bonus
+    const altBonus = alt>=5000?12:alt>=2000?6:alt>=1000?3:alt>=500?1:0;
+    // Park HR factor bonus
+    const pfBonus  = (hrF - 1.0) * 50;
+    return Math.min(99, Math.max(1, Math.round(50 + tempScore + wScore + altBonus + pfBonus)));
+  })();
   const envBgColor = gameEnvIQ>=70?'var(--cyan-bg)':gameEnvIQ>=50?'var(--bg4)':'var(--bg3)';
   const envColor   = gameEnvIQ>=70?'var(--cyan)':gameEnvIQ>=50?'var(--text2)':'var(--text3)';
 
@@ -4696,30 +4702,40 @@ function renderGame(g) {
     const v=getBvp(b.name); return v && v.hr>=1;
   });
 
-  // Gascans: either pitcher HR chip score >= 6 AND IP >= 12
+  // Gascans: either pitcher — HR/9 1.5+ AND BRL% 8%+ AND IP 15+
   function isGascan(pName) {
-    const ps=getPSplit(pName);
-    const pb=getPBrl(pName);
-    if(!ps && !pb) return false;
-    const r=ps?ps.vsR||{}:{}, l=ps?ps.vsL||{}:{};
-    const ip=(r.ip||0)+(l.ip||0);
-    // Two-way player fallback
-    if(!ip && pb && pb.ip>=12) {
-      return Math.min(10, Math.round((pb.hr9||0)/2.0*10)) >= 6;
-    }
+    const pb=getPBrl(pName), ps=getPSplit(pName);
+    if(!ps) return false;
+    const r=ps.vsR||{}, l=ps.vsL||{};
+    const ip=(r.ip||0)+(l.ip||0), hr=(r.hr||0)+(l.hr||0);
     if(ip<12) return false;
-    const totalHR=(r.hr||0)+(l.hr||0);
-    const hr9=totalHR/ip*9;
-    const hrScore=Math.min(10, Math.round(hr9/2.0*10));
-    return hrScore >= 6;
+    const hr9=hr/ip*9;
+    const brlPct=pb?(pb.barrel_pct||0):0;
+    return hr9>=1.2 && brlPct>=7;
   }
   const gascan = isGascan(g.awayP) || isGascan(g.homeP);
 
-  // Hot: temp >= 80 (exclude domes)
-  const hotFlag = !g.dome && (g.temp||0) >= 80;
+  // Loaded: 3+ batters HRIQ 55+ AND facing pitcher WHIP 1.20+
+  function lineupLoaded(lineup, facingP, facingPH, side) {
+    if(g.ou < 8.5) return false;
+    const scores=lineup.map((b,i)=>calcHRIQ({...b,_side:side},facingPH,i+1,g));
+    const topScores = scores.slice().sort((a,b)=>b-a).slice(0,4);
+    const avgTop4 = topScores.length ? topScores.reduce((a,b)=>a+b,0)/topScores.length : 0;
+    return avgTop4 >= 52;
+  }
+  const loaded = lineupLoaded(g.awayL,g.homeP,g.homePH,'away')||lineupLoaded(g.homeL,g.awayP,g.awayPH,'home');
 
-  // Wind Out: wind direction is out (any speed, exclude domes)
-  const windOutFlag = !g.dome && g.windDir === 'out';
+  // Standout: 1 batter 15+ HRIQ above next highest on their team
+  function hasStandout(lineup, facingPH, side) {
+    // Standout: has a player in top 5 HRIQ+ENV combined on the full slate
+    // Computed after all games scored — use top individual combined score
+    const combined = lineup.map((b,i)=>{
+      const bObj={...b,_side:side};
+      return calcHRIQ(bObj,facingPH,i+1,g) + calcEnvIQ(bObj,g);
+    });
+    return combined.some(s=>s>=110); // combined 55+55 threshold
+  }
+  const standout = hasStandout(g.awayL,g.homePH,'away')||hasStandout(g.homeL,g.awayPH,'home');
 
   // SB filter: pitcher net SB leaky AND lineup has active base stealers
   function pitcherSBRisk(pName, pH) {
@@ -4780,7 +4796,7 @@ function renderGame(g) {
   return '<div class="gcard'+(isPost?' postponed':hasHR?' hr-hi':'')+'" id="card-'+g.id+'"'
     +' data-ou="'+g.ou+'" data-bvphr="'+(bvpQual?1:0)+'" data-gid="'+g.id+'" data-time="'+g.time+'"'
     +' data-narr="'+(hasNarr?1:0)+'" data-gascan="'+(gascan?1:0)+'"'
-    +' data-hot="'+(hotFlag?1:0)+'" data-windout="'+(windOutFlag?1:0)+'" data-sb="'+(sbFlag?1:0)+'"'
+    +' data-loaded="'+(loaded?1:0)+'" data-standout="'+(standout?1:0)+'" data-sb="'+(sbFlag?1:0)+'"'
     +' data-conf="'+(bothConf?1:0)+'">'
     +'<div class="gtop">'
     +'<div class="gtop-row">'
@@ -4860,8 +4876,8 @@ function applyFilters() {
     if(activeFilters.has('bvp'))       show = show && card.dataset.bvphr==='1';
     if(activeFilters.has('narr'))      show = show && card.dataset.narr==='1';
     if(activeFilters.has('gascan'))    show = show && card.dataset.gascan==='1';
-    if(activeFilters.has('hot'))       show = show && card.dataset.hot==='1';
-    if(activeFilters.has('windout'))   show = show && card.dataset.windout==='1';
+    if(activeFilters.has('loaded'))    show = show && card.dataset.loaded==='1';
+    if(activeFilters.has('standout'))  show = show && card.dataset.standout==='1';
     if(activeFilters.has('sb'))        show = show && card.dataset.sb==='1';
     if(filterByTime) {
       const h = parseGameHour(card.dataset.time||'');
@@ -5166,15 +5182,15 @@ function calcBatterSortVal(name, side, g) {
   if(activeSorts.has('brl')) {
     const bb = getBBrl(name);
     const brl = bb ? (bb.barrel_pct||0) : 0;
-    // Normalize to 0-100: 20% BRL = 100
-    score += Math.min(100, Math.max(0, Math.round((brl / 20) * 100)));
+    // Normalize: 20% BRL → 50, 4% → 10, linear
+    score += Math.min(50, Math.max(0, Math.round((brl / 20) * 50)));
   }
   if(activeSorts.has('hrpa')) {
     const adv = getBAdvSplit(name);
     const bb  = getBBrl(name);
     const hrpa = (adv && bb && bb.pa > 0) ? (adv.hr||0) / bb.pa : 0;
-    // Normalize to 0-100: 0.07 HR/PA = 100
-    score += Math.min(100, Math.max(0, Math.round((hrpa / 0.07) * 100)));
+    // Normalize: 0.07 HR/PA → 50, linear
+    score += Math.min(50, Math.max(0, Math.round((hrpa / 0.07) * 50)));
   }
   return score;
 }
@@ -5191,31 +5207,29 @@ function sortScore(g) {
   if(activeSorts.has('hriq')) {
     const awayScores = g.awayL.map((b,i)=>calcHRIQ({...b,_side:'away'},g.homePH,i+1,g));
     const homeScores = g.homeL.map((b,i)=>calcHRIQ({...b,_side:'home'},g.awayPH,i+1,g));
-    const top5Away = awayScores.slice().sort((a,b)=>b-a).slice(0,5);
-    const top5Home = homeScores.slice().sort((a,b)=>b-a).slice(0,5);
-    const awayAvg = top5Away.length ? top5Away.reduce((a,b)=>a+b,0)/top5Away.length : 0;
-    const homeAvg = top5Home.length ? top5Home.reduce((a,b)=>a+b,0)/top5Home.length : 0;
+    const top3Away = awayScores.slice().sort((a,b)=>b-a).slice(0,3);
+    const top3Home = homeScores.slice().sort((a,b)=>b-a).slice(0,3);
+    const awayAvg = top3Away.length ? top3Away.reduce((a,b)=>a+b,0)/top3Away.length : 0;
+    const homeAvg = top3Home.length ? top3Home.reduce((a,b)=>a+b,0)/top3Home.length : 0;
     score += Math.round((awayAvg+homeAvg)/2);
   }
   if(activeSorts.has('env')) {
-    score += calcGameEnvIQ(g);
+    const allBat = [...g.awayL.map(b=>({...b,_side:'away'})),...g.homeL.map(b=>({...b,_side:'home'}))];
+    const envAll = allBat.map(b=>calcEnvIQ(b,g)).filter(s=>s>0);
+    score += envAll.length ? Math.round(envAll.reduce((a,b)=>a+b,0)/envAll.length) : 50;
   }
   if(activeSorts.has('brl')) {
-    const awayBrls = g.awayL.map(b=>{ const bb=getBBrl(b.name); return bb?(bb.barrel_pct||0):0; })
-      .filter(s=>s>0).sort((a,b)=>b-a).slice(0,5);
-    const homeBrls = g.homeL.map(b=>{ const bb=getBBrl(b.name); return bb?(bb.barrel_pct||0):0; })
-      .filter(s=>s>0).sort((a,b)=>b-a).slice(0,5);
-    const combined = [...awayBrls,...homeBrls];
-    const avgBrl = combined.length ? combined.reduce((a,b)=>a+b,0)/combined.length : 0;
-    score += Math.min(100, Math.round((avgBrl/20)*100));
+    const allBat = [...g.awayL,...g.homeL];
+    const brls = allBat.map(b=>{ const bb=getBBrl(b.name); return bb?(bb.barrel_pct||0):0; }).filter(s=>s>0);
+    const avgBrl = brls.length ? brls.reduce((a,b)=>a+b,0)/brls.length : 0;
+    score += Math.min(50, Math.round((avgBrl/20)*50));
   }
   if(activeSorts.has('hrpa')) {
-    const getHRPA = b => { const a=getBAdvSplit(b.name); const bb=getBBrl(b.name); return a&&bb&&bb.pa>0?(a.hr||0)/bb.pa:0; };
-    const awayVals = g.awayL.map(getHRPA).filter(s=>s>0).sort((a,b)=>b-a).slice(0,5);
-    const homeVals = g.homeL.map(getHRPA).filter(s=>s>0).sort((a,b)=>b-a).slice(0,5);
-    const combined = [...awayVals,...homeVals];
-    const avgHRPA = combined.length ? combined.reduce((a,b)=>a+b,0)/combined.length : 0;
-    score += Math.min(100, Math.round((avgHRPA/0.07)*100));
+    const allBat = [...g.awayL,...g.homeL];
+    const vals = allBat.map(b=>{ const a=getBAdvSplit(b.name); const bb=getBBrl(b.name);
+      return a&&bb&&bb.pa>0?(a.hr||0)/bb.pa:0; }).filter(s=>s>0);
+    const avgHRPA = vals.length ? vals.reduce((a,b)=>a+b,0)/vals.length : 0;
+    score += Math.min(50, Math.round((avgHRPA/0.07)*50));
   }
   return score;
 }
