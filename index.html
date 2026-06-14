@@ -370,8 +370,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
   <div class="fchip" onclick="toggleFilter('bvp',this)">💥 BVP</div>
   <div class="fchip" onclick="toggleFilter('narr',this)">🔔 Narrative</div>
   <div class="fchip" onclick="toggleFilter('gascan',this)">🗑️ Gascans</div>
-  <div class="fchip" onclick="toggleFilter('hot',this)">🌡️ 80°+</div>
-  <div class="fchip" onclick="toggleFilter('windout',this)">🌬️ Wind Out</div>
+  <div class="fchip" onclick="toggleFilter('loaded',this)">💪 Loaded</div>
   <div class="fchip" onclick="toggleFilter('sb',this)">🏃 SB</div>
 </div>
 </div>
@@ -816,6 +815,7 @@ const batterSplits = {
   "A. Rutschman": { vsR:{hr:5,h:33,avg:0.284,slg:0.534,iso:0.250,k_pct:15.0,bb_pct:10.5,sb:0,cs:0,wrc:144}, vsL:{hr:3,h:17,avg:0.246,slg:0.420,iso:0.174,k_pct:11.4,bb_pct:11.4,sb:0,cs:1,wrc:108} },
   "A. Vaughn": { vsR:{hr:1,h:17,avg:0.279,slg:0.361,iso:0.082,k_pct:10.6,bb_pct:6.1,sb:0,cs:0,wrc:95}, vsL:{hr:1,h:17,avg:0.531,slg:0.906,iso:0.375,k_pct:7.9,bb_pct:13.2,sb:0,cs:0,wrc:307} },
   "A. Volpe": { vsR:{hr:0,h:8,avg:0.178,slg:0.244,iso:0.067,k_pct:28.3,bb_pct:15.1,sb:2,cs:1,wrc:61}, vsL:{hr:1,h:5,avg:0.227,slg:0.409,iso:0.182,k_pct:8.0,bb_pct:12.0,sb:3,cs:0,wrc:104} },
+  "A. Williams": { vsR:{hr:1,h:5,avg:0.250,slg:0.450,iso:0.200,k_pct:33.3,bb_pct:0.0,sb:0,cs:1,wrc:92}, vsL:{hr:0,h:2,avg:0.154,slg:0.231,iso:0.077,k_pct:21.4,bb_pct:7.1,sb:0,cs:0,wrc:27} },
   "A.J. Ewing": { vsR:{hr:1,h:21,avg:0.288,slg:0.370,iso:0.082,k_pct:31.0,bb_pct:11.9,sb:7,cs:3,wrc:118}, vsL:{hr:0,h:4,avg:0.154,slg:0.231,iso:0.077,k_pct:33.3,bb_pct:6.7,sb:0,cs:0,wrc:24} },
   "Alec Bohm": { vsR:{hr:4,h:36,avg:0.216,slg:0.317,iso:0.102,k_pct:13.7,bb_pct:7.1,sb:1,cs:0,wrc:66}, vsL:{hr:4,h:17,avg:0.239,slg:0.465,iso:0.225,k_pct:15.4,bb_pct:6.4,sb:0,cs:0,wrc:109} },
   "Alex Bregman": { vsR:{hr:5,h:52,avg:0.250,slg:0.380,iso:0.130,k_pct:16.3,bb_pct:9.0,sb:1,cs:1,wrc:98}, vsL:{hr:1,h:16,avg:0.235,slg:0.279,iso:0.044,k_pct:18.5,bb_pct:13.6,sb:1,cs:0,wrc:84} },
@@ -907,7 +907,6 @@ const batterSplits = {
   "Gavin Sheets": { vsR:{hr:10,h:39,avg:0.245,slg:0.503,iso:0.258,k_pct:21.5,bb_pct:11.0,sb:3,cs:0,wrc:138}, vsL:{hr:0,h:6,avg:0.162,slg:0.216,iso:0.054,k_pct:30.0,bb_pct:7.5,sb:0,cs:0,wrc:30} },
   "H. Goodman": { vsR:{hr:14,h:42,avg:0.246,slg:0.532,iso:0.287,k_pct:29.5,bb_pct:8.8,sb:5,cs:2,wrc:121}, vsL:{hr:4,h:16,avg:0.225,slg:0.451,iso:0.225,k_pct:45.5,bb_pct:7.8,sb:0,cs:0,wrc:82} },
   "H. Hernandez": { vsR:{hr:2,h:18,avg:0.257,slg:0.357,iso:0.100,k_pct:24.4,bb_pct:10.3,sb:3,cs:2,wrc:100}, vsL:{hr:3,h:11,avg:0.208,slg:0.415,iso:0.208,k_pct:21.7,bb_pct:8.3,sb:2,cs:0,wrc:96} },
-  "Henry Bolte": { vsR:{hr:0,h:16,avg:0.276,slg:0.310,iso:0.034,k_pct:23.9,bb_pct:9.0,sb:4,cs:2,wrc:95}, vsL:{hr:1,h:9,avg:0.360,slg:0.560,iso:0.200,k_pct:44.8,bb_pct:3.4,sb:1,cs:0,wrc:185} },
   "Henry Davis": { vsR:{hr:4,h:14,avg:0.152,slg:0.315,iso:0.163,k_pct:20.0,bb_pct:12.7,sb:1,cs:0,wrc:76}, vsL:{hr:1,h:3,avg:0.097,slg:0.194,iso:0.097,k_pct:25.0,bb_pct:0.0,sb:0,cs:0,wrc:-28} },
   "I. Collins": { vsR:{hr:2,h:29,avg:0.232,slg:0.328,iso:0.096,k_pct:25.8,bb_pct:17.6,sb:2,cs:3,wrc:106}, vsL:{hr:1,h:12,avg:0.188,slg:0.266,iso:0.078,k_pct:25.7,bb_pct:4.3,sb:1,cs:0,wrc:43} },
   "I. Kiner-Falefa": { vsR:{hr:0,h:21,avg:0.318,slg:0.379,iso:0.061,k_pct:11.0,bb_pct:8.2,sb:5,cs:2,wrc:110}, vsL:{hr:1,h:6,avg:0.167,slg:0.250,iso:0.083,k_pct:20.0,bb_pct:10.0,sb:0,cs:0,wrc:40} },
@@ -925,14 +924,12 @@ const batterSplits = {
   "J. Jackson": { vsR:{hr:5,h:33,avg:0.264,slg:0.432,iso:0.168,k_pct:17.8,bb_pct:1.6,sb:0,cs:1,wrc:90}, vsL:{hr:1,h:11,avg:0.229,slg:0.313,iso:0.083,k_pct:25.5,bb_pct:3.9,sb:1,cs:0,wrc:64} },
   "J. Lawlar": { vsR:{hr:1,h:5,avg:0.357,slg:0.643,iso:0.286,k_pct:26.7,bb_pct:0.0,sb:2,cs:0,wrc:185}, vsL:{hr:0,h:3,avg:0.375,slg:0.375,iso:0.000,k_pct:30.0,bb_pct:10.0,sb:1,cs:0,wrc:156} },
   "J. Loperfido": { vsR:{hr:0,h:15,avg:0.278,slg:0.370,iso:0.093,k_pct:30.8,bb_pct:13.8,sb:1,cs:1,wrc:115}, vsL:{hr:0,h:1,avg:0.091,slg:0.091,iso:0.000,k_pct:18.2,bb_pct:0.0,sb:0,cs:0,wrc:-54} },
-  "J. McCarthy": { vsR:{hr:4,h:37,avg:0.270,slg:0.453,iso:0.182,k_pct:19.9,bb_pct:7.7,sb:9,cs:2,wrc:99}, vsL:{hr:0,h:12,avg:0.324,slg:0.432,iso:0.108,k_pct:18.9,bb_pct:0.0,sb:2,cs:0,wrc:93} },
   "J. Merrill": { vsR:{hr:4,h:34,avg:0.187,slg:0.297,iso:0.110,k_pct:23.8,bb_pct:8.4,sb:7,cs:1,wrc:60}, vsL:{hr:2,h:16,avg:0.246,slg:0.431,iso:0.185,k_pct:25.7,bb_pct:7.1,sb:3,cs:0,wrc:107} },
   "J. Pereda": { vsR:{hr:1,h:14,avg:0.280,slg:0.340,iso:0.060,k_pct:15.4,bb_pct:3.8,sb:0,cs:0,wrc:85}, vsL:{hr:1,h:3,avg:0.300,slg:0.600,iso:0.300,k_pct:15.4,bb_pct:15.4,sb:0,cs:0,wrc:199} },
   "J. Sanchez": { vsR:{hr:7,h:52,avg:0.313,slg:0.512,iso:0.199,k_pct:20.6,bb_pct:3.9,sb:1,cs:1,wrc:132}, vsL:{hr:0,h:4,avg:0.174,slg:0.217,iso:0.043,k_pct:16.7,bb_pct:0.0,sb:0,cs:0,wrc:18} },
   "J. Walker": { vsR:{hr:11,h:60,avg:0.303,slg:0.535,iso:0.232,k_pct:26.4,bb_pct:6.9,sb:9,cs:1,wrc:150}, vsL:{hr:6,h:18,avg:0.290,slg:0.629,iso:0.339,k_pct:22.1,bb_pct:8.8,sb:1,cs:2,wrc:172} },
   "J. Wetherholt": { vsR:{hr:7,h:44,avg:0.259,slg:0.412,iso:0.153,k_pct:18.5,bb_pct:9.2,sb:6,cs:0,wrc:119}, vsL:{hr:2,h:18,avg:0.237,slg:0.342,iso:0.105,k_pct:12.6,bb_pct:14.7,sb:1,cs:0,wrc:110} },
   "JJ Bleday": { vsR:{hr:9,h:31,avg:0.284,slg:0.633,iso:0.349,k_pct:18.1,bb_pct:14.2,sb:2,cs:1,wrc:176}, vsL:{hr:2,h:10,avg:0.233,slg:0.395,iso:0.163,k_pct:18.4,bb_pct:10.2,sb:0,cs:0,wrc:94} },
-  "Jacob Wilson": { vsR:{hr:3,h:35,avg:0.292,slg:0.408,iso:0.117,k_pct:11.2,bb_pct:4.0,sb:2,cs:0,wrc:104}, vsL:{hr:0,h:12,avg:0.273,slg:0.341,iso:0.068,k_pct:12.8,bb_pct:2.1,sb:0,cs:0,wrc:72} },
   "Jacob Young": { vsR:{hr:7,h:35,avg:0.229,slg:0.399,iso:0.170,k_pct:19.6,bb_pct:3.7,sb:6,cs:1,wrc:87}, vsL:{hr:1,h:15,avg:0.242,slg:0.371,iso:0.129,k_pct:17.6,bb_pct:7.4,sb:0,cs:0,wrc:86} },
   "Jake Burger": { vsR:{hr:7,h:47,avg:0.235,slg:0.390,iso:0.155,k_pct:25.3,bb_pct:7.4,sb:1,cs:0,wrc:86}, vsL:{hr:4,h:14,avg:0.298,slg:0.596,iso:0.298,k_pct:26.4,bb_pct:7.5,sb:0,cs:0,wrc:146} },
   "Jake Mangum": { vsR:{hr:1,h:27,avg:0.297,slg:0.374,iso:0.077,k_pct:18.1,bb_pct:7.6,sb:10,cs:2,wrc:109}, vsL:{hr:0,h:11,avg:0.275,slg:0.300,iso:0.025,k_pct:16.7,bb_pct:4.8,sb:2,cs:0,wrc:74} },
@@ -950,6 +947,7 @@ const batterSplits = {
   "Jo Adell": { vsR:{hr:4,h:43,avg:0.217,slg:0.313,iso:0.096,k_pct:24.8,bb_pct:2.4,sb:2,cs:0,wrc:64}, vsL:{hr:6,h:22,avg:0.297,slg:0.568,iso:0.270,k_pct:21.0,bb_pct:3.7,sb:1,cs:0,wrc:147} },
   "Joe Mack": { vsR:{hr:1,h:17,avg:0.239,slg:0.324,iso:0.085,k_pct:27.6,bb_pct:6.6,sb:0,cs:0,wrc:76}, vsL:{hr:0,h:5,avg:0.227,slg:0.273,iso:0.045,k_pct:36.0,bb_pct:4.0,sb:0,cs:0,wrc:52} },
   "Joey Ortiz": { vsR:{hr:1,h:19,avg:0.209,slg:0.286,iso:0.077,k_pct:15.9,bb_pct:12.1,sb:4,cs:2,wrc:67}, vsL:{hr:0,h:10,avg:0.208,slg:0.229,iso:0.021,k_pct:17.5,bb_pct:12.3,sb:1,cs:1,wrc:58} },
+  "Jonah Heim": { vsR:{hr:0,h:6,avg:0.150,slg:0.225,iso:0.075,k_pct:17.4,bb_pct:10.9,sb:0,cs:0,wrc:35}, vsL:{hr:5,h:14,avg:0.318,slg:0.750,iso:0.432,k_pct:17.0,bb_pct:6.4,sb:0,cs:0,wrc:204} },
   "Jorbit Vivas": { vsR:{hr:1,h:26,avg:0.228,slg:0.316,iso:0.088,k_pct:14.4,bb_pct:7.6,sb:0,cs:1,wrc:77}, vsL:{hr:0,h:5,avg:0.333,slg:0.333,iso:0.000,k_pct:5.6,bb_pct:11.1,sb:0,cs:0,wrc:117} },
   "Jose Fermin": { vsR:{hr:1,h:11,avg:0.282,slg:0.410,iso:0.128,k_pct:19.0,bb_pct:2.4,sb:1,cs:0,wrc:95}, vsL:{hr:1,h:13,avg:0.260,slg:0.380,iso:0.120,k_pct:14.0,bb_pct:12.3,sb:1,cs:0,wrc:111} },
   "Jose Siri": { vsR:{hr:0,h:8,avg:0.296,slg:0.370,iso:0.074,k_pct:22.6,bb_pct:6.5,sb:0,cs:1,wrc:104}, vsL:{hr:2,h:6,avg:0.375,slg:0.813,iso:0.438,k_pct:29.4,bb_pct:5.9,sb:0,cs:0,wrc:237} },
@@ -986,8 +984,8 @@ const batterSplits = {
   "Luis Rengifo": { vsR:{hr:0,h:26,avg:0.239,slg:0.294,iso:0.055,k_pct:7.2,bb_pct:9.6,sb:3,cs:1,wrc:74}, vsL:{hr:0,h:11,avg:0.153,slg:0.194,iso:0.042,k_pct:18.8,bb_pct:8.8,sb:0,cs:1,wrc:14} },
   "Luis Torrens": { vsR:{hr:1,h:19,avg:0.224,slg:0.341,iso:0.118,k_pct:21.5,bb_pct:4.3,sb:0,cs:0,wrc:80}, vsL:{hr:0,h:7,avg:0.233,slg:0.300,iso:0.067,k_pct:21.2,bb_pct:3.0,sb:0,cs:0,wrc:69} },
   "Luke Raley": { vsR:{hr:14,h:44,avg:0.259,slg:0.553,iso:0.294,k_pct:32.4,bb_pct:5.9,sb:1,cs:1,wrc:145}, vsL:{hr:0,h:2,avg:0.143,slg:0.143,iso:0.000,k_pct:26.7,bb_pct:0.0,sb:0,cs:0,wrc:-22} },
-  "M. Ballesteros": { vsR:{hr:6,h:34,avg:0.238,slg:0.392,iso:0.154,k_pct:20.0,bb_pct:9.4,sb:1,cs:0,wrc:95}, vsL:{hr:0,h:1,avg:0.143,slg:0.286,iso:0.143,k_pct:25.0,bb_pct:12.5,sb:0,cs:0,wrc:53} },
   "M. Busch": { vsR:{hr:6,h:45,avg:0.256,slg:0.426,iso:0.170,k_pct:22.2,bb_pct:15.1,sb:1,cs:0,wrc:128}, vsL:{hr:2,h:18,avg:0.243,slg:0.378,iso:0.135,k_pct:25.0,bb_pct:14.1,sb:0,cs:0,wrc:114} },
+  "M. Conforto": { vsR:{hr:4,h:21,avg:0.233,slg:0.467,iso:0.233,k_pct:31.4,bb_pct:13.3,sb:1,cs:0,wrc:122}, vsL:{hr:0,h:1,avg:0.333,slg:0.333,iso:0.000,k_pct:0.0,bb_pct:25.0,sb:0,cs:0,wrc:152} },
   "M. Dubon": { vsR:{hr:5,h:41,avg:0.277,slg:0.453,iso:0.176,k_pct:18.0,bb_pct:6.8,sb:1,cs:2,wrc:119}, vsL:{hr:1,h:21,avg:0.231,slg:0.330,iso:0.099,k_pct:12.1,bb_pct:7.1,sb:0,cs:0,wrc:77} },
   "M. Garcia": { vsR:{hr:1,h:48,avg:0.242,slg:0.338,iso:0.096,k_pct:15.7,bb_pct:7.4,sb:3,cs:3,wrc:75}, vsL:{hr:2,h:17,avg:0.354,slg:0.542,iso:0.188,k_pct:12.7,bb_pct:12.7,sb:1,cs:0,wrc:171} },
   "M. Gasper": { vsR:{hr:0,h:20,avg:0.308,slg:0.400,iso:0.092,k_pct:16.4,bb_pct:8.2,sb:0,cs:1,wrc:112}, vsL:{hr:0,h:2,avg:0.125,slg:0.125,iso:0.000,k_pct:41.2,bb_pct:0.0,sb:0,cs:0,wrc:-40} },
@@ -1005,7 +1003,9 @@ const batterSplits = {
   "Matt Chapman": { vsR:{hr:4,h:48,avg:0.253,slg:0.384,iso:0.132,k_pct:20.3,bb_pct:7.5,sb:0,cs:1,wrc:102}, vsL:{hr:2,h:18,avg:0.281,slg:0.469,iso:0.188,k_pct:20.5,bb_pct:17.9,sb:0,cs:0,wrc:150} },
   "Matt McLain": { vsR:{hr:5,h:35,avg:0.198,slg:0.345,iso:0.147,k_pct:25.9,bb_pct:9.6,sb:8,cs:1,wrc:75}, vsL:{hr:3,h:11,avg:0.234,slg:0.426,iso:0.191,k_pct:18.3,bb_pct:18.3,sb:2,cs:1,wrc:134} },
   "Matt Olson": { vsR:{hr:12,h:43,avg:0.276,slg:0.564,iso:0.288,k_pct:24.3,bb_pct:10.7,sb:1,cs:0,wrc:149}, vsL:{hr:8,h:30,avg:0.263,slg:0.561,iso:0.298,k_pct:21.3,bb_pct:8.7,sb:1,cs:0,wrc:145} },
+  "Max Muncy (LAD)": { vsR:{hr:11,h:44,avg:0.272,slg:0.525,iso:0.253,k_pct:23.8,bb_pct:13.8,sb:0,cs:0,wrc:154}, vsL:{hr:3,h:11,avg:0.229,slg:0.438,iso:0.208,k_pct:26.4,bb_pct:5.7,sb:0,cs:0,wrc:111} },
   "Max Muncy": { vsR:{hr:11,h:44,avg:0.272,slg:0.525,iso:0.253,k_pct:23.8,bb_pct:13.8,sb:0,cs:0,wrc:154}, vsL:{hr:3,h:11,avg:0.229,slg:0.438,iso:0.208,k_pct:26.4,bb_pct:5.7,sb:0,cs:0,wrc:111} },
+  "Max Muncy (ATH)": { vsR:{hr:1,h:18,avg:0.257,slg:0.357,iso:0.100,k_pct:35.5,bb_pct:1.3,sb:1,cs:1,wrc:80}, vsL:{hr:1,h:7,avg:0.206,slg:0.471,iso:0.265,k_pct:29.3,bb_pct:14.6,sb:1,cs:0,wrc:127} },
   "Mike Trout": { vsR:{hr:12,h:41,avg:0.222,slg:0.454,iso:0.232,k_pct:23.7,bb_pct:20.3,sb:5,cs:0,wrc:137}, vsL:{hr:3,h:14,avg:0.237,slg:0.441,iso:0.203,k_pct:26.3,bb_pct:22.4,sb:1,cs:0,wrc:140} },
   "Mookie Betts": { vsR:{hr:4,h:18,avg:0.180,slg:0.320,iso:0.140,k_pct:11.9,bb_pct:7.3,sb:0,cs:1,wrc:63}, vsL:{hr:2,h:7,avg:0.184,slg:0.395,iso:0.211,k_pct:11.6,bb_pct:9.3,sb:0,cs:1,wrc:82} },
   "N. Arenado": { vsR:{hr:6,h:41,avg:0.259,slg:0.430,iso:0.171,k_pct:22.3,bb_pct:7.3,sb:1,cs:0,wrc:110}, vsL:{hr:2,h:12,avg:0.214,slg:0.375,iso:0.161,k_pct:15.4,bb_pct:12.3,sb:0,cs:0,wrc:83} },
@@ -1018,7 +1018,6 @@ const batterSplits = {
   "Nathan Lukes": { vsR:{hr:1,h:32,avg:0.337,slg:0.432,iso:0.095,k_pct:13.6,bb_pct:3.9,sb:0,cs:1,wrc:124}, vsL:{hr:0,h:2,avg:0.133,slg:0.133,iso:0.000,k_pct:27.8,bb_pct:5.6,sb:0,cs:0,wrc:33} },
   "Nick Fortes": { vsR:{hr:1,h:25,avg:0.298,slg:0.393,iso:0.095,k_pct:12.5,bb_pct:2.3,sb:0,cs:0,wrc:105}, vsL:{hr:0,h:18,avg:0.237,slg:0.303,iso:0.066,k_pct:13.1,bb_pct:2.4,sb:0,cs:0,wrc:70} },
   "Nick Kurtz": { vsR:{hr:11,h:47,avg:0.296,slg:0.572,iso:0.277,k_pct:26.2,bb_pct:23.8,sb:6,cs:1,wrc:185}, vsL:{hr:5,h:23,avg:0.267,slg:0.477,iso:0.209,k_pct:34.7,bb_pct:13.9,sb:1,cs:0,wrc:139} },
-  "Nico Hoerner": { vsR:{hr:2,h:44,avg:0.227,slg:0.304,iso:0.077,k_pct:5.3,bb_pct:10.7,sb:9,cs:1,wrc:78}, vsL:{hr:2,h:23,avg:0.288,slg:0.438,iso:0.150,k_pct:9.2,bb_pct:6.9,sb:3,cs:1,wrc:119} },
   "Noelvi Marte": { vsR:{hr:0,h:9,avg:0.265,slg:0.294,iso:0.029,k_pct:13.5,bb_pct:8.1,sb:4,cs:0,wrc:77}, vsL:{hr:1,h:1,avg:0.071,slg:0.286,iso:0.214,k_pct:53.3,bb_pct:6.7,sb:0,cs:1,wrc:12} },
   "O. Peraza": { vsR:{hr:2,h:32,avg:0.254,slg:0.365,iso:0.111,k_pct:23.2,bb_pct:5.1,sb:7,cs:0,wrc:96}, vsL:{hr:5,h:21,avg:0.288,slg:0.562,iso:0.274,k_pct:27.3,bb_pct:2.6,sb:2,cs:1,wrc:143} },
   "Otto Lopez": { vsR:{hr:4,h:62,avg:0.298,slg:0.428,iso:0.130,k_pct:17.0,bb_pct:3.6,sb:11,cs:3,wrc:114}, vsL:{hr:1,h:32,avg:0.478,slg:0.657,iso:0.179,k_pct:10.0,bb_pct:2.9,sb:2,cs:0,wrc:220} },
@@ -1027,6 +1026,7 @@ const batterSplits = {
   "P. Bailey": { vsR:{hr:1,h:19,avg:0.171,slg:0.243,iso:0.072,k_pct:23.7,bb_pct:5.9,sb:2,cs:0,wrc:27}, vsL:{hr:1,h:3,avg:0.136,slg:0.273,iso:0.136,k_pct:30.8,bb_pct:11.5,sb:0,cs:0,wrc:40} },
   "P. Crow-Armstrong": { vsR:{hr:8,h:43,avg:0.244,slg:0.455,iso:0.210,k_pct:23.2,bb_pct:8.6,sb:13,cs:2,wrc:114}, vsL:{hr:3,h:24,avg:0.282,slg:0.424,iso:0.141,k_pct:28.9,bb_pct:7.2,sb:2,cs:3,wrc:127} },
   "P. Goldschmidt": { vsR:{hr:3,h:19,avg:0.213,slg:0.348,iso:0.135,k_pct:21.9,bb_pct:6.3,sb:1,cs:0,wrc:67}, vsL:{hr:5,h:23,avg:0.397,slg:0.776,iso:0.379,k_pct:14.3,bb_pct:12.9,sb:0,cs:0,wrc:245} },
+  "P. Ramirez": { vsR:{hr:0,h:5,avg:0.263,slg:0.316,iso:0.053,k_pct:4.5,bb_pct:13.6,sb:0,cs:0,wrc:98}, vsL:{hr:0,h:0,avg:0.000,slg:0.000,iso:0.000,k_pct:0.0,bb_pct:0.0,sb:0,cs:0,wrc:-111} },
   "Pete Alonso": { vsR:{hr:12,h:48,avg:0.253,slg:0.489,iso:0.237,k_pct:22.3,bb_pct:11.8,sb:2,cs:0,wrc:128}, vsL:{hr:3,h:18,avg:0.228,slg:0.380,iso:0.152,k_pct:23.0,bb_pct:8.0,sb:0,cs:0,wrc:84} },
   "R. Devers": { vsR:{hr:7,h:46,avg:0.249,slg:0.459,iso:0.211,k_pct:31.0,bb_pct:6.5,sb:0,cs:0,wrc:108}, vsL:{hr:2,h:17,avg:0.191,slg:0.303,iso:0.112,k_pct:30.3,bb_pct:9.1,sb:0,cs:0,wrc:68} },
   "R. Duran": { vsR:{hr:1,h:3,avg:0.158,slg:0.368,iso:0.211,k_pct:17.4,bb_pct:17.4,sb:0,cs:0,wrc:98}, vsL:{hr:0,h:0,avg:0.000,slg:0.000,iso:0.000,k_pct:35.7,bb_pct:21.4,sb:0,cs:0,wrc:27} },
@@ -1040,7 +1040,6 @@ const batterSplits = {
   "S. Antonacci": { vsR:{hr:1,h:45,avg:0.331,slg:0.441,iso:0.110,k_pct:12.4,bb_pct:8.1,sb:9,cs:4,wrc:147}, vsL:{hr:0,h:3,avg:0.091,slg:0.091,iso:0.000,k_pct:25.0,bb_pct:2.5,sb:0,cs:0,wrc:9} },
   "S. Basallo": { vsR:{hr:9,h:37,avg:0.264,slg:0.536,iso:0.271,k_pct:22.9,bb_pct:9.6,sb:0,cs:0,wrc:134}, vsL:{hr:1,h:11,avg:0.234,slg:0.298,iso:0.064,k_pct:36.0,bb_pct:6.0,sb:0,cs:0,wrc:62} },
   "S. Horwitz": { vsR:{hr:8,h:51,avg:0.291,slg:0.486,iso:0.194,k_pct:11.7,bb_pct:13.1,sb:1,cs:0,wrc:144}, vsL:{hr:1,h:9,avg:0.257,slg:0.343,iso:0.086,k_pct:18.6,bb_pct:14.0,sb:0,cs:0,wrc:109} },
-  "S. Langeliers": { vsR:{hr:11,h:50,avg:0.259,slg:0.482,iso:0.223,k_pct:19.6,bb_pct:7.5,sb:1,cs:0,wrc:125}, vsL:{hr:7,h:24,avg:0.343,slg:0.700,iso:0.357,k_pct:18.7,bb_pct:6.7,sb:0,cs:0,wrc:200} },
   "S. Ohtani": { vsR:{hr:8,h:51,avg:0.300,slg:0.529,iso:0.229,k_pct:23.3,bb_pct:18.6,sb:4,cs:2,wrc:168}, vsL:{hr:5,h:23,avg:0.315,slg:0.575,iso:0.260,k_pct:20.5,bb_pct:7.2,sb:2,cs:0,wrc:167} },
   "S. Perez": { vsR:{hr:6,h:36,avg:0.193,slg:0.305,iso:0.112,k_pct:20.0,bb_pct:3.5,sb:0,cs:0,wrc:45}, vsL:{hr:3,h:15,avg:0.242,slg:0.435,iso:0.194,k_pct:15.7,bb_pct:7.1,sb:0,cs:0,wrc:102} },
   "S. Torkelson": { vsR:{hr:10,h:37,avg:0.207,slg:0.425,iso:0.218,k_pct:33.5,bb_pct:8.9,sb:0,cs:0,wrc:96}, vsL:{hr:1,h:12,avg:0.235,slg:0.392,iso:0.157,k_pct:30.2,bb_pct:19.0,sb:0,cs:1,wrc:120} },
@@ -1052,6 +1051,7 @@ const batterSplits = {
   "T. Bazzana": { vsR:{hr:3,h:28,avg:0.286,slg:0.480,iso:0.194,k_pct:14.0,bb_pct:12.3,sb:6,cs:2,wrc:135}, vsL:{hr:1,h:9,avg:0.180,slg:0.260,iso:0.080,k_pct:32.1,bb_pct:8.9,sb:4,cs:0,wrc:51} },
   "T. Callihan": { vsR:{hr:2,h:4,avg:0.286,slg:0.929,iso:0.643,k_pct:26.3,bb_pct:26.3,sb:0,cs:0,wrc:262}, vsL:{hr:0,h:1,avg:0.500,slg:1.000,iso:0.500,k_pct:0.0,bb_pct:33.3,sb:1,cs:0,wrc:328} },
   "T. Freeman": { vsR:{hr:1,h:30,avg:0.286,slg:0.352,iso:0.067,k_pct:8.9,bb_pct:5.7,sb:3,cs:1,wrc:96}, vsL:{hr:2,h:9,avg:0.237,slg:0.421,iso:0.184,k_pct:19.0,bb_pct:2.4,sb:2,cs:1,wrc:84} },
+  "T. Johnston": { vsR:{hr:2,h:60,avg:0.345,slg:0.477,iso:0.132,k_pct:20.2,bb_pct:8.3,sb:2,cs:3,wrc:132}, vsL:{hr:0,h:9,avg:0.188,slg:0.250,iso:0.063,k_pct:11.5,bb_pct:3.8,sb:2,cs:0,wrc:11} },
   "T. Larnach": { vsR:{hr:2,h:41,avg:0.275,slg:0.396,iso:0.121,k_pct:19.4,bb_pct:13.1,sb:2,cs:1,wrc:120}, vsL:{hr:1,h:2,avg:0.087,slg:0.217,iso:0.130,k_pct:26.9,bb_pct:11.5,sb:0,cs:0,wrc:17} },
   "T. Peters": { vsR:{hr:2,h:49,avg:0.316,slg:0.477,iso:0.161,k_pct:18.5,bb_pct:8.1,sb:4,cs:0,wrc:140}, vsL:{hr:0,h:2,avg:0.125,slg:0.125,iso:0.000,k_pct:22.2,bb_pct:0.0,sb:0,cs:2,wrc:-36} },
   "T. Soderstrom": { vsR:{hr:5,h:41,avg:0.240,slg:0.433,iso:0.193,k_pct:14.9,bb_pct:14.4,sb:0,cs:1,wrc:118}, vsL:{hr:6,h:16,avg:0.222,slg:0.514,iso:0.292,k_pct:26.9,bb_pct:7.7,sb:1,cs:0,wrc:119} },
@@ -1093,6 +1093,7 @@ const batterBarrels = {
   "A. Rutschman": {pa:203,barrel_n:10,barrel_pct:9.0,ev_avg:89.0,ev_max:110.3,angle:"17.7",avg_hit_dist:189,avg_hr_dist:399,max_hr_dist:0,hard:36.5,med:52.8,soft:10.7,pull:37.7,center:42.1,oppo:20.1,xba:0.278,xslg:0.461,speed:22.7},
   "A. Vaughn": {pa:101,barrel_n:2,barrel_pct:4.8,ev_avg:87.8,ev_max:104.9,angle:"5.2",avg_hit_dist:142,avg_hr_dist:403,max_hr_dist:0,hard:37.3,med:43.4,soft:19.3,pull:38.5,center:32.5,oppo:28.9,xba:0.306,xslg:0.416,speed:22.9},
   "A. Volpe": {pa:78,barrel_n:0,barrel_pct:0.0,ev_avg:89.1,ev_max:104.5,angle:"25.7",avg_hit_dist:189,avg_hr_dist:0,max_hr_dist:0,hard:24.5,med:53.1,soft:22.5,pull:40.8,center:36.7,oppo:22.5,xba:0.170,xslg:0.231,speed:24.6},
+  "A. Williams": {pa:35,barrel_n:0,barrel_pct:0.0,ev_avg:87.4,ev_max:95.5,angle:"13.2",avg_hit_dist:140,avg_hr_dist:0,max_hr_dist:0,hard:33.3,med:62.5,soft:4.2,pull:33.3,center:50.0,oppo:16.7,xba:0.164,xslg:0.210,speed:25.9},
   "A.J. Ewing": {pa:110,barrel_n:3,barrel_pct:11.5,ev_avg:88.0,ev_max:110.5,angle:"12.8",avg_hit_dist:185,avg_hr_dist:405,max_hr_dist:0,hard:30.3,med:57.6,soft:12.1,pull:37.9,center:27.3,oppo:34.8,xba:0.267,xslg:0.458,speed:26.0},
   "Alec Bohm": {pa:246,barrel_n:5,barrel_pct:3.3,ev_avg:90.0,ev_max:108.8,angle:"11.6",avg_hit_dist:155,avg_hr_dist:371,max_hr_dist:0,hard:27.0,med:60.3,soft:12.8,pull:29.4,center:44.1,oppo:26.5,xba:0.236,xslg:0.342,speed:23.0},
   "Alex Bregman": {pa:295,barrel_n:10,barrel_pct:5.9,ev_avg:88.9,ev_max:108.3,angle:"14.2",avg_hit_dist:155,avg_hr_dist:390,max_hr_dist:0,hard:33.3,med:50.2,soft:16.4,pull:47.6,center:36.0,oppo:16.4,xba:0.259,xslg:0.398,speed:22.4},
@@ -1183,7 +1184,6 @@ const batterBarrels = {
   "Gavin Sheets": {pa:204,barrel_n:11,barrel_pct:9.8,ev_avg:89.7,ev_max:110.1,angle:"13.9",avg_hit_dist:176,avg_hr_dist:402,max_hr_dist:0,hard:35.9,med:46.9,soft:17.2,pull:42.8,center:31.0,oppo:26.2,xba:0.262,xslg:0.466,speed:22.3},
   "H. Goodman": {pa:254,barrel_n:15,barrel_pct:13.3,ev_avg:91.0,ev_max:111.7,angle:"18.0",avg_hit_dist:186,avg_hr_dist:400,max_hr_dist:0,hard:41.7,med:42.4,soft:15.9,pull:53.0,center:30.5,oppo:16.6,xba:0.213,xslg:0.397,speed:23.0},
   "H. Hernandez": {pa:123,barrel_n:5,barrel_pct:7.4,ev_avg:90.6,ev_max:109.9,angle:"11.0",avg_hit_dist:154,avg_hr_dist:428,max_hr_dist:0,hard:33.7,med:52.2,soft:14.1,pull:50.0,center:32.6,oppo:17.4,xba:0.267,xslg:0.439,speed:24.0},
-  "Henry Bolte": {pa:92,barrel_n:0,barrel_pct:0.0,ev_avg:90.2,ev_max:112.2,angle:"7.7",avg_hit_dist:137,avg_hr_dist:0,max_hr_dist:0,hard:41.8,med:41.8,soft:16.4,pull:38.2,center:38.2,oppo:23.6,xba:0.195,xslg:0.270,speed:27.7},
   "Henry Davis": {pa:138,barrel_n:7,barrel_pct:8.6,ev_avg:90.4,ev_max:112.3,angle:"18.5",avg_hit_dist:144,avg_hr_dist:392,max_hr_dist:0,hard:32.6,med:51.6,soft:15.8,pull:57.9,center:28.4,oppo:13.7,xba:0.200,xslg:0.321,speed:24.2},
   "I. Collins": {pa:214,barrel_n:9,barrel_pct:9.1,ev_avg:88.9,ev_max:110.9,angle:"17.5",avg_hit_dist:184,avg_hr_dist:377,max_hr_dist:0,hard:34.3,med:45.5,soft:20.2,pull:41.0,center:38.1,oppo:20.9,xba:0.226,xslg:0.319,speed:23.1},
   "I. Kiner-Falefa": {pa:109,barrel_n:1,barrel_pct:2.3,ev_avg:82.4,ev_max:108.1,angle:"9.3",avg_hit_dist:135,avg_hr_dist:0,max_hr_dist:0,hard:24.1,med:50.6,soft:25.3,pull:42.5,center:34.5,oppo:23.0,xba:0.262,xslg:0.329,speed:24.6},
@@ -1201,14 +1201,12 @@ const batterBarrels = {
   "J. Jackson": {pa:168,barrel_n:11,barrel_pct:9.0,ev_avg:89.3,ev_max:110.9,angle:"6.4",avg_hit_dist:146,avg_hr_dist:396,max_hr_dist:0,hard:37.4,med:45.3,soft:17.3,pull:45.3,center:31.7,oppo:23.0,xba:0.255,xslg:0.416,speed:23.9},
   "J. Lawlar": {pa:20,barrel_n:1,barrel_pct:8.3,ev_avg:90.4,ev_max:106.5,angle:"23.4",avg_hit_dist:209,avg_hr_dist:424,max_hr_dist:0,hard:46.7,med:33.3,soft:20.0,pull:66.7,center:13.3,oppo:20.0,xba:0.275,xslg:0.474,speed:25.3},
   "J. Loperfido": {pa:60,barrel_n:2,barrel_pct:5.0,ev_avg:90.0,ev_max:105.7,angle:"7.6",avg_hit_dist:122,avg_hr_dist:0,max_hr_dist:0,hard:36.4,med:56.8,soft:6.8,pull:34.1,center:43.2,oppo:22.7,xba:0.232,xslg:0.302,speed:26.4},
-  "J. McCarthy": {pa:186,barrel_n:6,barrel_pct:5.8,ev_avg:83.8,ev_max:107.4,angle:"15.3",avg_hit_dist:155,avg_hr_dist:425,max_hr_dist:0,hard:22.7,med:60.3,soft:17.0,pull:38.3,center:39.7,oppo:22.0,xba:0.264,xslg:0.402,speed:25.8},
   "J. Merrill": {pa:248,barrel_n:12,barrel_pct:8.9,ev_avg:89.6,ev_max:108.7,angle:"12.6",avg_hit_dist:162,avg_hr_dist:408,max_hr_dist:0,hard:33.3,med:51.9,soft:14.8,pull:39.3,center:31.7,oppo:29.0,xba:0.237,xslg:0.404,speed:25.0},
   "J. Pereda": {pa:61,barrel_n:1,barrel_pct:6.7,ev_avg:90.9,ev_max:106.7,angle:"25.8",avg_hit_dist:243,avg_hr_dist:392,max_hr_dist:0,hard:32.0,med:48.0,soft:20.0,pull:34.0,center:38.0,oppo:28.0,xba:0.279,xslg:0.453,speed:21.3},
   "J. Sanchez": {pa:191,barrel_n:9,barrel_pct:7.3,ev_avg:90.9,ev_max:112.3,angle:"11.0",avg_hit_dist:164,avg_hr_dist:400,max_hr_dist:0,hard:37.5,med:48.7,soft:13.8,pull:36.2,center:38.8,oppo:25.0,xba:0.290,xslg:0.452,speed:21.7},
   "J. Walker": {pa:267,barrel_n:23,barrel_pct:16.7,ev_avg:94.5,ev_max:115.6,angle:"14.6",avg_hit_dist:183,avg_hr_dist:406,max_hr_dist:0,hard:45.5,med:44.4,soft:10.1,pull:40.7,center:37.0,oppo:22.2,xba:0.279,xslg:0.545,speed:24.3},
   "J. Wetherholt": {pa:272,barrel_n:12,barrel_pct:7.8,ev_avg:90.2,ev_max:108.7,angle:"16.7",avg_hit_dist:186,avg_hr_dist:394,max_hr_dist:0,hard:36.0,med:52.0,soft:12.0,pull:40.5,center:37.0,oppo:22.5,xba:0.244,xslg:0.446,speed:24.2},
   "JJ Bleday": {pa:171,barrel_n:9,barrel_pct:13.0,ev_avg:91.6,ev_max:112.6,angle:"21.1",avg_hit_dist:214,avg_hr_dist:386,max_hr_dist:0,hard:36.4,med:51.2,soft:12.4,pull:52.1,center:32.2,oppo:15.7,xba:0.284,xslg:0.540,speed:23.1},
-  "Jacob Wilson": {pa:155,barrel_n:3,barrel_pct:2.1,ev_avg:84.3,ev_max:105.4,angle:"7.3",avg_hit_dist:135,avg_hr_dist:368,max_hr_dist:0,hard:21.9,med:61.6,soft:16.4,pull:34.3,center:35.6,oppo:30.1,xba:0.267,xslg:0.339,speed:23.5},
   "Jacob Young": {pa:218,barrel_n:8,barrel_pct:5.8,ev_avg:88.7,ev_max:110.1,angle:"11.1",avg_hit_dist:170,avg_hr_dist:390,max_hr_dist:0,hard:27.3,med:56.4,soft:16.3,pull:35.5,center:36.6,oppo:27.9,xba:0.268,xslg:0.404,speed:25.2},
   "Jake Burger": {pa:254,barrel_n:14,barrel_pct:10.2,ev_avg:90.6,ev_max:113.6,angle:"12.8",avg_hit_dist:164,avg_hr_dist:393,max_hr_dist:0,hard:39.4,med:42.2,soft:18.3,pull:45.6,center:35.6,oppo:18.9,xba:0.243,xslg:0.422,speed:23.7},
   "Jake Mangum": {pa:143,barrel_n:0,barrel_pct:0.0,ev_avg:83.3,ev_max:104.2,angle:"2.4",avg_hit_dist:99,avg_hr_dist:0,max_hr_dist:0,hard:16.5,med:63.3,soft:20.2,pull:30.3,center:32.1,oppo:37.6,xba:0.247,xslg:0.295,speed:26.0},
@@ -1226,6 +1224,7 @@ const batterBarrels = {
   "Jo Adell": {pa:271,barrel_n:13,barrel_pct:8.3,ev_avg:91.5,ev_max:114.9,angle:"19.4",avg_hit_dist:176,avg_hr_dist:412,max_hr_dist:0,hard:36.6,med:46.8,soft:16.6,pull:40.0,center:35.1,oppo:24.9,xba:0.271,xslg:0.455,speed:23.6},
   "Joe Mack": {pa:97,barrel_n:1,barrel_pct:3.1,ev_avg:89.0,ev_max:106.3,angle:"7.2",avg_hit_dist:121,avg_hr_dist:0,max_hr_dist:0,hard:36.9,med:50.8,soft:12.3,pull:52.3,center:26.2,oppo:21.5,xba:0.180,xslg:0.236,speed:24.2},
   "Joey Ortiz": {pa:152,barrel_n:3,barrel_pct:3.3,ev_avg:86.0,ev_max:110.8,angle:"7.0",avg_hit_dist:124,avg_hr_dist:395,max_hr_dist:0,hard:24.8,med:57.3,soft:18.0,pull:25.6,center:51.3,oppo:23.1,xba:0.218,xslg:0.280,speed:24.2},
+  "Jonah Heim": {pa:86,barrel_n:2,barrel_pct:3.8,ev_avg:85.3,ev_max:106.0,angle:"14.4",avg_hit_dist:161,avg_hr_dist:425,max_hr_dist:0,hard:34.8,med:44.9,soft:20.3,pull:42.0,center:26.1,oppo:31.9,xba:0.205,xslg:0.311,speed:21.9},
   "Jorbit Vivas": {pa:139,barrel_n:2,barrel_pct:2.4,ev_avg:82.7,ev_max:108.5,angle:"13.8",avg_hit_dist:133,avg_hr_dist:364,max_hr_dist:0,hard:23.9,med:51.3,soft:24.8,pull:38.0,center:32.7,oppo:29.2,xba:0.229,xslg:0.289,speed:23.1},
   "Jose Fermin": {pa:86,barrel_n:1,barrel_pct:2.2,ev_avg:85.3,ev_max:105.1,angle:"26.0",avg_hit_dist:151,avg_hr_dist:372,max_hr_dist:0,hard:29.7,med:46.0,soft:24.3,pull:54.0,center:27.0,oppo:18.9,xba:0.191,xslg:0.276,speed:23.3},
   "Jose Siri": {pa:44,barrel_n:0,barrel_pct:0.0,ev_avg:88.0,ev_max:107.2,angle:"23.4",avg_hit_dist:166,avg_hr_dist:0,max_hr_dist:0,hard:30.3,med:48.5,soft:21.2,pull:36.4,center:39.4,oppo:24.2,xba:0.148,xslg:0.219,speed:24.5},
@@ -1262,8 +1261,8 @@ const batterBarrels = {
   "Luis Rengifo": {pa:196,barrel_n:7,barrel_pct:5.6,ev_avg:87.6,ev_max:107.3,angle:"4.7",avg_hit_dist:131,avg_hr_dist:0,max_hr_dist:0,hard:24.2,med:57.8,soft:18.0,pull:36.7,center:36.0,oppo:27.3,xba:0.243,xslg:0.337,speed:22.8},
   "Luis Torrens": {pa:116,barrel_n:0,barrel_pct:0.0,ev_avg:89.0,ev_max:106.4,angle:"6.4",avg_hit_dist:126,avg_hr_dist:0,max_hr_dist:0,hard:28.9,med:58.9,soft:12.2,pull:28.9,center:43.3,oppo:27.8,xba:0.220,xslg:0.294,speed:23.4},
   "Luke Raley": {pa:185,barrel_n:18,barrel_pct:21.2,ev_avg:91.7,ev_max:113.8,angle:"13.8",avg_hit_dist:186,avg_hr_dist:382,max_hr_dist:0,hard:40.5,med:44.6,soft:14.9,pull:50.4,center:24.0,oppo:25.6,xba:0.275,xslg:0.581,speed:24.4},
-  "M. Ballesteros": {pa:157,barrel_n:11,barrel_pct:12.0,ev_avg:91.2,ev_max:111.4,angle:"12.1",avg_hit_dist:173,avg_hr_dist:390,max_hr_dist:0,hard:37.3,med:47.5,soft:15.3,pull:36.4,center:37.3,oppo:26.3,xba:0.244,xslg:0.428,speed:21.3},
   "M. Busch": {pa:291,barrel_n:18,barrel_pct:12.9,ev_avg:88.5,ev_max:108.7,angle:"14.8",avg_hit_dist:173,avg_hr_dist:396,max_hr_dist:0,hard:38.8,med:44.8,soft:16.4,pull:36.1,center:37.2,oppo:26.8,xba:0.246,xslg:0.435,speed:23.0},
+  "M. Conforto": {pa:103,barrel_n:6,barrel_pct:12.8,ev_avg:94.8,ev_max:109.3,angle:"18.8",avg_hit_dist:202,avg_hr_dist:409,max_hr_dist:0,hard:45.9,med:49.2,soft:4.9,pull:50.8,center:31.2,oppo:18.0,xba:0.273,xslg:0.502,speed:22.5},
   "M. Dubon": {pa:243,barrel_n:8,barrel_pct:5.1,ev_avg:87.0,ev_max:106.3,angle:"15.6",avg_hit_dist:173,avg_hr_dist:389,max_hr_dist:0,hard:30.3,med:55.0,soft:14.7,pull:31.8,center:37.9,oppo:30.3,xba:0.249,xslg:0.368,speed:21.5},
   "M. Garcia": {pa:248,barrel_n:8,barrel_pct:4.6,ev_avg:90.2,ev_max:110.6,angle:"8.4",avg_hit_dist:158,avg_hr_dist:398,max_hr_dist:0,hard:30.0,med:58.0,soft:12.1,pull:34.8,center:41.5,oppo:23.7,xba:0.280,xslg:0.377,speed:23.1},
   "M. Gasper": {pa:85,barrel_n:2,barrel_pct:6.9,ev_avg:91.5,ev_max:105.9,angle:"17.8",avg_hit_dist:179,avg_hr_dist:0,max_hr_dist:0,hard:40.6,med:48.4,soft:10.9,pull:45.3,center:29.7,oppo:25.0,xba:0.249,xslg:0.376,speed:24.5},
@@ -1281,7 +1280,9 @@ const batterBarrels = {
   "Matt Chapman": {pa:274,barrel_n:7,barrel_pct:4.9,ev_avg:87.5,ev_max:113.0,angle:"9.2",avg_hit_dist:130,avg_hr_dist:349,max_hr_dist:0,hard:29.4,med:45.2,soft:25.4,pull:40.6,center:34.0,oppo:25.4,xba:0.208,xslg:0.285,speed:23.7},
   "Matt McLain": {pa:238,barrel_n:10,barrel_pct:7.4,ev_avg:88.1,ev_max:110.5,angle:"20.3",avg_hit_dist:186,avg_hr_dist:398,max_hr_dist:0,hard:30.1,med:55.2,soft:14.7,pull:35.0,center:40.5,oppo:24.5,xba:0.233,xslg:0.384,speed:24.7},
   "Matt Olson": {pa:285,barrel_n:24,barrel_pct:15.5,ev_avg:93.0,ev_max:111.6,angle:"16.6",avg_hit_dist:184,avg_hr_dist:413,max_hr_dist:0,hard:40.4,med:43.8,soft:15.8,pull:37.0,center:37.9,oppo:25.1,xba:0.259,xslg:0.546,speed:21.2},
-  "Max Muncy": {pa:96,barrel_n:7,barrel_pct:12.3,ev_avg:92.5,ev_max:111.4,angle:"10.5",avg_hit_dist:154,avg_hr_dist:383,max_hr_dist:0,hard:43.3,med:40.3,soft:16.4,pull:46.3,center:32.8,oppo:20.9,xba:0.224,xslg:0.391,speed:24.7},
+  "Max Muncy (LAD)": {pa:225,barrel_n:21,barrel_pct:18.4,ev_avg:91.8,ev_max:110.1,angle:"14.3",avg_hit_dist:189,avg_hr_dist:407,max_hr_dist:0,hard:43.0,med:43.0,soft:13.9,pull:55.6,center:28.5,oppo:15.9,xba:0.274,xslg:0.567,speed:22.8},
+  "Max Muncy": {pa:225,barrel_n:21,barrel_pct:18.4,ev_avg:91.8,ev_max:110.1,angle:"14.3",avg_hit_dist:189,avg_hr_dist:407,max_hr_dist:0,hard:43.0,med:43.0,soft:13.9,pull:55.6,center:28.5,oppo:15.9,xba:0.274,xslg:0.567,speed:22.8},
+  "Max Muncy (ATH)": {pa:96,barrel_n:7,barrel_pct:12.3,ev_avg:92.5,ev_max:111.4,angle:"10.5",avg_hit_dist:154,avg_hr_dist:383,max_hr_dist:0,hard:43.3,med:40.3,soft:16.4,pull:46.3,center:32.8,oppo:20.9,xba:0.224,xslg:0.391,speed:24.7},
   "Mike Trout": {pa:292,barrel_n:27,barrel_pct:20.5,ev_avg:91.4,ev_max:114.6,angle:"20.9",avg_hit_dist:204,avg_hr_dist:407,max_hr_dist:0,hard:45.2,med:40.5,soft:14.3,pull:41.1,center:33.3,oppo:25.6,xba:0.257,xslg:0.578,speed:24.1},
   "Mookie Betts": {pa:149,barrel_n:7,barrel_pct:10.6,ev_avg:91.2,ev_max:105.6,angle:"18.6",avg_hit_dist:204,avg_hr_dist:387,max_hr_dist:0,hard:36.4,med:55.4,soft:8.3,pull:38.8,center:42.2,oppo:19.0,xba:0.267,xslg:0.459,speed:21.0},
   "N. Arenado": {pa:228,barrel_n:9,barrel_pct:6.8,ev_avg:85.6,ev_max:107.5,angle:"19.2",avg_hit_dist:174,avg_hr_dist:401,max_hr_dist:0,hard:31.1,med:49.1,soft:19.8,pull:47.3,center:35.9,oppo:16.8,xba:0.271,xslg:0.420,speed:21.7},
@@ -1294,7 +1295,6 @@ const batterBarrels = {
   "Nathan Lukes": {pa:109,barrel_n:0,barrel_pct:0.0,ev_avg:86.9,ev_max:107.5,angle:"15.7",avg_hit_dist:148,avg_hr_dist:0,max_hr_dist:0,hard:26.9,med:59.1,soft:14.0,pull:34.4,center:38.7,oppo:26.9,xba:0.260,xslg:0.344,speed:24.0},
   "Nick Fortes": {pa:159,barrel_n:1,barrel_pct:1.0,ev_avg:87.3,ev_max:108.9,angle:"6.7",avg_hit_dist:119,avg_hr_dist:408,max_hr_dist:0,hard:37.9,med:40.0,soft:22.1,pull:49.3,center:34.3,oppo:16.4,xba:0.253,xslg:0.324,speed:23.2},
   "Nick Kurtz": {pa:289,barrel_n:19,barrel_pct:16.2,ev_avg:94.7,ev_max:115.9,angle:"13.2",avg_hit_dist:176,avg_hr_dist:411,max_hr_dist:0,hard:47.1,med:39.3,soft:13.6,pull:33.5,center:39.3,oppo:27.1,xba:0.256,xslg:0.482,speed:22.3},
-  "Nico Hoerner": {pa:292,barrel_n:3,barrel_pct:1.6,ev_avg:85.3,ev_max:105.8,angle:"13.4",avg_hit_dist:166,avg_hr_dist:383,max_hr_dist:0,hard:24.4,med:58.1,soft:17.4,pull:35.3,center:41.1,oppo:23.6,xba:0.290,xslg:0.377,speed:24.1},
   "Noelvi Marte": {pa:39,barrel_n:0,barrel_pct:0.0,ev_avg:84.9,ev_max:106.0,angle:"-0.8",avg_hit_dist:58,avg_hr_dist:0,max_hr_dist:0,hard:28.6,med:54.3,soft:17.1,pull:57.1,center:34.3,oppo:8.6,xba:0.133,xslg:0.149,speed:26.6},
   "O. Peraza": {pa:205,barrel_n:9,barrel_pct:8.8,ev_avg:86.1,ev_max:110.3,angle:"13.5",avg_hit_dist:163,avg_hr_dist:387,max_hr_dist:0,hard:32.0,med:52.4,soft:15.7,pull:38.8,center:38.1,oppo:23.1,xba:0.267,xslg:0.420,speed:25.0},
   "Otto Lopez": {pa:273,barrel_n:14,barrel_pct:8.0,ev_avg:90.6,ev_max:112.8,angle:"6.3",avg_hit_dist:150,avg_hr_dist:396,max_hr_dist:0,hard:38.0,med:50.8,soft:11.1,pull:30.8,center:42.7,oppo:26.5,xba:0.289,xslg:0.447,speed:24.8},
@@ -1303,6 +1303,7 @@ const batterBarrels = {
   "P. Bailey": {pa:133,barrel_n:5,barrel_pct:6.6,ev_avg:90.0,ev_max:106.3,angle:"12.3",avg_hit_dist:154,avg_hr_dist:407,max_hr_dist:0,hard:33.7,med:54.1,soft:12.2,pull:37.8,center:35.7,oppo:26.5,xba:0.216,xslg:0.362,speed:21.5},
   "P. Crow-Armstrong": {pa:278,barrel_n:12,barrel_pct:8.9,ev_avg:90.9,ev_max:111.5,angle:"18.2",avg_hit_dist:158,avg_hr_dist:386,max_hr_dist:0,hard:41.3,med:42.9,soft:15.9,pull:49.7,center:30.2,oppo:20.1,xba:0.234,xslg:0.406,speed:23.8},
   "P. Goldschmidt": {pa:158,barrel_n:11,barrel_pct:17.5,ev_avg:90.2,ev_max:109.8,angle:"13.7",avg_hit_dist:171,avg_hr_dist:397,max_hr_dist:0,hard:34.2,med:44.4,soft:21.4,pull:33.3,center:35.9,oppo:30.8,xba:0.289,xslg:0.561,speed:22.0},
+  "P. Ramirez": {pa:26,barrel_n:0,barrel_pct:0.0,ev_avg:88.4,ev_max:101.4,angle:"4.6",avg_hit_dist:137,avg_hr_dist:0,max_hr_dist:0,hard:40.9,med:54.5,soft:4.6,pull:45.5,center:40.9,oppo:13.6,xba:0.384,xslg:0.429,speed:25.6},
   "Pete Alonso": {pa:290,barrel_n:20,barrel_pct:13.5,ev_avg:95.1,ev_max:114.6,angle:"15.4",avg_hit_dist:186,avg_hr_dist:391,max_hr_dist:0,hard:44.3,med:50.7,soft:4.9,pull:35.5,center:41.4,oppo:23.2,xba:0.255,xslg:0.508,speed:20.9},
   "R. Devers": {pa:282,barrel_n:14,barrel_pct:10.0,ev_avg:91.0,ev_max:112.4,angle:"11.3",avg_hit_dist:169,avg_hr_dist:402,max_hr_dist:0,hard:39.7,med:45.1,soft:15.2,pull:34.8,center:41.3,oppo:23.9,xba:0.221,xslg:0.402,speed:21.0},
   "R. Duran": {pa:37,barrel_n:3,barrel_pct:25.0,ev_avg:91.8,ev_max:108.3,angle:"26.5",avg_hit_dist:235,avg_hr_dist:386,max_hr_dist:0,hard:35.0,med:40.0,soft:25.0,pull:50.0,center:35.0,oppo:15.0,xba:0.242,xslg:0.571,speed:24.2},
@@ -1316,7 +1317,6 @@ const batterBarrels = {
   "S. Antonacci": {pa:196,barrel_n:8,barrel_pct:8.4,ev_avg:88.6,ev_max:108.4,angle:"10.8",avg_hit_dist:145,avg_hr_dist:0,max_hr_dist:0,hard:29.6,med:57.8,soft:12.7,pull:32.4,center:40.1,oppo:27.5,xba:0.326,xslg:0.460,speed:26.3},
   "S. Basallo": {pa:191,barrel_n:11,barrel_pct:10.7,ev_avg:93.0,ev_max:111.8,angle:"15.4",avg_hit_dist:174,avg_hr_dist:404,max_hr_dist:0,hard:39.3,med:45.9,soft:14.8,pull:43.7,center:37.0,oppo:19.3,xba:0.263,xslg:0.466,speed:21.2},
   "S. Horwitz": {pa:237,barrel_n:5,barrel_pct:4.0,ev_avg:86.4,ev_max:108.0,angle:"15.2",avg_hit_dist:154,avg_hr_dist:380,max_hr_dist:0,hard:26.9,med:51.1,soft:22.0,pull:40.7,center:33.0,oppo:26.4,xba:0.232,xslg:0.345,speed:20.4},
-  "S. Langeliers": {pa:271,barrel_n:22,barrel_pct:14.4,ev_avg:91.8,ev_max:114.4,angle:"20.4",avg_hit_dist:182,avg_hr_dist:415,max_hr_dist:0,hard:40.4,med:43.3,soft:16.4,pull:38.5,center:33.7,oppo:27.9,xba:0.294,xslg:0.551,speed:23.6},
   "S. Ohtani": {pa:284,barrel_n:22,barrel_pct:16.3,ev_avg:93.1,ev_max:114.6,angle:"13.0",avg_hit_dist:183,avg_hr_dist:400,max_hr_dist:0,hard:49.2,med:41.9,soft:8.9,pull:52.5,center:23.5,oppo:24.0,xba:0.277,xslg:0.521,speed:22.0},
   "S. Perez": {pa:250,barrel_n:14,barrel_pct:8.9,ev_avg:88.8,ev_max:111.2,angle:"16.5",avg_hit_dist:174,avg_hr_dist:392,max_hr_dist:0,hard:32.7,med:52.0,soft:15.4,pull:42.1,center:29.7,oppo:28.2,xba:0.229,xslg:0.400,speed:19.6},
   "S. Torkelson": {pa:248,barrel_n:15,barrel_pct:13.5,ev_avg:90.1,ev_max:109.8,angle:"19.5",avg_hit_dist:212,avg_hr_dist:400,max_hr_dist:0,hard:40.0,med:50.3,soft:9.7,pull:48.3,center:31.7,oppo:20.0,xba:0.213,xslg:0.411,speed:22.6},
@@ -1328,6 +1328,7 @@ const batterBarrels = {
   "T. Bazzana": {pa:166,barrel_n:3,barrel_pct:4.4,ev_avg:88.6,ev_max:108.1,angle:"11.7",avg_hit_dist:161,avg_hr_dist:399,max_hr_dist:0,hard:29.6,med:57.4,soft:13.0,pull:44.3,center:34.8,oppo:20.9,xba:0.269,xslg:0.397,speed:25.3},
   "T. Callihan": {pa:19,barrel_n:0,barrel_pct:0.0,ev_avg:0.0,ev_max:0.0,angle:"0.0",avg_hit_dist:0,avg_hr_dist:0,max_hr_dist:0,hard:45.5,med:45.5,soft:9.1,pull:72.7,center:18.2,oppo:9.1,xba:0.000,xslg:0.000,speed:25.1},
   "T. Freeman": {pa:152,barrel_n:0,barrel_pct:0.0,ev_avg:86.8,ev_max:106.4,angle:"9.4",avg_hit_dist:143,avg_hr_dist:361,max_hr_dist:0,hard:26.6,med:60.9,soft:12.5,pull:38.3,center:34.4,oppo:27.3,xba:0.277,xslg:0.361,speed:25.4},
+  "T. Johnston": {pa:232,barrel_n:2,barrel_pct:1.7,ev_avg:88.8,ev_max:106.3,angle:"12.0",avg_hit_dist:172,avg_hr_dist:415,max_hr_dist:0,hard:32.8,med:62.2,soft:5.0,pull:36.1,center:39.4,oppo:24.4,xba:0.286,xslg:0.394,speed:23.2},
   "T. Larnach": {pa:184,barrel_n:6,barrel_pct:6.2,ev_avg:86.6,ev_max:108.5,angle:"11.4",avg_hit_dist:159,avg_hr_dist:381,max_hr_dist:0,hard:20.6,med:58.0,soft:21.4,pull:40.5,center:38.9,oppo:20.6,xba:0.241,xslg:0.355,speed:22.9},
   "T. Peters": {pa:181,barrel_n:5,barrel_pct:5.1,ev_avg:87.3,ev_max:105.8,angle:"17.4",avg_hit_dist:145,avg_hr_dist:363,max_hr_dist:0,hard:24.5,med:60.4,soft:15.1,pull:55.4,center:25.9,oppo:18.7,xba:0.234,xslg:0.340,speed:27.0},
   "T. Soderstrom": {pa:258,barrel_n:16,barrel_pct:10.8,ev_avg:90.0,ev_max:113.2,angle:"14.7",avg_hit_dist:164,avg_hr_dist:393,max_hr_dist:0,hard:35.2,med:45.6,soft:19.2,pull:36.3,center:42.0,oppo:21.8,xba:0.232,xslg:0.402,speed:23.0},
@@ -1364,6 +1365,7 @@ const batterAdv = {
   "A. Rutschman": {iso:0.222,slg:0.492,wrc:130,chase:28.7,hr:8},
   "A. Vaughn": {iso:0.183,slg:0.548,wrc:173,chase:25.9,hr:2},
   "A. Volpe": {iso:0.104,slg:0.299,wrc:75,chase:25.7,hr:1},
+  "A. Williams": {iso:0.152,slg:0.364,wrc:65,chase:40.8,hr:1},
   "A.J. Ewing": {iso:0.081,slg:0.333,wrc:94,chase:30.2,hr:1},
   "Alec Bohm": {iso:0.139,slg:0.361,wrc:79,chase:27.9,hr:8},
   "Alex Bregman": {iso:0.109,slg:0.355,wrc:94,chase:25.1,hr:6},
@@ -1455,7 +1457,6 @@ const batterAdv = {
   "Gavin Sheets": {iso:0.219,slg:0.449,wrc:119,chase:35.4,hr:10},
   "H. Goodman": {iso:0.269,slg:0.508,wrc:110,chase:42.7,hr:18},
   "H. Hernandez": {iso:0.146,slg:0.382,wrc:98,chase:27.3,hr:5},
-  "Henry Bolte": {iso:0.084,slg:0.386,wrc:122,chase:33.9,hr:1},
   "Henry Davis": {iso:0.146,slg:0.285,wrc:53,chase:32.9,hr:5},
   "I. Collins": {iso:0.090,slg:0.307,wrc:87,chase:22.3,hr:3},
   "I. Kiner-Falefa": {iso:0.069,slg:0.333,wrc:85,chase:38.8,hr:1},
@@ -1473,14 +1474,12 @@ const batterAdv = {
   "J. Jackson": {iso:0.145,slg:0.399,wrc:82,chase:41.2,hr:6},
   "J. Lawlar": {iso:0.182,slg:0.545,wrc:174,chase:32.4,hr:1},
   "J. Loperfido": {iso:0.077,slg:0.323,wrc:91,chase:33.5,hr:0},
-  "J. McCarthy": {iso:0.167,slg:0.448,wrc:98,chase:38.3,hr:4},
   "J. Merrill": {iso:0.130,slg:0.332,wrc:72,chase:36.8,hr:6},
   "J. Pereda": {iso:0.100,slg:0.383,wrc:108,chase:34.5,hr:2},
   "J. Sanchez": {iso:0.180,slg:0.476,wrc:118,chase:41.9,hr:7},
   "J. Walker": {iso:0.258,slg:0.558,wrc:155,chase:39.0,hr:17},
   "J. Wetherholt": {iso:0.138,slg:0.390,wrc:116,chase:25.9,hr:9},
   "JJ Bleday": {iso:0.296,slg:0.566,wrc:153,chase:28.0,hr:11},
-  "Jacob Wilson": {iso:0.104,slg:0.390,wrc:96,chase:45.3,hr:3},
   "Jacob Young": {iso:0.158,slg:0.391,wrc:87,chase:29.8,hr:8},
   "Jake Burger": {iso:0.182,slg:0.429,wrc:98,chase:39.6,hr:11},
   "Jake Mangum": {iso:0.061,slg:0.351,wrc:99,chase:49.5,hr:1},
@@ -1498,6 +1497,7 @@ const batterAdv = {
   "Jo Adell": {iso:0.143,slg:0.382,wrc:87,chase:40.7,hr:10},
   "Joe Mack": {iso:0.075,slg:0.312,wrc:70,chase:27.0,hr:1},
   "Joey Ortiz": {iso:0.058,slg:0.266,wrc:64,chase:33.2,hr:1},
+  "Jonah Heim": {iso:0.262,slg:0.500,wrc:120,chase:35.5,hr:5},
   "Jorbit Vivas": {iso:0.078,slg:0.318,wrc:82,chase:29.3,hr:1},
   "Jose Fermin": {iso:0.124,slg:0.393,wrc:104,chase:26.4,hr:2},
   "Jose Siri": {iso:0.209,slg:0.535,wrc:153,chase:47.1,hr:2},
@@ -1534,8 +1534,8 @@ const batterAdv = {
   "Luis Rengifo": {iso:0.050,slg:0.254,wrc:51,chase:31.1,hr:0},
   "Luis Torrens": {iso:0.104,slg:0.330,wrc:77,chase:37.0,hr:1},
   "Luke Raley": {iso:0.272,slg:0.522,wrc:133,chase:36.1,hr:14},
-  "M. Ballesteros": {iso:0.153,slg:0.387,wrc:93,chase:38.5,hr:6},
   "M. Busch": {iso:0.160,slg:0.412,wrc:124,chase:26.6,hr:8},
+  "M. Conforto": {iso:0.226,slg:0.462,wrc:123,chase:28.0,hr:4},
   "M. Dubon": {iso:0.146,slg:0.406,wrc:103,chase:40.3,hr:6},
   "M. Garcia": {iso:0.114,slg:0.378,wrc:95,chase:23.6,hr:3},
   "M. Gasper": {iso:0.074,slg:0.346,wrc:85,chase:27.9,hr:0},
@@ -1553,7 +1553,9 @@ const batterAdv = {
   "Matt Chapman": {iso:0.146,slg:0.406,wrc:115,chase:28.7,hr:6},
   "Matt McLain": {iso:0.156,slg:0.362,wrc:89,chase:27.6,hr:8},
   "Matt Olson": {iso:0.293,slg:0.563,wrc:148,chase:30.7,hr:20},
+  "Max Muncy (LAD)": {iso:0.243,slg:0.505,wrc:144,chase:27.9,hr:14},
   "Max Muncy": {iso:0.243,slg:0.505,wrc:144,chase:27.9,hr:14},
+  "Max Muncy (ATH)": {iso:0.154,slg:0.394,wrc:96,chase:40.3,hr:2},
   "Mike Trout": {iso:0.225,slg:0.451,wrc:138,chase:22.3,hr:15},
   "Mookie Betts": {iso:0.159,slg:0.341,wrc:69,chase:24.0,hr:6},
   "N. Arenado": {iso:0.168,slg:0.416,wrc:103,chase:33.1,hr:8},
@@ -1566,7 +1568,6 @@ const batterAdv = {
   "Nathan Lukes": {iso:0.082,slg:0.391,wrc:110,chase:40.6,hr:1},
   "Nick Fortes": {iso:0.081,slg:0.350,wrc:88,chase:40.9,hr:1},
   "Nick Kurtz": {iso:0.253,slg:0.539,wrc:170,chase:23.1,hr:16},
-  "Nico Hoerner": {iso:0.099,slg:0.343,wrc:90,chase:32.3,hr:4},
   "Noelvi Marte": {iso:0.083,slg:0.292,wrc:58,chase:40.9,hr:1},
   "O. Peraza": {iso:0.171,slg:0.437,wrc:113,chase:39.4,hr:7},
   "Otto Lopez": {iso:0.142,slg:0.484,wrc:139,chase:38.3,hr:5},
@@ -1575,6 +1576,7 @@ const batterAdv = {
   "P. Bailey": {iso:0.083,slg:0.248,wrc:29,chase:31.6,hr:2},
   "P. Crow-Armstrong": {iso:0.188,slg:0.444,wrc:118,chase:40.1,hr:11},
   "P. Goldschmidt": {iso:0.231,slg:0.517,wrc:142,chase:34.3,hr:8},
+  "P. Ramirez": {iso:0.043,slg:0.261,wrc:66,chase:23.5,hr:0},
   "Pete Alonso": {iso:0.212,slg:0.457,wrc:116,chase:28.1,hr:15},
   "R. Devers": {iso:0.179,slg:0.409,wrc:95,chase:34.1,hr:9},
   "R. Duran": {iso:0.138,slg:0.241,wrc:71,chase:25.0,hr:1},
@@ -1588,7 +1590,6 @@ const batterAdv = {
   "S. Antonacci": {iso:0.089,slg:0.373,wrc:120,chase:24.6,hr:1},
   "S. Basallo": {iso:0.219,slg:0.476,wrc:117,chase:42.3,hr:10},
   "S. Horwitz": {iso:0.176,slg:0.462,wrc:138,chase:27.5,hr:9},
-  "S. Langeliers": {iso:0.259,slg:0.540,wrc:144,chase:36.9,hr:18},
   "S. Ohtani": {iso:0.239,slg:0.543,wrc:167,chase:29.3,hr:13},
   "S. Perez": {iso:0.133,slg:0.337,wrc:60,chase:48.1,hr:9},
   "S. Torkelson": {iso:0.204,slg:0.417,wrc:102,chase:23.5,hr:11},
@@ -1600,6 +1601,7 @@ const batterAdv = {
   "T. Bazzana": {iso:0.155,slg:0.405,wrc:107,chase:27.1,hr:4},
   "T. Callihan": {iso:0.625,slg:0.938,wrc:271,chase:25.0,hr:2},
   "T. Freeman": {iso:0.098,slg:0.371,wrc:93,chase:30.8,hr:3},
+  "T. Johnston": {iso:0.117,slg:0.428,wrc:107,chase:39.0,hr:2},
   "T. Larnach": {iso:0.122,slg:0.372,wrc:106,chase:29.9,hr:3},
   "T. Peters": {iso:0.146,slg:0.444,wrc:125,chase:37.5,hr:2},
   "T. Soderstrom": {iso:0.222,slg:0.457,wrc:119,chase:29.7,hr:11},
@@ -3434,20 +3436,20 @@ const projPitchers = {
 // ════════════════════════════════════════════════════
 const games = [
 
-  {id:"mia-pit",time:"12:15 PM",away:"MIA",home:"PIT",awayRec:"35-36",homeRec:"36-35",awayP:"Max Meyer",awayPH:"R",awayEra:"2.85",awayConf:true,awayPrim:false,homeP:"Paul Skenes",homePH:"R",homeEra:"2.84",homeConf:true,homePrim:false,line:"PIT -164",ou:7.0,windDir:"in",dome:false,postponed:false,rain:26,temp:80,windMph:13,windLabel:"13mph in",awayL:[{pos:"1B",name:"Liam Hicks",hand:"L",team:"MIA"},{pos:"SS",name:"Otto Lopez",hand:"R",team:"MIA"},{pos:"DH",name:"Kyle Stowers",hand:"L",team:"MIA"},{pos:"2B",name:"X. Edwards",hand:"S",team:"MIA"},{pos:"LF",name:"H. Hernandez",hand:"R",team:"MIA"},{pos:"RF",name:"Owen Caissie",hand:"L",team:"MIA"},{pos:"CF",name:"Jakob Marsee",hand:"L",team:"MIA"},{pos:"C",name:"Joe Mack",hand:"L",team:"MIA"},{pos:"3B",name:"Connor Norby",hand:"R",team:"MIA"}],homeL:[{pos:"DH",name:"S. Horwitz",hand:"L",team:"PIT"},{pos:"2B",name:"Brandon Lowe",hand:"L",team:"PIT"},{pos:"LF",name:"B. Reynolds",hand:"S",team:"PIT"},{pos:"1B",name:"Ryan OHearn",hand:"L",team:"PIT"},{pos:"3B",name:"N. Gonzales",hand:"R",team:"PIT"},{pos:"RF",name:"T. Callihan",hand:"L",team:"PIT"},{pos:"CF",name:"Jake Mangum",hand:"S",team:"PIT"},{pos:"SS",name:"Jared Triolo",hand:"R",team:"PIT"},{pos:"C",name:"Henry Davis",hand:"R",team:"PIT"}]},
+  {id:"mia-pit",time:"12:15 PM",away:"MIA",home:"PIT",awayRec:"35-36",homeRec:"36-35",awayP:"Max Meyer",awayPH:"R",awayEra:"2.85",awayConf:true,awayPrim:false,homeP:"Paul Skenes",homePH:"R",homeEra:"2.84",homeConf:true,homePrim:false,line:"PIT -164",ou:7.0,windDir:"R-L",dome:false,postponed:false,rain:26,temp:80,windMph:13,windLabel:"13mph R-L",awayL:[{pos:"1B",name:"Liam Hicks",hand:"L",team:"MIA"},{pos:"SS",name:"Otto Lopez",hand:"R",team:"MIA"},{pos:"DH",name:"Kyle Stowers",hand:"L",team:"MIA"},{pos:"2B",name:"X. Edwards",hand:"S",team:"MIA"},{pos:"LF",name:"H. Hernandez",hand:"R",team:"MIA"},{pos:"RF",name:"Owen Caissie",hand:"L",team:"MIA"},{pos:"CF",name:"Jakob Marsee",hand:"L",team:"MIA"},{pos:"C",name:"Joe Mack",hand:"L",team:"MIA"},{pos:"3B",name:"Connor Norby",hand:"R",team:"MIA"}],homeL:[{pos:"DH",name:"S. Horwitz",hand:"L",team:"PIT"},{pos:"2B",name:"Brandon Lowe",hand:"L",team:"PIT"},{pos:"LF",name:"B. Reynolds",hand:"S",team:"PIT"},{pos:"1B",name:"Ryan OHearn",hand:"L",team:"PIT"},{pos:"3B",name:"N. Gonzales",hand:"R",team:"PIT"},{pos:"RF",name:"T. Callihan",hand:"L",team:"PIT"},{pos:"CF",name:"Jake Mangum",hand:"S",team:"PIT"},{pos:"SS",name:"Jared Triolo",hand:"R",team:"PIT"},{pos:"C",name:"Henry Davis",hand:"R",team:"PIT"}]},
   {id:"sd-bal",time:"1:35 PM",away:"SD",home:"BAL",awayRec:"36-33",homeRec:"34-38",awayP:"Walker Buehler",awayPH:"R",awayEra:"4.33",awayConf:true,awayPrim:false,homeP:"Trevor Rogers",homePH:"L",homeEra:"6.15",homeConf:true,homePrim:false,line:"BAL -137",ou:10.5,windDir:"out",dome:false,postponed:false,rain:4,temp:91,windMph:14,windLabel:"14mph out",awayL:[{pos:"2B",name:"F. Tatis",hand:"R",team:"SD"},{pos:"CF",name:"J. Merrill",hand:"L",team:"SD"},{pos:"3B",name:"M. Machado",hand:"R",team:"SD"},{pos:"SS",name:"X. Bogaerts",hand:"R",team:"SD"},{pos:"1B",name:"Gavin Sheets",hand:"L",team:"SD"},{pos:"LF",name:"Samad Taylor",hand:"R",team:"SD"},{pos:"DH",name:"Nick Solak",hand:"R",team:"SD"},{pos:"RF",name:"Jase Bowen",hand:"R",team:"SD"},{pos:"C",name:"R. Duran",hand:"R",team:"SD"}],homeL:[{pos:"LF",name:"Taylor Ward",hand:"R",team:"BAL"},{pos:"SS",name:"G. Henderson",hand:"L",team:"BAL"},{pos:"DH",name:"A. Rutschman",hand:"S",team:"BAL"},{pos:"1B",name:"Pete Alonso",hand:"R",team:"BAL"},{pos:"C",name:"S. Basallo",hand:"L",team:"BAL"},{pos:"RF",name:"L. Taveras",hand:"S",team:"BAL"},{pos:"CF",name:"C. Cowser",hand:"L",team:"BAL"},{pos:"2B",name:"J. Jackson",hand:"R",team:"BAL"},{pos:"3B",name:"B. Alexander",hand:"R",team:"BAL"}]},
-  {id:"sea-wsh",time:"1:35 PM",away:"SEA",home:"WSH",awayRec:"37-35",homeRec:"36-35",awayP:"Emerson Hancock",awayPH:"R",awayEra:"2.74",awayConf:true,awayPrim:false,homeP:"Miles Mikolas",homePH:"R",homeEra:"5.90",homeConf:false,homePrim:true,line:"SEA -136",ou:10.5,windDir:"in",dome:false,postponed:false,rain:3,temp:90,windMph:13,windLabel:"13mph in",awayL:[{pos:"2B",name:"Cole Young",hand:"L",team:"SEA"},{pos:"DH",name:"Julio Rodriguez",hand:"R",team:"SEA"},{pos:"1B",name:"Josh Naylor",hand:"L",team:"SEA"},{pos:"LF",name:"Luke Raley",hand:"L",team:"SEA"},{pos:"RF",name:"D. Canzone",hand:"L",team:"SEA"},{pos:"CF",name:"V. Robles",hand:"R",team:"SEA"},{pos:"3B",name:"M. Mastrobuoni",hand:"L",team:"SEA"},{pos:"C",name:"J. Pereda",hand:"R",team:"SEA"},{pos:"SS",name:"Colt Emerson",hand:"L",team:"SEA"}],homeL:[{pos:"DH",name:"James Wood",hand:"L",team:"WSH"},{pos:"1B",name:"Luis Garcia",hand:"L",team:"WSH"},{pos:"RF",name:"Dylan Crews",hand:"R",team:"WSH"},{pos:"SS",name:"CJ Abrams",hand:"L",team:"WSH"},{pos:"C",name:"Keibert Ruiz",hand:"S",team:"WSH"},{pos:"LF",name:"Daylen Lile",hand:"L",team:"WSH"},{pos:"2B",name:"Nasim Nunez",hand:"S",team:"WSH"},{pos:"3B",name:"Jorbit Vivas",hand:"L",team:"WSH"},{pos:"CF",name:"Jacob Young",hand:"R",team:"WSH"}]},
+  {id:"sea-wsh",time:"1:35 PM",away:"SEA",home:"WSH",awayRec:"37-35",homeRec:"36-35",awayP:"Emerson Hancock",awayPH:"R",awayEra:"2.74",awayConf:true,awayPrim:false,homeP:"Miles Mikolas",homePH:"R",homeEra:"5.90",homeConf:false,homePrim:true,line:"SEA -132",ou:10.5,windDir:"out",dome:false,postponed:false,rain:3,temp:90,windMph:13,windLabel:"13mph out",awayL:[{pos:"2B",name:"Cole Young",hand:"L",team:"SEA"},{pos:"DH",name:"Julio Rodriguez",hand:"R",team:"SEA"},{pos:"1B",name:"Josh Naylor",hand:"L",team:"SEA"},{pos:"LF",name:"Luke Raley",hand:"L",team:"SEA"},{pos:"RF",name:"D. Canzone",hand:"L",team:"SEA"},{pos:"CF",name:"V. Robles",hand:"R",team:"SEA"},{pos:"3B",name:"M. Mastrobuoni",hand:"L",team:"SEA"},{pos:"C",name:"J. Pereda",hand:"R",team:"SEA"},{pos:"SS",name:"Colt Emerson",hand:"L",team:"SEA"}],homeL:[{pos:"DH",name:"James Wood",hand:"L",team:"WSH"},{pos:"1B",name:"Luis Garcia",hand:"L",team:"WSH"},{pos:"RF",name:"Dylan Crews",hand:"R",team:"WSH"},{pos:"SS",name:"CJ Abrams",hand:"L",team:"WSH"},{pos:"C",name:"Keibert Ruiz",hand:"S",team:"WSH"},{pos:"LF",name:"Daylen Lile",hand:"L",team:"WSH"},{pos:"2B",name:"Nasim Nunez",hand:"S",team:"WSH"},{pos:"3B",name:"Jorbit Vivas",hand:"L",team:"WSH"},{pos:"CF",name:"Jacob Young",hand:"R",team:"WSH"}]},
   {id:"nyy-tor",time:"1:37 PM",away:"NYY",home:"TOR",awayRec:"42-27",homeRec:"34-37",awayP:"Will Warren",awayPH:"R",awayEra:"3.41",awayConf:true,awayPrim:false,homeP:"Patrick Corbin",homePH:"L",homeEra:"4.55",homeConf:true,homePrim:false,line:"NYY -130",ou:8.5,windDir:"dome",dome:true,postponed:false,rain:0,temp:0,windMph:0,windLabel:"",awayL:[{pos:"1B",name:"P. Goldschmidt",hand:"R",team:"NYY"},{pos:"DH",name:"Ben Rice",hand:"L",team:"NYY"},{pos:"RF",name:"J. Dominguez",hand:"S",team:"NYY"},{pos:"CF",name:"C. Bellinger",hand:"L",team:"NYY"},{pos:"3B",name:"Amed Rosario",hand:"R",team:"NYY"},{pos:"2B",name:"J. Caballero",hand:"R",team:"NYY"},{pos:"LF",name:"M. Schuemann",hand:"R",team:"NYY"},{pos:"SS",name:"A. Volpe",hand:"R",team:"NYY"},{pos:"C",name:"Ali Sanchez",hand:"R",team:"NYY"}],homeL:[{pos:"DH",name:"G. Springer",hand:"R",team:"TOR"},{pos:"CF",name:"Nathan Lukes",hand:"L",team:"TOR"},{pos:"C",name:"A. Kirk",hand:"R",team:"TOR"},{pos:"RF",name:"Y. Pinango",hand:"L",team:"TOR"},{pos:"3B",name:"K. Okamoto",hand:"R",team:"TOR"},{pos:"LF",name:"J. Sanchez",hand:"L",team:"TOR"},{pos:"SS",name:"E. Clement",hand:"R",team:"TOR"},{pos:"2B",name:"D. Schneider",hand:"R",team:"TOR"},{pos:"1B",name:"C. McAdoo",hand:"R",team:"TOR"}]},
-  {id:"det-cle",time:"1:40 PM",away:"DET",home:"CLE",awayRec:"29-42",homeRec:"39-33",awayP:"Casey Mize",awayPH:"R",awayEra:"2.27",awayConf:true,awayPrim:false,homeP:"Gavin Williams",homePH:"R",homeEra:"3.32",homeConf:true,homePrim:false,line:"—",ou:7.0,windDir:"in",dome:false,postponed:false,rain:71,temp:74,windMph:11,windLabel:"11mph in",awayL:[{pos:"SS",name:"K. McGonigle",hand:"L",team:"DET"},{pos:"2B",name:"G. Torres",hand:"R",team:"DET"},{pos:"LF",name:"Riley Greene",hand:"L",team:"DET"},{pos:"DH",name:"D. Dingler",hand:"R",team:"DET"},{pos:"RF",name:"K. Carpenter",hand:"L",team:"DET"},{pos:"3B",name:"Colt Keith",hand:"L",team:"DET"},{pos:"1B",name:"S. Torkelson",hand:"R",team:"DET"},{pos:"CF",name:"James Outman",hand:"L",team:"DET"},{pos:"C",name:"Jake Rogers",hand:"R",team:"DET"}],homeL:[{pos:"2B",name:"T. Bazzana",hand:"L",team:"CLE"},{pos:"SS",name:"B. Rocchio",hand:"S",team:"CLE"},{pos:"1B",name:"K. Manzardo",hand:"L",team:"CLE"},{pos:"DH",name:"Rhys Hoskins",hand:"R",team:"CLE"},{pos:"CF",name:"D. Schneemann",hand:"L",team:"CLE"},{pos:"RF",name:"David Fry",hand:"R",team:"CLE"},{pos:"LF",name:"Steven Kwan",hand:"L",team:"CLE"},{pos:"3B",name:"G. Arias",hand:"R",team:"CLE"},{pos:"C",name:"P. Bailey",hand:"S",team:"CLE"}]},
-  {id:"ari-cin",time:"1:40 PM",away:"ARI",home:"CIN",awayRec:"35-35",homeRec:"33-36",awayP:"Zac Gallen",awayPH:"R",awayEra:"5.43",awayConf:true,awayPrim:false,homeP:"Andrew Abbott",homePH:"L",homeEra:"4.10",homeConf:true,homePrim:false,line:"ARI -111",ou:10.0,windDir:"in",dome:false,postponed:false,rain:52,temp:78,windMph:11,windLabel:"11mph in",awayL:[{pos:"DH",name:"Ketel Marte",hand:"S",team:"ARI"},{pos:"RF",name:"C. Carroll",hand:"L",team:"ARI"},{pos:"C",name:"G. Moreno",hand:"R",team:"ARI"},{pos:"3B",name:"N. Arenado",hand:"R",team:"ARI"},{pos:"2B",name:"I. Vargas",hand:"S",team:"ARI"},{pos:"SS",name:"G. Perdomo",hand:"S",team:"ARI"},{pos:"CF",name:"J. Lawlar",hand:"R",team:"ARI"},{pos:"1B",name:"L. Groover",hand:"R",team:"ARI"},{pos:"LF",name:"Tommy Troy",hand:"R",team:"ARI"}],homeL:[{pos:"CF",name:"Blake Dunn",hand:"R",team:"CIN"},{pos:"LF",name:"JJ Bleday",hand:"L",team:"CIN"},{pos:"3B",name:"Sal Stewart",hand:"R",team:"CIN"},{pos:"1B",name:"N. Lowe",hand:"L",team:"CIN"},{pos:"DH",name:"E. Suarez",hand:"R",team:"CIN"},{pos:"RF",name:"Noelvi Marte",hand:"R",team:"CIN"},{pos:"SS",name:"Matt McLain",hand:"R",team:"CIN"},{pos:"C",name:"Jose Trevino",hand:"R",team:"CIN"},{pos:"2B",name:"Edwin Arroyo",hand:"S",team:"CIN"}]},
-  {id:"atl-nym",time:"1:40 PM",away:"ATL",home:"NYM",awayRec:"46-24",homeRec:"31-39",awayP:"Bryce Elder",awayPH:"R",awayEra:"2.66",awayConf:true,awayPrim:false,homeP:"Freddy Peralta",homePH:"R",homeEra:"4.04",homeConf:true,homePrim:false,line:"NYM -131",ou:8.5,windDir:"in",dome:false,postponed:false,rain:1,temp:86,windMph:13,windLabel:"13mph in",awayL:[{pos:"CF",name:"M. Harris",hand:"L",team:"ATL"},{pos:"SS",name:"M. Dubon",hand:"R",team:"ATL"},{pos:"1B",name:"Matt Olson",hand:"L",team:"ATL"},{pos:"2B",name:"Ozzie Albies",hand:"S",team:"ATL"},{pos:"DH",name:"D. Smith",hand:"L",team:"ATL"},{pos:"3B",name:"Austin Riley",hand:"R",team:"ATL"},{pos:"RF",name:"Eli White",hand:"R",team:"ATL"},{pos:"LF",name:"M. Yastrzemski",hand:"L",team:"ATL"},{pos:"C",name:"Sandy Leon",hand:"S",team:"ATL"}],homeL:[{pos:"RF",name:"Carson Benge",hand:"L",team:"NYM"},{pos:"SS",name:"Bo Bichette",hand:"R",team:"NYM"},{pos:"DH",name:"Juan Soto",hand:"L",team:"NYM"},{pos:"1B",name:"Jared Young",hand:"L",team:"NYM"},{pos:"CF",name:"A.J. Ewing",hand:"L",team:"NYM"},{pos:"2B",name:"M. Semien",hand:"R",team:"NYM"},{pos:"3B",name:"Brett Baty",hand:"L",team:"NYM"},{pos:"LF",name:"MJ Melendez",hand:"L",team:"NYM"},{pos:"C",name:"Luis Torrens",hand:"R",team:"NYM"}]},
+  {id:"det-cle",time:"1:40 PM",away:"DET",home:"CLE",awayRec:"29-42",homeRec:"39-33",awayP:"Casey Mize",awayPH:"R",awayEra:"2.27",awayConf:true,awayPrim:false,homeP:"Gavin Williams",homePH:"R",homeEra:"3.32",homeConf:true,homePrim:false,line:"—",ou:7.0,windDir:"L-R",dome:false,postponed:false,rain:71,temp:74,windMph:11,windLabel:"11mph L-R",awayL:[{pos:"SS",name:"K. McGonigle",hand:"L",team:"DET"},{pos:"2B",name:"G. Torres",hand:"R",team:"DET"},{pos:"LF",name:"Riley Greene",hand:"L",team:"DET"},{pos:"DH",name:"D. Dingler",hand:"R",team:"DET"},{pos:"RF",name:"K. Carpenter",hand:"L",team:"DET"},{pos:"3B",name:"Colt Keith",hand:"L",team:"DET"},{pos:"1B",name:"S. Torkelson",hand:"R",team:"DET"},{pos:"CF",name:"James Outman",hand:"L",team:"DET"},{pos:"C",name:"Jake Rogers",hand:"R",team:"DET"}],homeL:[{pos:"2B",name:"T. Bazzana",hand:"L",team:"CLE"},{pos:"SS",name:"B. Rocchio",hand:"S",team:"CLE"},{pos:"1B",name:"K. Manzardo",hand:"L",team:"CLE"},{pos:"DH",name:"Rhys Hoskins",hand:"R",team:"CLE"},{pos:"CF",name:"D. Schneemann",hand:"L",team:"CLE"},{pos:"RF",name:"David Fry",hand:"R",team:"CLE"},{pos:"LF",name:"Steven Kwan",hand:"L",team:"CLE"},{pos:"3B",name:"G. Arias",hand:"R",team:"CLE"},{pos:"C",name:"P. Bailey",hand:"S",team:"CLE"}]},
+  {id:"ari-cin",time:"1:40 PM",away:"ARI",home:"CIN",awayRec:"35-35",homeRec:"33-36",awayP:"Zac Gallen",awayPH:"R",awayEra:"5.43",awayConf:true,awayPrim:false,homeP:"Andrew Abbott",homePH:"L",homeEra:"4.10",homeConf:true,homePrim:false,line:"ARI -111",ou:10.0,windDir:"R-L",dome:false,postponed:false,rain:52,temp:78,windMph:11,windLabel:"11mph R-L",awayL:[{pos:"DH",name:"Ketel Marte",hand:"S",team:"ARI"},{pos:"RF",name:"C. Carroll",hand:"L",team:"ARI"},{pos:"C",name:"G. Moreno",hand:"R",team:"ARI"},{pos:"3B",name:"N. Arenado",hand:"R",team:"ARI"},{pos:"2B",name:"I. Vargas",hand:"S",team:"ARI"},{pos:"SS",name:"G. Perdomo",hand:"S",team:"ARI"},{pos:"CF",name:"J. Lawlar",hand:"R",team:"ARI"},{pos:"1B",name:"L. Groover",hand:"R",team:"ARI"},{pos:"LF",name:"Tommy Troy",hand:"R",team:"ARI"}],homeL:[{pos:"CF",name:"Blake Dunn",hand:"R",team:"CIN"},{pos:"LF",name:"JJ Bleday",hand:"L",team:"CIN"},{pos:"3B",name:"Sal Stewart",hand:"R",team:"CIN"},{pos:"1B",name:"N. Lowe",hand:"L",team:"CIN"},{pos:"DH",name:"E. Suarez",hand:"R",team:"CIN"},{pos:"RF",name:"Noelvi Marte",hand:"R",team:"CIN"},{pos:"SS",name:"Matt McLain",hand:"R",team:"CIN"},{pos:"C",name:"Jose Trevino",hand:"R",team:"CIN"},{pos:"2B",name:"Edwin Arroyo",hand:"S",team:"CIN"}]},
+  {id:"atl-nym",time:"1:40 PM",away:"ATL",home:"NYM",awayRec:"46-24",homeRec:"31-39",awayP:"Bryce Elder",awayPH:"R",awayEra:"2.66",awayConf:true,awayPrim:false,homeP:"Freddy Peralta",homePH:"R",homeEra:"4.04",homeConf:true,homePrim:false,line:"NYM -131",ou:8.5,windDir:"R-L",dome:false,postponed:false,rain:1,temp:86,windMph:13,windLabel:"13mph R-L",awayL:[{pos:"CF",name:"M. Harris",hand:"L",team:"ATL"},{pos:"SS",name:"M. Dubon",hand:"R",team:"ATL"},{pos:"1B",name:"Matt Olson",hand:"L",team:"ATL"},{pos:"2B",name:"Ozzie Albies",hand:"S",team:"ATL"},{pos:"DH",name:"D. Smith",hand:"L",team:"ATL"},{pos:"3B",name:"Austin Riley",hand:"R",team:"ATL"},{pos:"RF",name:"Eli White",hand:"R",team:"ATL"},{pos:"LF",name:"M. Yastrzemski",hand:"L",team:"ATL"},{pos:"C",name:"Sandy Leon",hand:"S",team:"ATL"}],homeL:[{pos:"RF",name:"Carson Benge",hand:"L",team:"NYM"},{pos:"SS",name:"Bo Bichette",hand:"R",team:"NYM"},{pos:"DH",name:"Juan Soto",hand:"L",team:"NYM"},{pos:"1B",name:"Jared Young",hand:"L",team:"NYM"},{pos:"CF",name:"A.J. Ewing",hand:"L",team:"NYM"},{pos:"2B",name:"M. Semien",hand:"R",team:"NYM"},{pos:"3B",name:"Brett Baty",hand:"L",team:"NYM"},{pos:"LF",name:"MJ Melendez",hand:"L",team:"NYM"},{pos:"C",name:"Luis Torrens",hand:"R",team:"NYM"}]},
   {id:"lad-cws",time:"2:10 PM",away:"LAD",home:"CWS",awayRec:"45-26",homeRec:"37-32",awayP:"Emmet Sheehan",awayPH:"R",awayEra:"4.70",awayConf:true,awayPrim:false,homeP:"Erick Fedde",homePH:"R",homeEra:"4.69",homeConf:false,homePrim:true,line:"LAD -205",ou:9.5,windDir:"out",dome:false,postponed:false,rain:0,temp:68,windMph:17,windLabel:"17mph out",awayL:[{pos:"DH",name:"S. Ohtani",hand:"L",team:"LAD"},{pos:"CF",name:"Andy Pages",hand:"R",team:"LAD"},{pos:"1B",name:"F. Freeman",hand:"L",team:"LAD"},{pos:"SS",name:"Mookie Betts",hand:"R",team:"LAD"},{pos:"3B",name:"Max Muncy",hand:"L",team:"LAD"},{pos:"RF",name:"Kyle Tucker",hand:"L",team:"LAD"},{pos:"LF",name:"Ryan Ward",hand:"L",team:"LAD"},{pos:"C",name:"D. Rushing",hand:"L",team:"LAD"},{pos:"2B",name:"A. Freeland",hand:"S",team:"LAD"}],homeL:[{pos:"LF",name:"S. Antonacci",hand:"L",team:"CWS"},{pos:"3B",name:"M. Vargas",hand:"R",team:"CWS"},{pos:"DH",name:"A. Benintendi",hand:"L",team:"CWS"},{pos:"SS",name:"C. Montgomery",hand:"L",team:"CWS"},{pos:"RF",name:"B. Montgomery",hand:"S",team:"CWS"},{pos:"2B",name:"C. Meidroth",hand:"R",team:"CWS"},{pos:"1B",name:"J. Gonzalez",hand:"L",team:"CWS"},{pos:"CF",name:"T. Peters",hand:"L",team:"CWS"},{pos:"C",name:"Drew Romo",hand:"S",team:"CWS"}]},
   {id:"hou-kc",time:"2:10 PM",away:"HOU",home:"KC",awayRec:"33-39",homeRec:"28-43",awayP:"S. Arrighetti",awayPH:"R",awayEra:"2.21",awayConf:true,awayPrim:false,homeP:"Stephen Kolek",homePH:"R",homeEra:"3.14",homeConf:true,homePrim:false,line:"KC -120",ou:8.5,windDir:"L-R",dome:false,postponed:false,rain:0,temp:71,windMph:11,windLabel:"11mph L-R",awayL:[{pos:"SS",name:"Jeremy Pena",hand:"R",team:"HOU"},{pos:"DH",name:"Y. Alvarez",hand:"L",team:"HOU"},{pos:"1B",name:"C. Walker",hand:"R",team:"HOU"},{pos:"LF",name:"J. Loperfido",hand:"L",team:"HOU"},{pos:"RF",name:"Cam Smith",hand:"R",team:"HOU"},{pos:"CF",name:"Jake Meyers",hand:"R",team:"HOU"},{pos:"2B",name:"B. Matthews",hand:"R",team:"HOU"},{pos:"3B",name:"R. Delgado",hand:"L",team:"HOU"},{pos:"C",name:"Collin Price",hand:"R",team:"HOU"}],homeL:[{pos:"DH",name:"C. Jensen",hand:"L",team:"KC"},{pos:"SS",name:"Bobby Witt",hand:"R",team:"KC"},{pos:"1B",name:"J. Caglianone",hand:"L",team:"KC"},{pos:"3B",name:"M. Garcia",hand:"R",team:"KC"},{pos:"2B",name:"M. Massey",hand:"L",team:"KC"},{pos:"C",name:"S. Perez",hand:"R",team:"KC"},{pos:"CF",name:"K. Misner",hand:"L",team:"KC"},{pos:"RF",name:"Lane Thomas",hand:"R",team:"KC"},{pos:"LF",name:"I. Collins",hand:"S",team:"KC"}]},
   {id:"phi-mil",time:"2:10 PM",away:"PHI",home:"MIL",awayRec:"38-32",homeRec:"42-26",awayP:"Cristopher Sanchez",awayPH:"L",awayEra:"1.54",awayConf:true,awayPrim:false,homeP:"Kyle Harrison",homePH:"L",homeEra:"2.72",homeConf:true,homePrim:false,line:"PHI -131",ou:6.5,windDir:"dome",dome:true,postponed:false,rain:0,temp:0,windMph:0,windLabel:"",awayL:[{pos:"DH",name:"K. Schwarber",hand:"L",team:"PHI"},{pos:"SS",name:"Trea Turner",hand:"R",team:"PHI"},{pos:"1B",name:"Bryce Harper",hand:"L",team:"PHI"},{pos:"3B",name:"Alec Bohm",hand:"R",team:"PHI"},{pos:"RF",name:"B. Marsh",hand:"L",team:"PHI"},{pos:"LF",name:"Edmundo Sosa",hand:"R",team:"PHI"},{pos:"2B",name:"Bryson Stott",hand:"L",team:"PHI"},{pos:"C",name:"R. Marchan",hand:"S",team:"PHI"},{pos:"CF",name:"Derek Hill",hand:"R",team:"PHI"}],homeL:[{pos:"LF",name:"J. Chourio",hand:"R",team:"MIL"},{pos:"1B",name:"A. Vaughn",hand:"R",team:"MIL"},{pos:"DH",name:"William Contreras",hand:"R",team:"MIL"},{pos:"C",name:"Gary Sanchez",hand:"R",team:"MIL"},{pos:"3B",name:"Luis Rengifo",hand:"S",team:"MIL"},{pos:"CF",name:"G. Mitchell",hand:"L",team:"MIL"},{pos:"RF",name:"B. Perkins",hand:"S",team:"MIL"},{pos:"SS",name:"Joey Ortiz",hand:"R",team:"MIL"},{pos:"2B",name:"D. Hamilton",hand:"L",team:"MIL"}]},
-  {id:"stl-min",time:"2:10 PM",away:"STL",home:"MIN",awayRec:"38-30",homeRec:"32-40",awayP:"Michael McGreevy",awayPH:"R",awayEra:"2.99",awayConf:true,awayPrim:false,homeP:"Taj Bradley",homePH:"R",homeEra:"4.02",homeConf:true,homePrim:false,line:"MIN -117",ou:9.5,windDir:"in",dome:false,postponed:false,rain:0,temp:68,windMph:14,windLabel:"14mph in",awayL:[{pos:"SS",name:"J. Wetherholt",hand:"L",team:"STL"},{pos:"C",name:"Ivan Herrera",hand:"R",team:"STL"},{pos:"DH",name:"A. Burleson",hand:"L",team:"STL"},{pos:"RF",name:"J. Walker",hand:"R",team:"STL"},{pos:"LF",name:"L. Nootbaar",hand:"L",team:"STL"},{pos:"1B",name:"Blaze Jordan",hand:"R",team:"STL"},{pos:"2B",name:"Bryan Torres",hand:"L",team:"STL"},{pos:"3B",name:"Jose Fermin",hand:"R",team:"STL"},{pos:"CF",name:"N. Church",hand:"L",team:"STL"}],homeL:[{pos:"LF",name:"T. Larnach",hand:"L",team:"MIN"},{pos:"CF",name:"Byron Buxton",hand:"R",team:"MIN"},{pos:"RF",name:"Kody Clemens",hand:"L",team:"MIN"},{pos:"1B",name:"Royce Lewis",hand:"R",team:"MIN"},{pos:"DH",name:"Josh Bell",hand:"S",team:"MIN"},{pos:"C",name:"V. Caratini",hand:"S",team:"MIN"},{pos:"3B",name:"Brooks Lee",hand:"S",team:"MIN"},{pos:"SS",name:"Tristan Gray",hand:"L",team:"MIN"},{pos:"2B",name:"L. Keaschall",hand:"R",team:"MIN"}]},
-  {id:"col-ath",time:"3:05 PM",away:"COL",home:"ATH",awayRec:"26-45",homeRec:"35-35",awayP:"Tomoyuki Sugano",awayPH:"R",awayEra:"4.08",awayConf:false,awayPrim:false,homeP:"Jeffrey Springs",homePH:"L",homeEra:"4.68",homeConf:false,homePrim:false,line:"ATH -198",ou:14.0,windDir:"out",dome:false,postponed:false,rain:1,temp:100,windMph:11,windLabel:"11mph out",awayL:[{pos:"2B",name:"Willi Castro",hand:"S",team:"COL"},{pos:"RF",name:"T. Freeman",hand:"R",team:"COL"},{pos:"1B",name:"TJ Rumfield",hand:"L",team:"COL"},{pos:"C",name:"H. Goodman",hand:"R",team:"COL"},{pos:"SS",name:"E. Tovar",hand:"R",team:"COL"},{pos:"LF",name:"J. McCarthy",hand:"L",team:"COL"},{pos:"3B",name:"Kyle Karros",hand:"R",team:"COL"},{pos:"CF",name:"Cole Carrigg",hand:"S",team:"COL"},{pos:"DH",name:"B. Fulford",hand:"R",team:"COL"}],homeL:[{pos:"1B",name:"Nick Kurtz",hand:"L",team:"ATH"},{pos:"LF",name:"T. Soderstrom",hand:"L",team:"ATH"},{pos:"C",name:"S. Langeliers",hand:"R",team:"ATH"},{pos:"DH",name:"C. Cortes",hand:"L",team:"ATH"},{pos:"SS",name:"Jacob Wilson",hand:"R",team:"ATH"},{pos:"3B",name:"Zack Gelof",hand:"R",team:"ATH"},{pos:"RF",name:"L. Butler",hand:"L",team:"ATH"},{pos:"CF",name:"Henry Bolte",hand:"R",team:"ATH"},{pos:"2B",name:"Jeff McNeil",hand:"L",team:"ATH"}]},
-  {id:"chc-sf",time:"3:10 PM",away:"CHC",home:"SF",awayRec:"37-34",homeRec:"28-43",awayP:"Colin Rea",awayPH:"R",awayEra:"5.19",awayConf:false,awayPrim:true,homeP:"Logan Webb",homePH:"R",homeEra:"3.88",homeConf:false,homePrim:false,line:"SF -136",ou:8.0,windDir:"out",dome:false,postponed:false,rain:0,temp:63,windMph:7,windLabel:"7mph out",awayL:[{pos:"CF",name:"P. Crow-Armstrong",hand:"L",team:"CHC"},{pos:"2B",name:"Nico Hoerner",hand:"R",team:"CHC"},{pos:"1B",name:"M. Busch",hand:"L",team:"CHC"},{pos:"3B",name:"Alex Bregman",hand:"R",team:"CHC"},{pos:"LF",name:"Ian Happ",hand:"S",team:"CHC"},{pos:"RF",name:"Seiya Suzuki",hand:"R",team:"CHC"},{pos:"DH",name:"M. Ballesteros",hand:"L",team:"CHC"},{pos:"C",name:"Carson Kelly",hand:"R",team:"CHC"},{pos:"SS",name:"D. Swanson",hand:"R",team:"CHC"}],homeL:[{pos:"2B",name:"Luis Arraez",hand:"L",team:"SF"},{pos:"DH",name:"B. Eldridge",hand:"L",team:"SF"},{pos:"LF",name:"C. Schmitt",hand:"R",team:"SF"},{pos:"1B",name:"R. Devers",hand:"L",team:"SF"},{pos:"RF",name:"Jung Hoo Lee",hand:"L",team:"SF"},{pos:"SS",name:"Willy Adames",hand:"R",team:"SF"},{pos:"3B",name:"Matt Chapman",hand:"R",team:"SF"},{pos:"CF",name:"Drew Gilbert",hand:"L",team:"SF"},{pos:"C",name:"Daniel Susac",hand:"R",team:"SF"}]},
-  {id:"tb-laa",time:"4:07 PM",away:"TB",home:"LAA",awayRec:"40-27",homeRec:"29-42",awayP:"Ian Seymour",awayPH:"L",awayEra:"4.89",awayConf:false,awayPrim:true,homeP:"G. Rodriguez",homePH:"R",homeEra:"8.10",homeConf:false,homePrim:false,line:"TB -120",ou:9.0,windDir:"out",dome:false,postponed:false,rain:0,temp:80,windMph:8,windLabel:"8mph out",awayL:[{pos:"LF",name:"C. Simpson",hand:"L",team:"TB"},{pos:"3B",name:"J. Caminero",hand:"R",team:"TB"},{pos:"1B",name:"J. Aranda",hand:"L",team:"TB"},{pos:"DH",name:"Yandy Diaz",hand:"R",team:"TB"},{pos:"2B",name:"R. Palacios",hand:"L",team:"TB"},{pos:"CF",name:"C. Mullins",hand:"L",team:"TB"},{pos:"SS",name:"Taylor Walls",hand:"S",team:"TB"},{pos:"RF",name:"Victor Mesa",hand:"L",team:"TB"},{pos:"C",name:"Nick Fortes",hand:"R",team:"TB"}],homeL:[{pos:"SS",name:"Zach Neto",hand:"R",team:"LAA"},{pos:"CF",name:"Mike Trout",hand:"R",team:"LAA"},{pos:"2B",name:"O. Peraza",hand:"R",team:"LAA"},{pos:"RF",name:"Jo Adell",hand:"R",team:"LAA"},{pos:"3B",name:"D. Guzman",hand:"R",team:"LAA"},{pos:"1B",name:"N. Schanuel",hand:"L",team:"LAA"},{pos:"LF",name:"Jose Siri",hand:"R",team:"LAA"},{pos:"DH",name:"N. Madrigal",hand:"R",team:"LAA"},{pos:"C",name:"L. OHoppe",hand:"R",team:"LAA"}]},
+  {id:"stl-min",time:"2:10 PM",away:"STL",home:"MIN",awayRec:"38-30",homeRec:"32-40",awayP:"Michael McGreevy",awayPH:"R",awayEra:"2.99",awayConf:true,awayPrim:false,homeP:"Taj Bradley",homePH:"R",homeEra:"4.02",homeConf:true,homePrim:false,line:"MIN -117",ou:9.5,windDir:"out",dome:false,postponed:false,rain:0,temp:68,windMph:14,windLabel:"14mph out",awayL:[{pos:"SS",name:"J. Wetherholt",hand:"L",team:"STL"},{pos:"C",name:"Ivan Herrera",hand:"R",team:"STL"},{pos:"DH",name:"A. Burleson",hand:"L",team:"STL"},{pos:"RF",name:"J. Walker",hand:"R",team:"STL"},{pos:"LF",name:"L. Nootbaar",hand:"L",team:"STL"},{pos:"1B",name:"Blaze Jordan",hand:"R",team:"STL"},{pos:"2B",name:"Bryan Torres",hand:"L",team:"STL"},{pos:"3B",name:"Jose Fermin",hand:"R",team:"STL"},{pos:"CF",name:"N. Church",hand:"L",team:"STL"}],homeL:[{pos:"LF",name:"T. Larnach",hand:"L",team:"MIN"},{pos:"CF",name:"Byron Buxton",hand:"R",team:"MIN"},{pos:"RF",name:"Kody Clemens",hand:"L",team:"MIN"},{pos:"1B",name:"Royce Lewis",hand:"R",team:"MIN"},{pos:"DH",name:"Josh Bell",hand:"S",team:"MIN"},{pos:"C",name:"V. Caratini",hand:"S",team:"MIN"},{pos:"3B",name:"Brooks Lee",hand:"S",team:"MIN"},{pos:"SS",name:"Tristan Gray",hand:"L",team:"MIN"},{pos:"2B",name:"L. Keaschall",hand:"R",team:"MIN"}]},
+  {id:"col-ath",time:"3:05 PM",away:"COL",home:"ATH",awayRec:"26-45",homeRec:"35-35",awayP:"Tomoyuki Sugano",awayPH:"R",awayEra:"4.08",awayConf:true,awayPrim:false,homeP:"Jeffrey Springs",homePH:"L",homeEra:"4.68",homeConf:true,homePrim:false,line:"ATH -199",ou:14.0,windDir:"out",dome:false,postponed:false,rain:1,temp:100,windMph:11,windLabel:"11mph out",awayL:[{pos:"2B",name:"Willi Castro",hand:"S",team:"COL"},{pos:"RF",name:"T. Freeman",hand:"R",team:"COL"},{pos:"1B",name:"TJ Rumfield",hand:"L",team:"COL"},{pos:"C",name:"H. Goodman",hand:"R",team:"COL"},{pos:"SS",name:"E. Tovar",hand:"R",team:"COL"},{pos:"CF",name:"Cole Carrigg",hand:"S",team:"COL"},{pos:"3B",name:"Kyle Karros",hand:"R",team:"COL"},{pos:"LF",name:"T. Johnston",hand:"L",team:"COL"},{pos:"DH",name:"B. Fulford",hand:"R",team:"COL"}],homeL:[{pos:"CF",name:"L. Butler",hand:"L",team:"ATH"},{pos:"DH",name:"Nick Kurtz",hand:"L",team:"ATH"},{pos:"LF",name:"T. Soderstrom",hand:"L",team:"ATH"},{pos:"RF",name:"C. Cortes",hand:"L",team:"ATH"},{pos:"2B",name:"Zack Gelof",hand:"R",team:"ATH"},{pos:"C",name:"Jonah Heim",hand:"S",team:"ATH"},{pos:"3B",name:"Max Muncy",hand:"R",team:"ATH"},{pos:"1B",name:"Jeff McNeil",hand:"L",team:"ATH"},{pos:"SS",name:"A. Williams",hand:"R",team:"ATH"}]},
+  {id:"chc-sf",time:"3:10 PM",away:"CHC",home:"SF",awayRec:"37-34",homeRec:"28-43",awayP:"Colin Rea",awayPH:"R",awayEra:"5.19",awayConf:false,awayPrim:true,homeP:"Logan Webb",homePH:"R",homeEra:"3.88",homeConf:true,homePrim:false,line:"SF -136",ou:8.0,windDir:"out",dome:false,postponed:false,rain:0,temp:63,windMph:7,windLabel:"7mph out",awayL:[{pos:"CF",name:"P. Crow-Armstrong",hand:"L",team:"CHC"},{pos:"3B",name:"Alex Bregman",hand:"R",team:"CHC"},{pos:"1B",name:"M. Busch",hand:"L",team:"CHC"},{pos:"LF",name:"Ian Happ",hand:"S",team:"CHC"},{pos:"DH",name:"Seiya Suzuki",hand:"R",team:"CHC"},{pos:"RF",name:"M. Conforto",hand:"L",team:"CHC"},{pos:"2B",name:"P. Ramirez",hand:"S",team:"CHC"},{pos:"C",name:"Carson Kelly",hand:"R",team:"CHC"},{pos:"SS",name:"D. Swanson",hand:"R",team:"CHC"}],homeL:[{pos:"3B",name:"Matt Chapman",hand:"R",team:"SF"},{pos:"2B",name:"Luis Arraez",hand:"L",team:"SF"},{pos:"1B",name:"B. Eldridge",hand:"L",team:"SF"},{pos:"DH",name:"R. Devers",hand:"L",team:"SF"},{pos:"LF",name:"C. Schmitt",hand:"R",team:"SF"},{pos:"SS",name:"Willy Adames",hand:"R",team:"SF"},{pos:"RF",name:"Jung Hoo Lee",hand:"L",team:"SF"},{pos:"C",name:"Daniel Susac",hand:"R",team:"SF"},{pos:"CF",name:"Drew Gilbert",hand:"L",team:"SF"}]},
+  {id:"tb-laa",time:"4:07 PM",away:"TB",home:"LAA",awayRec:"40-27",homeRec:"29-42",awayP:"Ian Seymour",awayPH:"L",awayEra:"4.89",awayConf:false,awayPrim:true,homeP:"G. Rodriguez",homePH:"R",homeEra:"8.10",homeConf:false,homePrim:false,line:"TB -122",ou:9.0,windDir:"out",dome:false,postponed:false,rain:0,temp:80,windMph:8,windLabel:"8mph out",awayL:[{pos:"LF",name:"C. Simpson",hand:"L",team:"TB"},{pos:"3B",name:"J. Caminero",hand:"R",team:"TB"},{pos:"1B",name:"J. Aranda",hand:"L",team:"TB"},{pos:"DH",name:"Yandy Diaz",hand:"R",team:"TB"},{pos:"2B",name:"R. Palacios",hand:"L",team:"TB"},{pos:"CF",name:"C. Mullins",hand:"L",team:"TB"},{pos:"SS",name:"Taylor Walls",hand:"S",team:"TB"},{pos:"RF",name:"Victor Mesa",hand:"L",team:"TB"},{pos:"C",name:"Nick Fortes",hand:"R",team:"TB"}],homeL:[{pos:"SS",name:"Zach Neto",hand:"R",team:"LAA"},{pos:"CF",name:"Mike Trout",hand:"R",team:"LAA"},{pos:"2B",name:"O. Peraza",hand:"R",team:"LAA"},{pos:"RF",name:"Jo Adell",hand:"R",team:"LAA"},{pos:"3B",name:"D. Guzman",hand:"R",team:"LAA"},{pos:"1B",name:"N. Schanuel",hand:"L",team:"LAA"},{pos:"LF",name:"Jose Siri",hand:"R",team:"LAA"},{pos:"DH",name:"N. Madrigal",hand:"R",team:"LAA"},{pos:"C",name:"L. OHoppe",hand:"R",team:"LAA"}]},
   {id:"tex-bos",time:"7:20 PM",away:"TEX",home:"BOS",awayRec:"34-36",homeRec:"29-39",awayP:"Nathan Eovaldi",awayPH:"R",awayEra:"4.26",awayConf:false,awayPrim:false,homeP:"Connelly Early",homePH:"L",homeEra:"3.30",homeConf:false,homePrim:false,line:"BOS -114",ou:9.0,windDir:"out",dome:false,postponed:false,rain:0,temp:88,windMph:15,windLabel:"15mph out",awayL:[{pos:"CF",name:"W. Langford",hand:"R",team:"TEX"},{pos:"SS",name:"Corey Seager",hand:"L",team:"TEX"},{pos:"3B",name:"Josh Jung",hand:"R",team:"TEX"},{pos:"RF",name:"B. Nimmo",hand:"L",team:"TEX"},{pos:"LF",name:"E. Duran",hand:"R",team:"TEX"},{pos:"1B",name:"Jake Burger",hand:"R",team:"TEX"},{pos:"C",name:"K. Higashioka",hand:"R",team:"TEX"},{pos:"DH",name:"J. Foscue",hand:"R",team:"TEX"},{pos:"2B",name:"Cody Freeman",hand:"R",team:"TEX"}],homeL:[{pos:"LF",name:"Jarren Duran",hand:"L",team:"BOS"},{pos:"CF",name:"C. Rafaela",hand:"R",team:"BOS"},{pos:"RF",name:"Wilyer Abreu",hand:"L",team:"BOS"},{pos:"1B",name:"Willson Contreras",hand:"R",team:"BOS"},{pos:"C",name:"M. Gasper",hand:"S",team:"BOS"},{pos:"DH",name:"M. Yoshida",hand:"L",team:"BOS"},{pos:"3B",name:"Caleb Durbin",hand:"R",team:"BOS"},{pos:"2B",name:"I. Kiner-Falefa",hand:"R",team:"BOS"},{pos:"SS",name:"M. Mayer",hand:"L",team:"BOS"}]},
 
 ];
@@ -3653,9 +3655,9 @@ function getBAdvSplit(name) {
 }
 
 function calcHRIQ(batter, facingPH, battingSpot, g) {
-  const bb   = getBBrl(batter.name);
-  const bs   = getBSplit(batter.name);
-  const adv  = getBAdvSplit(batter.name);
+  const bb   = getBBrlT(batter.name, batter.team||'');
+  const bs   = getBSplitT(batter.name, batter.team||'');
+  const adv  = getBAdvT(batter.name, batter.team||'');
   const pitcherName = g ? (batter._side==='away' ? g.homeP : g.awayP) : '';
   const pH   = g ? (batter._side==='away' ? g.homePH : g.awayPH) : facingPH;
   const pbl  = getPBrl(pitcherName);
@@ -4581,8 +4583,8 @@ function batterRow(b, gid, side, idx, facingPH, hriq, env) {
   b._side = side;
   const bvp = getBvp(b.name);
   const hasHR = bvp&&bvp.hr>=1;
-  const bs = getBSplit(b.name);
-  const bb = getBBrl(b.name);
+  const bs = getBSplitT(b.name, b.team||'');
+  const bb = getBBrlT(b.name, b.team||'');
   const rel = relevantSplit(b.hand, facingPH, bs);
   const {score:lcs} = calcLCS(b.name, idx+1, key);
   const tc = triCounts[key]||0;
@@ -4606,7 +4608,7 @@ function batterRow(b, gid, side, idx, facingPH, hriq, env) {
   const projSB2  = proj2 ? (proj2.sb||0) : 0;
   const speed2   = bb ? (bb.speed||0) : 0;
   const bPA      = bb ? (bb.pa||1) : 1;
-  const adv2     = getBAdvSplit(b.name);
+  const adv2     = getBAdvT(b.name, b.team||'');
   const obp2     = adv2 ? Math.max(0, (adv2.slg||0) - (adv2.iso||0)) : 0;
   const sbAtt    = (bsR.sb||0)+(bsL.sb||0);
   const csAtt    = (bsR.cs||0)+(bsL.cs||0);
@@ -4731,29 +4733,40 @@ function renderGame(g) {
     const v=getBvp(b.name); return v && v.hr>=1;
   });
 
-  // Gascans: either pitcher HR chip score >= 6 AND IP >= 12
+  // Gascans: either pitcher — HR/9 1.5+ AND BRL% 8%+ AND IP 15+
   function isGascan(pName) {
-    const ps=getPSplit(pName);
-    const pb=getPBrl(pName);
-    if(!ps && !pb) return false;
-    const r=ps?ps.vsR||{}:{}, l=ps?ps.vsL||{}:{};
-    const ip=(r.ip||0)+(l.ip||0);
-    if(!ip && pb && pb.ip>=12) {
-      return Math.min(10, Math.round((pb.hr9||0)/2.0*10)) >= 6;
-    }
+    const pb=getPBrl(pName), ps=getPSplit(pName);
+    if(!ps) return false;
+    const r=ps.vsR||{}, l=ps.vsL||{};
+    const ip=(r.ip||0)+(l.ip||0), hr=(r.hr||0)+(l.hr||0);
     if(ip<12) return false;
-    const totalHR=(r.hr||0)+(l.hr||0);
-    const hr9=totalHR/ip*9;
-    const hrScore=Math.min(10, Math.round(hr9/2.0*10));
-    return hrScore >= 6;
+    const hr9=hr/ip*9;
+    const brlPct=pb?(pb.barrel_pct||0):0;
+    return hr9>=1.2 && brlPct>=7;
   }
   const gascan = isGascan(g.awayP) || isGascan(g.homeP);
 
-  // Hot: temp >= 80 (exclude domes)
-  const hotFlag = !g.dome && (g.temp||0) >= 80;
+  // Loaded: 3+ batters HRIQ 55+ AND facing pitcher WHIP 1.20+
+  function lineupLoaded(lineup, facingP, facingPH, side) {
+    if(g.ou < 8.5) return false;
+    const scores=lineup.map((b,i)=>calcHRIQ({...b,_side:side},facingPH,i+1,g));
+    const topScores = scores.slice().sort((a,b)=>b-a).slice(0,4);
+    const avgTop4 = topScores.length ? topScores.reduce((a,b)=>a+b,0)/topScores.length : 0;
+    return avgTop4 >= 52;
+  }
+  const loaded = lineupLoaded(g.awayL,g.homeP,g.homePH,'away')||lineupLoaded(g.homeL,g.awayP,g.awayPH,'home');
 
-  // Wind Out: wind direction is out (any speed, exclude domes)
-  const windOutFlag = !g.dome && g.windDir === 'out';
+  // Standout: 1 batter 15+ HRIQ above next highest on their team
+  function hasStandout(lineup, facingPH, side) {
+    // Standout: has a player in top 5 HRIQ+ENV combined on the full slate
+    // Computed after all games scored — use top individual combined score
+    const combined = lineup.map((b,i)=>{
+      const bObj={...b,_side:side};
+      return calcHRIQ(bObj,facingPH,i+1,g) + calcEnvIQ(bObj,g);
+    });
+    return combined.some(s=>s>=110); // combined 55+55 threshold
+  }
+  const standout = hasStandout(g.awayL,g.homePH,'away')||hasStandout(g.homeL,g.awayPH,'home');
 
   // SB filter: pitcher net SB leaky AND lineup has active base stealers
   function pitcherSBRisk(pName, pH) {
@@ -4814,7 +4827,7 @@ function renderGame(g) {
   return '<div class="gcard'+(isPost?' postponed':hasHR?' hr-hi':'')+'" id="card-'+g.id+'"'
     +' data-ou="'+g.ou+'" data-bvphr="'+(bvpQual?1:0)+'" data-gid="'+g.id+'" data-time="'+g.time+'"'
     +' data-narr="'+(hasNarr?1:0)+'" data-gascan="'+(gascan?1:0)+'"'
-    +' data-hot="'+(hotFlag?1:0)+'" data-windout="'+(windOutFlag?1:0)+'" data-sb="'+(sbFlag?1:0)+'"'
+    +' data-loaded="'+(loaded?1:0)+'" data-standout="'+(standout?1:0)+'" data-sb="'+(sbFlag?1:0)+'"'
     +' data-conf="'+(bothConf?1:0)+'">'
     +'<div class="gtop">'
     +'<div class="gtop-row">'
@@ -4894,8 +4907,8 @@ function applyFilters() {
     if(activeFilters.has('bvp'))       show = show && card.dataset.bvphr==='1';
     if(activeFilters.has('narr'))      show = show && card.dataset.narr==='1';
     if(activeFilters.has('gascan'))    show = show && card.dataset.gascan==='1';
-    if(activeFilters.has('hot'))       show = show && card.dataset.hot==='1';
-    if(activeFilters.has('windout'))   show = show && card.dataset.windout==='1';
+    if(activeFilters.has('loaded'))    show = show && card.dataset.loaded==='1';
+    if(activeFilters.has('standout'))  show = show && card.dataset.standout==='1';
     if(activeFilters.has('sb'))        show = show && card.dataset.sb==='1';
     if(filterByTime) {
       const h = parseGameHour(card.dataset.time||'');
