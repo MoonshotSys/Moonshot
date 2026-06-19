@@ -370,7 +370,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
   <div class="fchip" onclick="toggleFilter('bvp',this)">💥 BVP</div>
   <div class="fchip" onclick="toggleFilter('narr',this)">🔔 Narrative</div>
   <div class="fchip" onclick="toggleFilter('gascan',this)">🗑️ Gascans</div>
-  <div class="fchip" onclick="toggleFilter('loaded',this)">💪 Loaded</div>
+  <div class="fchip" onclick="toggleFilter('hot',this)">🌡️ 80°+</div>
+  <div class="fchip" onclick="toggleFilter('windout',this)">🌬️ Wind Out</div>
+  <div class="fchip" onclick="toggleFilter('elitenv',this)">⚡ Elite ENV</div>
+  <div class="fchip" onclick="toggleFilter('highbrl',this)">💣 High BRL%</div>
   <div class="fchip" onclick="toggleFilter('sb',this)">🏃 SB</div>
 </div>
 </div>
@@ -390,6 +393,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
   <button class="tab" onclick="switchView('matchup',this)">&#x1F3AF; Matchups</button>
   <button class="tab" onclick="switchView('anomaly',this)">&#x1F47D; Anomalies</button>
   <button class="tab" onclick="switchView('chaos',this)">&#x1F9EA; Experimental</button>
+  <button class="tab" onclick="switchView('parlays',this)">&#x1F3B2; Parlays</button>
 </div>
 
 <!-- SORT BAR -->
@@ -473,6 +477,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
   <div id="slamList" class="list-cards"></div>
 </div>
 <div id="chaosView" class="list-view"><div id="chaosList"></div></div>
+<div id="parlaysView" class="list-view"><div id="parlaysList"></div></div>
 <div id="anomalyView" class="list-view">
   <div class="list-hdr">⚡ Anomalies</div>
   <div id="anomalyList" class="list-cards"></div>
@@ -3324,15 +3329,15 @@ const games = [
 
   {id:"tor-chc",time:"2:20 PM",away:"TOR",home:"CHC",awayRec:"37-38",homeRec:"39-36",awayP:"Kevin Gausman",awayPH:"R",awayEra:"3.41",awayConf:true,awayPrim:false,homeP:"Ben Brown",homePH:"R",homeEra:"1.74",homeConf:true,homePrim:false,line:"CHC -116",ou:7.5,windDir:"in",dome:false,postponed:false,rain:0,temp:70,windMph:9,windLabel:"9mph in",awayL:[{pos:"DH",name:"G. Springer",hand:"R",team:"TOR"},{pos:"1B",name:"V. Guerrero",hand:"R",team:"TOR"},{pos:"RF",name:"J. Sanchez",hand:"L",team:"TOR"},{pos:"LF",name:"Y. Pinango",hand:"L",team:"TOR"},{pos:"C",name:"A. Kirk",hand:"R",team:"TOR"},{pos:"CF",name:"Nathan Lukes",hand:"L",team:"TOR"},{pos:"3B",name:"K. Okamoto",hand:"R",team:"TOR"},{pos:"2B",name:"D. Schneider",hand:"R",team:"TOR"},{pos:"SS",name:"A. Gimenez",hand:"L",team:"TOR"}],homeL:[{pos:"CF",name:"P. Crow-Armstrong",hand:"L",team:"CHC"},{pos:"3B",name:"Alex Bregman",hand:"R",team:"CHC"},{pos:"1B",name:"M. Busch",hand:"L",team:"CHC"},{pos:"DH",name:"Seiya Suzuki",hand:"R",team:"CHC"},{pos:"LF",name:"Ian Happ",hand:"S",team:"CHC"},{pos:"RF",name:"Matt Shaw",hand:"R",team:"CHC"},{pos:"2B",name:"Nico Hoerner",hand:"R",team:"CHC"},{pos:"C",name:"Carson Kelly",hand:"R",team:"CHC"},{pos:"SS",name:"D. Swanson",hand:"R",team:"CHC"}]},
   {id:"cws-det",time:"6:40 PM",away:"CWS",home:"DET",awayRec:"39-34",homeRec:"30-44",awayP:"Erick Fedde",awayPH:"R",awayEra:"4.50",awayConf:false,awayPrim:false,homeP:"Tarik Skubal",homePH:"L",homeEra:"2.81",homeConf:false,homePrim:false,line:"DET -204",ou:8.0,windDir:"out",dome:false,postponed:false,rain:0,temp:69,windMph:16,windLabel:"16mph out",awayL:[{pos:"2B",name:"C. Meidroth",hand:"R",team:"CWS"},{pos:"DH",name:"R. Grichuk",hand:"R",team:"CWS"},{pos:"1B",name:"M. Vargas",hand:"R",team:"CWS"},{pos:"3B",name:"C. Montgomery",hand:"L",team:"CWS"},{pos:"C",name:"Edgar Quero",hand:"S",team:"CWS"},{pos:"RF",name:"B. Montgomery",hand:"S",team:"CWS"},{pos:"SS",name:"L. Acuna",hand:"R",team:"CWS"},{pos:"CF",name:"Junior Perez",hand:"R",team:"CWS"},{pos:"LF",name:"S. Antonacci",hand:"L",team:"CWS"}],homeL:[{pos:"3B",name:"K. McGonigle",hand:"L",team:"DET"},{pos:"C",name:"D. Dingler",hand:"R",team:"DET"},{pos:"LF",name:"Riley Greene",hand:"L",team:"DET"},{pos:"1B",name:"S. Torkelson",hand:"R",team:"DET"},{pos:"RF",name:"K. Carpenter",hand:"L",team:"DET"},{pos:"DH",name:"Colt Keith",hand:"L",team:"DET"},{pos:"SS",name:"Z. McKinstry",hand:"L",team:"DET"},{pos:"2B",name:"Hao-Yu Lee",hand:"R",team:"DET"},{pos:"CF",name:"James Outman",hand:"L",team:"DET"}]},
-  {id:"cin-nyy",time:"7:05 PM",away:"CIN",home:"NYY",awayRec:"35-38",homeRec:"45-28",awayP:"Rhett Lowder",awayPH:"R",awayEra:"4.60",awayConf:false,awayPrim:false,homeP:"Cam Schlittler",homePH:"R",homeEra:"1.82",homeConf:false,homePrim:false,line:"NYY -281",ou:8.5,windDir:"out",dome:false,postponed:false,rain:0,temp:82,windMph:14,windLabel:"14mph out",awayL:[{pos:"CF",name:"Blake Dunn",hand:"R",team:"CIN"},{pos:"LF",name:"JJ Bleday",hand:"L",team:"CIN"},{pos:"3B",name:"Sal Stewart",hand:"R",team:"CIN"},{pos:"1B",name:"N. Lowe",hand:"L",team:"CIN"},{pos:"DH",name:"E. Suarez",hand:"R",team:"CIN"},{pos:"2B",name:"S. Steer",hand:"R",team:"CIN"},{pos:"RF",name:"Noelvi Marte",hand:"R",team:"CIN"},{pos:"C",name:"T. Stephenson",hand:"R",team:"CIN"},{pos:"SS",name:"Matt McLain",hand:"R",team:"CIN"}],homeL:[{pos:"DH",name:"Ben Rice",hand:"L",team:"NYY"},{pos:"RF",name:"J. Dominguez",hand:"S",team:"NYY"},{pos:"LF",name:"C. Bellinger",hand:"L",team:"NYY"},{pos:"1B",name:"P. Goldschmidt",hand:"R",team:"NYY"},{pos:"2B",name:"J. Chisholm",hand:"L",team:"NYY"},{pos:"CF",name:"S. Jones",hand:"L",team:"NYY"},{pos:"SS",name:"J. Caballero",hand:"R",team:"NYY"},{pos:"3B",name:"Ryan McMahon",hand:"L",team:"NYY"},{pos:"C",name:"J.C. Escarra",hand:"L",team:"NYY"}]},
+  {id:"cin-nyy",time:"7:05 PM",away:"CIN",home:"NYY",awayRec:"35-38",homeRec:"45-28",awayP:"Rhett Lowder",awayPH:"R",awayEra:"4.60",awayConf:false,awayPrim:false,homeP:"Cam Schlittler",homePH:"R",homeEra:"1.82",homeConf:false,homePrim:false,line:"NYY -281",ou:8.5,windDir:"out",dome:false,postponed:false,rain:0,temp:81,windMph:14,windLabel:"14mph out",awayL:[{pos:"CF",name:"Blake Dunn",hand:"R",team:"CIN"},{pos:"LF",name:"JJ Bleday",hand:"L",team:"CIN"},{pos:"3B",name:"Sal Stewart",hand:"R",team:"CIN"},{pos:"1B",name:"N. Lowe",hand:"L",team:"CIN"},{pos:"DH",name:"E. Suarez",hand:"R",team:"CIN"},{pos:"2B",name:"S. Steer",hand:"R",team:"CIN"},{pos:"RF",name:"Noelvi Marte",hand:"R",team:"CIN"},{pos:"C",name:"T. Stephenson",hand:"R",team:"CIN"},{pos:"SS",name:"Matt McLain",hand:"R",team:"CIN"}],homeL:[{pos:"DH",name:"Ben Rice",hand:"L",team:"NYY"},{pos:"RF",name:"J. Dominguez",hand:"S",team:"NYY"},{pos:"LF",name:"C. Bellinger",hand:"L",team:"NYY"},{pos:"1B",name:"P. Goldschmidt",hand:"R",team:"NYY"},{pos:"2B",name:"J. Chisholm",hand:"L",team:"NYY"},{pos:"CF",name:"S. Jones",hand:"L",team:"NYY"},{pos:"SS",name:"J. Caballero",hand:"R",team:"NYY"},{pos:"3B",name:"Ryan McMahon",hand:"L",team:"NYY"},{pos:"C",name:"J.C. Escarra",hand:"L",team:"NYY"}]},
   {id:"sf-mia",time:"7:10 PM",away:"SF",home:"MIA",awayRec:"31-43",homeRec:"37-38",awayP:"Landen Roupp",awayPH:"R",awayEra:"4.24",awayConf:false,awayPrim:false,homeP:"Dax Fulton",homePH:"L",homeEra:"3.00",homeConf:false,homePrim:true,line:"MIA -120",ou:8.0,windDir:"dome",dome:true,postponed:false,rain:0,temp:0,windMph:0,windLabel:"",awayL:[{pos:"3B",name:"Matt Chapman",hand:"R",team:"SF"},{pos:"2B",name:"Luis Arraez",hand:"L",team:"SF"},{pos:"DH",name:"B. Eldridge",hand:"L",team:"SF"},{pos:"1B",name:"R. Devers",hand:"L",team:"SF"},{pos:"LF",name:"C. Schmitt",hand:"R",team:"SF"},{pos:"SS",name:"Willy Adames",hand:"R",team:"SF"},{pos:"RF",name:"Jung Hoo Lee",hand:"L",team:"SF"},{pos:"C",name:"Daniel Susac",hand:"R",team:"SF"},{pos:"CF",name:"Drew Gilbert",hand:"L",team:"SF"}],homeL:[{pos:"DH",name:"Liam Hicks",hand:"L",team:"MIA"},{pos:"SS",name:"Otto Lopez",hand:"R",team:"MIA"},{pos:"1B",name:"Kyle Stowers",hand:"L",team:"MIA"},{pos:"2B",name:"X. Edwards",hand:"S",team:"MIA"},{pos:"LF",name:"H. Hernandez",hand:"R",team:"MIA"},{pos:"RF",name:"Owen Caissie",hand:"L",team:"MIA"},{pos:"CF",name:"Jakob Marsee",hand:"L",team:"MIA"},{pos:"C",name:"Joe Mack",hand:"L",team:"MIA"},{pos:"3B",name:"J. Sanoja",hand:"R",team:"MIA"}]},
-  {id:"wsh-tb",time:"7:10 PM",away:"WSH",home:"TB",awayRec:"39-36",homeRec:"41-30",awayP:"Cade Cavalli",awayPH:"R",awayEra:"3.98",awayConf:false,awayPrim:false,homeP:"Griffin Jax",homePH:"R",homeEra:"3.68",homeConf:false,homePrim:false,line:"TB -131",ou:8.0,windDir:"dome",dome:true,postponed:false,rain:0,temp:0,windMph:0,windLabel:"",awayL:[{pos:"DH",name:"James Wood",hand:"L",team:"WSH"},{pos:"1B",name:"Luis Garcia",hand:"L",team:"WSH"},{pos:"3B",name:"Curtis Mead",hand:"R",team:"WSH"},{pos:"SS",name:"CJ Abrams",hand:"L",team:"WSH"},{pos:"RF",name:"Dylan Crews",hand:"R",team:"WSH"},{pos:"LF",name:"Daylen Lile",hand:"L",team:"WSH"},{pos:"CF",name:"Jacob Young",hand:"R",team:"WSH"},{pos:"C",name:"Keibert Ruiz",hand:"S",team:"WSH"},{pos:"2B",name:"Nasim Nunez",hand:"S",team:"WSH"}],homeL:[{pos:"DH",name:"Yandy Diaz",hand:"R",team:"TB"},{pos:"1B",name:"J. Aranda",hand:"L",team:"TB"},{pos:"CF",name:"C. Mullins",hand:"L",team:"TB"},{pos:"3B",name:"J. Caminero",hand:"R",team:"TB"},{pos:"2B",name:"R. Palacios",hand:"L",team:"TB"},{pos:"LF",name:"C. Simpson",hand:"L",team:"TB"},{pos:"RF",name:"Victor Mesa",hand:"L",team:"TB"},{pos:"C",name:"H. Feduccia",hand:"L",team:"TB"},{pos:"SS",name:"Taylor Walls",hand:"S",team:"TB"}]},
+  {id:"wsh-tb",time:"7:10 PM",away:"WSH",home:"TB",awayRec:"39-36",homeRec:"41-30",awayP:"Cade Cavalli",awayPH:"R",awayEra:"3.98",awayConf:false,awayPrim:false,homeP:"Griffin Jax",homePH:"R",homeEra:"3.68",homeConf:false,homePrim:false,line:"TB -126",ou:8.0,windDir:"dome",dome:true,postponed:false,rain:0,temp:0,windMph:0,windLabel:"",awayL:[{pos:"DH",name:"James Wood",hand:"L",team:"WSH"},{pos:"1B",name:"Luis Garcia",hand:"L",team:"WSH"},{pos:"3B",name:"Curtis Mead",hand:"R",team:"WSH"},{pos:"SS",name:"CJ Abrams",hand:"L",team:"WSH"},{pos:"RF",name:"Dylan Crews",hand:"R",team:"WSH"},{pos:"LF",name:"Daylen Lile",hand:"L",team:"WSH"},{pos:"CF",name:"Jacob Young",hand:"R",team:"WSH"},{pos:"C",name:"Keibert Ruiz",hand:"S",team:"WSH"},{pos:"2B",name:"Nasim Nunez",hand:"S",team:"WSH"}],homeL:[{pos:"DH",name:"Yandy Diaz",hand:"R",team:"TB"},{pos:"1B",name:"J. Aranda",hand:"L",team:"TB"},{pos:"CF",name:"C. Mullins",hand:"L",team:"TB"},{pos:"3B",name:"J. Caminero",hand:"R",team:"TB"},{pos:"2B",name:"R. Palacios",hand:"L",team:"TB"},{pos:"LF",name:"C. Simpson",hand:"L",team:"TB"},{pos:"RF",name:"Victor Mesa",hand:"L",team:"TB"},{pos:"C",name:"H. Feduccia",hand:"L",team:"TB"},{pos:"SS",name:"Taylor Walls",hand:"S",team:"TB"}]},
   {id:"mil-atl",time:"7:15 PM",away:"MIL",home:"ATL",awayRec:"45-27",homeRec:"46-27",awayP:"J. Misiorowski",awayPH:"R",awayEra:"1.34",awayConf:false,awayPrim:false,homeP:"Martin Perez",homePH:"L",homeEra:"2.90",homeConf:false,homePrim:false,line:"MIL -168",ou:7.5,windDir:"L-R",dome:false,postponed:false,rain:11,temp:82,windMph:7,windLabel:"7mph L-R",awayL:[{pos:"LF",name:"J. Chourio",hand:"R",team:"MIL"},{pos:"2B",name:"Brice Turang",hand:"L",team:"MIL"},{pos:"C",name:"William Contreras",hand:"R",team:"MIL"},{pos:"1B",name:"A. Vaughn",hand:"R",team:"MIL"},{pos:"DH",name:"Gary Sanchez",hand:"R",team:"MIL"},{pos:"CF",name:"G. Mitchell",hand:"L",team:"MIL"},{pos:"RF",name:"B. Perkins",hand:"S",team:"MIL"},{pos:"SS",name:"Cooper Pratt",hand:"R",team:"MIL"},{pos:"3B",name:"Joey Ortiz",hand:"R",team:"MIL"}],homeL:[{pos:"C",name:"D. Baldwin",hand:"L",team:"ATL"},{pos:"CF",name:"M. Harris",hand:"L",team:"ATL"},{pos:"1B",name:"Matt Olson",hand:"L",team:"ATL"},{pos:"2B",name:"Ozzie Albies",hand:"S",team:"ATL"},{pos:"DH",name:"D. Smith",hand:"L",team:"ATL"},{pos:"3B",name:"Austin Riley",hand:"R",team:"ATL"},{pos:"SS",name:"M. Dubon",hand:"R",team:"ATL"},{pos:"LF",name:"M. Yastrzemski",hand:"L",team:"ATL"},{pos:"RF",name:"Eli White",hand:"R",team:"ATL"}]},
   {id:"sd-tex",time:"8:05 PM",away:"SD",home:"TEX",awayRec:"38-35",homeRec:"35-39",awayP:"Randy Vasquez",awayPH:"R",awayEra:"3.63",awayConf:false,awayPrim:false,homeP:"Jacob deGrom",homePH:"R",homeEra:"3.17",homeConf:false,homePrim:false,line:"TEX -163",ou:7.0,windDir:"dome",dome:true,postponed:false,rain:0,temp:0,windMph:0,windLabel:"",awayL:[{pos:"2B",name:"F. Tatis",hand:"R",team:"SD"},{pos:"RF",name:"Samad Taylor",hand:"R",team:"SD"},{pos:"CF",name:"J. Merrill",hand:"L",team:"SD"},{pos:"3B",name:"M. Machado",hand:"R",team:"SD"},{pos:"LF",name:"Gavin Sheets",hand:"L",team:"SD"},{pos:"SS",name:"X. Bogaerts",hand:"R",team:"SD"},{pos:"1B",name:"Ty France",hand:"R",team:"SD"},{pos:"DH",name:"Will Wagner",hand:"L",team:"SD"},{pos:"C",name:"R. Duran",hand:"R",team:"SD"}],homeL:[{pos:"DH",name:"Joc Pederson",hand:"L",team:"TEX"},{pos:"3B",name:"Josh Jung",hand:"R",team:"TEX"},{pos:"RF",name:"B. Nimmo",hand:"L",team:"TEX"},{pos:"CF",name:"W. Langford",hand:"R",team:"TEX"},{pos:"SS",name:"E. Duran",hand:"R",team:"TEX"},{pos:"1B",name:"Jake Burger",hand:"R",team:"TEX"},{pos:"2B",name:"Josh Smith",hand:"L",team:"TEX"},{pos:"C",name:"K. Higashioka",hand:"R",team:"TEX"},{pos:"LF",name:"A. Osuna",hand:"L",team:"TEX"}]},
   {id:"cle-hou",time:"8:10 PM",away:"CLE",home:"HOU",awayRec:"40-35",homeRec:"35-41",awayP:"Tanner Bibee",awayPH:"R",awayEra:"3.96",awayConf:false,awayPrim:false,homeP:"Tatsuya Imai",homePH:"R",homeEra:"6.43",homeConf:false,homePrim:false,line:"HOU -125",ou:8.5,windDir:"dome",dome:true,postponed:false,rain:0,temp:0,windMph:0,windLabel:"",awayL:[{pos:"2B",name:"T. Bazzana",hand:"L",team:"CLE"},{pos:"1B",name:"K. Manzardo",hand:"L",team:"CLE"},{pos:"SS",name:"B. Rocchio",hand:"S",team:"CLE"},{pos:"DH",name:"Rhys Hoskins",hand:"R",team:"CLE"},{pos:"CF",name:"D. Schneemann",hand:"L",team:"CLE"},{pos:"LF",name:"Steven Kwan",hand:"L",team:"CLE"},{pos:"3B",name:"G. Arias",hand:"R",team:"CLE"},{pos:"RF",name:"K. Watson",hand:"L",team:"CLE"},{pos:"C",name:"P. Bailey",hand:"S",team:"CLE"}],homeL:[{pos:"SS",name:"Jeremy Pena",hand:"R",team:"HOU"},{pos:"DH",name:"Y. Alvarez",hand:"L",team:"HOU"},{pos:"1B",name:"C. Walker",hand:"R",team:"HOU"},{pos:"3B",name:"I. Paredes",hand:"R",team:"HOU"},{pos:"2B",name:"Jose Altuve",hand:"R",team:"HOU"},{pos:"RF",name:"Cam Smith",hand:"R",team:"HOU"},{pos:"LF",name:"J. Loperfido",hand:"L",team:"HOU"},{pos:"C",name:"Yainer Diaz",hand:"R",team:"HOU"},{pos:"CF",name:"Jake Meyers",hand:"R",team:"HOU"}]},
   {id:"stl-kc",time:"8:15 PM",away:"STL",home:"KC",awayRec:"40-33",homeRec:"31-45",awayP:"Michael McGreevy",awayPH:"R",awayEra:"2.99",awayConf:false,awayPrim:false,homeP:"Seth Lugo",homePH:"R",homeEra:"3.86",homeConf:false,homePrim:false,line:"STL -120",ou:9.0,windDir:"R-L",dome:false,postponed:false,rain:8,temp:82,windMph:6,windLabel:"6mph R-L",awayL:[{pos:"2B",name:"J. Wetherholt",hand:"L",team:"STL"},{pos:"DH",name:"Ivan Herrera",hand:"R",team:"STL"},{pos:"1B",name:"A. Burleson",hand:"L",team:"STL"},{pos:"RF",name:"J. Walker",hand:"R",team:"STL"},{pos:"LF",name:"L. Nootbaar",hand:"L",team:"STL"},{pos:"SS",name:"Masyn Winn",hand:"R",team:"STL"},{pos:"C",name:"Jimmy Crooks",hand:"L",team:"STL"},{pos:"3B",name:"Blaze Jordan",hand:"R",team:"STL"},{pos:"CF",name:"N. Church",hand:"L",team:"STL"}],homeL:[{pos:"DH",name:"C. Jensen",hand:"L",team:"KC"},{pos:"SS",name:"Bobby Witt",hand:"R",team:"KC"},{pos:"1B",name:"J. Caglianone",hand:"L",team:"KC"},{pos:"3B",name:"M. Garcia",hand:"R",team:"KC"},{pos:"2B",name:"M. Massey",hand:"L",team:"KC"},{pos:"C",name:"S. Perez",hand:"R",team:"KC"},{pos:"CF",name:"K. Misner",hand:"L",team:"KC"},{pos:"RF",name:"Lane Thomas",hand:"R",team:"KC"},{pos:"LF",name:"I. Collins",hand:"S",team:"KC"}]},
-  {id:"pit-col",time:"8:40 PM",away:"PIT",home:"COL",awayRec:"38-37",homeRec:"28-47",awayP:"Bubba Chandler",awayPH:"R",awayEra:"4.76",awayConf:false,awayPrim:false,homeP:"Kyle Freeland",homePH:"L",homeEra:"7.98",homeConf:false,homePrim:false,line:"PIT -143",ou:11.5,windDir:"R-L",dome:false,postponed:false,rain:5,temp:87,windMph:8,windLabel:"8mph R-L",awayL:[{pos:"3B",name:"N. Gonzales",hand:"R",team:"PIT"},{pos:"2B",name:"Brandon Lowe",hand:"L",team:"PIT"},{pos:"LF",name:"B. Reynolds",hand:"S",team:"PIT"},{pos:"DH",name:"M. Ozuna",hand:"R",team:"PIT"},{pos:"RF",name:"E. Valdez",hand:"R",team:"PIT"},{pos:"1B",name:"S. Horwitz",hand:"L",team:"PIT"},{pos:"SS",name:"Jared Triolo",hand:"R",team:"PIT"},{pos:"CF",name:"Billy Cook",hand:"R",team:"PIT"},{pos:"C",name:"E. Rodriguez",hand:"S",team:"PIT"}],homeL:[{pos:"LF",name:"J. McCarthy",hand:"L",team:"COL"},{pos:"2B",name:"Willi Castro",hand:"S",team:"COL"},{pos:"1B",name:"TJ Rumfield",hand:"L",team:"COL"},{pos:"C",name:"H. Goodman",hand:"R",team:"COL"},{pos:"DH",name:"T. Johnston",hand:"L",team:"COL"},{pos:"RF",name:"T. Freeman",hand:"R",team:"COL"},{pos:"CF",name:"Cole Carrigg",hand:"S",team:"COL"},{pos:"SS",name:"E. Tovar",hand:"R",team:"COL"},{pos:"3B",name:"Kyle Karros",hand:"R",team:"COL"}]},
-  {id:"laa-ath",time:"9:40 PM",away:"LAA",home:"ATH",awayRec:"30-46",homeRec:"37-38",awayP:"Jose Soriano",awayPH:"R",awayEra:"2.79",awayConf:false,awayPrim:false,homeP:"Jeffrey Springs",homePH:"L",homeEra:"5.13",homeConf:false,homePrim:false,line:"ATH -167",ou:10.0,windDir:"out",dome:false,postponed:false,rain:0,temp:80,windMph:11,windLabel:"11mph out",awayL:[{pos:"SS",name:"Zach Neto",hand:"R",team:"LAA"},{pos:"DH",name:"N. Madrigal",hand:"R",team:"LAA"},{pos:"RF",name:"Jo Adell",hand:"R",team:"LAA"},{pos:"1B",name:"V. Grissom",hand:"R",team:"LAA"},{pos:"2B",name:"O. Peraza",hand:"R",team:"LAA"},{pos:"LF",name:"C. Moore",hand:"R",team:"LAA"},{pos:"3B",name:"D. Guzman",hand:"R",team:"LAA"},{pos:"C",name:"L. OHoppe",hand:"R",team:"LAA"},{pos:"CF",name:"Jose Siri",hand:"R",team:"LAA"}],homeL:[{pos:"1B",name:"Nick Kurtz",hand:"L",team:"ATH"},{pos:"C",name:"S. Langeliers",hand:"R",team:"ATH"},{pos:"LF",name:"T. Soderstrom",hand:"L",team:"ATH"},{pos:"SS",name:"Jacob Wilson",hand:"R",team:"ATH"},{pos:"DH",name:"C. Cortes",hand:"L",team:"ATH"},{pos:"3B",name:"Zack Gelof",hand:"R",team:"ATH"},{pos:"RF",name:"L. Butler",hand:"L",team:"ATH"},{pos:"CF",name:"Henry Bolte",hand:"R",team:"ATH"},{pos:"2B",name:"Jeff McNeil",hand:"L",team:"ATH"}]},
+  {id:"pit-col",time:"8:40 PM",away:"PIT",home:"COL",awayRec:"38-37",homeRec:"28-47",awayP:"Bubba Chandler",awayPH:"R",awayEra:"4.76",awayConf:false,awayPrim:false,homeP:"Kyle Freeland",homePH:"L",homeEra:"7.98",homeConf:false,homePrim:false,line:"PIT -143",ou:11.5,windDir:"R-L",dome:false,postponed:false,rain:5,temp:86,windMph:8,windLabel:"8mph R-L",awayL:[{pos:"3B",name:"N. Gonzales",hand:"R",team:"PIT"},{pos:"2B",name:"Brandon Lowe",hand:"L",team:"PIT"},{pos:"LF",name:"B. Reynolds",hand:"S",team:"PIT"},{pos:"DH",name:"M. Ozuna",hand:"R",team:"PIT"},{pos:"RF",name:"E. Valdez",hand:"R",team:"PIT"},{pos:"1B",name:"S. Horwitz",hand:"L",team:"PIT"},{pos:"SS",name:"Jared Triolo",hand:"R",team:"PIT"},{pos:"CF",name:"Billy Cook",hand:"R",team:"PIT"},{pos:"C",name:"E. Rodriguez",hand:"S",team:"PIT"}],homeL:[{pos:"LF",name:"J. McCarthy",hand:"L",team:"COL"},{pos:"2B",name:"Willi Castro",hand:"S",team:"COL"},{pos:"1B",name:"TJ Rumfield",hand:"L",team:"COL"},{pos:"C",name:"H. Goodman",hand:"R",team:"COL"},{pos:"DH",name:"T. Johnston",hand:"L",team:"COL"},{pos:"RF",name:"T. Freeman",hand:"R",team:"COL"},{pos:"CF",name:"Cole Carrigg",hand:"S",team:"COL"},{pos:"SS",name:"E. Tovar",hand:"R",team:"COL"},{pos:"3B",name:"Kyle Karros",hand:"R",team:"COL"}]},
+  {id:"laa-ath",time:"9:40 PM",away:"LAA",home:"ATH",awayRec:"30-46",homeRec:"37-38",awayP:"Jose Soriano",awayPH:"R",awayEra:"2.79",awayConf:false,awayPrim:false,homeP:"Jeffrey Springs",homePH:"L",homeEra:"5.13",homeConf:false,homePrim:false,line:"ATH -163",ou:10.0,windDir:"out",dome:false,postponed:false,rain:0,temp:80,windMph:11,windLabel:"11mph out",awayL:[{pos:"SS",name:"Zach Neto",hand:"R",team:"LAA"},{pos:"DH",name:"N. Madrigal",hand:"R",team:"LAA"},{pos:"RF",name:"Jo Adell",hand:"R",team:"LAA"},{pos:"1B",name:"V. Grissom",hand:"R",team:"LAA"},{pos:"2B",name:"O. Peraza",hand:"R",team:"LAA"},{pos:"LF",name:"C. Moore",hand:"R",team:"LAA"},{pos:"3B",name:"D. Guzman",hand:"R",team:"LAA"},{pos:"C",name:"L. OHoppe",hand:"R",team:"LAA"},{pos:"CF",name:"Jose Siri",hand:"R",team:"LAA"}],homeL:[{pos:"1B",name:"Nick Kurtz",hand:"L",team:"ATH"},{pos:"C",name:"S. Langeliers",hand:"R",team:"ATH"},{pos:"LF",name:"T. Soderstrom",hand:"L",team:"ATH"},{pos:"SS",name:"Jacob Wilson",hand:"R",team:"ATH"},{pos:"DH",name:"C. Cortes",hand:"L",team:"ATH"},{pos:"3B",name:"Zack Gelof",hand:"R",team:"ATH"},{pos:"RF",name:"L. Butler",hand:"L",team:"ATH"},{pos:"CF",name:"Henry Bolte",hand:"R",team:"ATH"},{pos:"2B",name:"Jeff McNeil",hand:"L",team:"ATH"}]},
   {id:"min-ari",time:"9:45 PM",away:"MIN",home:"ARI",awayRec:"36-40",homeRec:"38-36",awayP:"Connor Prielipp",awayPH:"L",awayEra:"5.26",awayConf:false,awayPrim:false,homeP:"Michael Soroka",homePH:"R",homeEra:"3.11",homeConf:false,homePrim:false,line:"ARI -175",ou:8.5,windDir:"dome",dome:true,postponed:false,rain:0,temp:0,windMph:0,windLabel:"",awayL:[{pos:"LF",name:"T. Larnach",hand:"L",team:"MIN"},{pos:"CF",name:"Byron Buxton",hand:"R",team:"MIN"},{pos:"RF",name:"Kody Clemens",hand:"L",team:"MIN"},{pos:"1B",name:"Royce Lewis",hand:"R",team:"MIN"},{pos:"DH",name:"Josh Bell",hand:"S",team:"MIN"},{pos:"C",name:"V. Caratini",hand:"S",team:"MIN"},{pos:"3B",name:"Brooks Lee",hand:"S",team:"MIN"},{pos:"SS",name:"Tristan Gray",hand:"L",team:"MIN"},{pos:"2B",name:"L. Keaschall",hand:"R",team:"MIN"}],homeL:[{pos:"DH",name:"Ketel Marte",hand:"S",team:"ARI"},{pos:"SS",name:"G. Perdomo",hand:"S",team:"ARI"},{pos:"RF",name:"C. Carroll",hand:"L",team:"ARI"},{pos:"C",name:"G. Moreno",hand:"R",team:"ARI"},{pos:"LF",name:"L. Gurriel",hand:"R",team:"ARI"},{pos:"3B",name:"N. Arenado",hand:"R",team:"ARI"},{pos:"2B",name:"I. Vargas",hand:"S",team:"ARI"},{pos:"CF",name:"J. Lawlar",hand:"R",team:"ARI"},{pos:"1B",name:"L. Groover",hand:"R",team:"ARI"}]},
   {id:"bos-sea",time:"10:10 PM",away:"BOS",home:"SEA",awayRec:"29-43",homeRec:"39-37",awayP:"Ranger Suarez",awayPH:"L",awayEra:"3.21",awayConf:false,awayPrim:false,homeP:"Luis Castillo",homePH:"R",homeEra:"5.00",homeConf:false,homePrim:true,line:"SEA -112",ou:6.5,windDir:"dome",dome:true,postponed:false,rain:0,temp:0,windMph:0,windLabel:"",awayL:[{pos:"C",name:"M. Gasper",hand:"S",team:"BOS"},{pos:"CF",name:"C. Rafaela",hand:"R",team:"BOS"},{pos:"RF",name:"Wilyer Abreu",hand:"L",team:"BOS"},{pos:"1B",name:"Willson Contreras",hand:"R",team:"BOS"},{pos:"LF",name:"Jarren Duran",hand:"L",team:"BOS"},{pos:"3B",name:"Caleb Durbin",hand:"R",team:"BOS"},{pos:"DH",name:"M. Yoshida",hand:"L",team:"BOS"},{pos:"2B",name:"I. Kiner-Falefa",hand:"R",team:"BOS"},{pos:"SS",name:"M. Mayer",hand:"L",team:"BOS"}],homeL:[{pos:"3B",name:"J.P. Crawford",hand:"L",team:"SEA"},{pos:"CF",name:"Julio Rodriguez",hand:"R",team:"SEA"},{pos:"DH",name:"Cal Raleigh",hand:"S",team:"SEA"},{pos:"1B",name:"Josh Naylor",hand:"L",team:"SEA"},{pos:"LF",name:"R. Refsnyder",hand:"R",team:"SEA"},{pos:"C",name:"Mitch Garver",hand:"R",team:"SEA"},{pos:"2B",name:"Cole Young",hand:"L",team:"SEA"},{pos:"RF",name:"V. Robles",hand:"R",team:"SEA"},{pos:"SS",name:"Colt Emerson",hand:"L",team:"SEA"}]},
   {id:"bal-lad",time:"10:10 PM",away:"BAL",home:"LAD",awayRec:"35-41",homeRec:"48-27",awayP:"Trey Gibson",awayPH:"R",awayEra:"5.91",awayConf:false,awayPrim:false,homeP:"Roki Sasaki",homePH:"R",homeEra:"4.76",homeConf:false,homePrim:false,line:"LAD -219",ou:9.5,windDir:"out",dome:false,postponed:false,rain:0,temp:69,windMph:10,windLabel:"10mph out",awayL:[{pos:"LF",name:"Taylor Ward",hand:"R",team:"BAL"},{pos:"SS",name:"G. Henderson",hand:"L",team:"BAL"},{pos:"C",name:"A. Rutschman",hand:"S",team:"BAL"},{pos:"1B",name:"Pete Alonso",hand:"R",team:"BAL"},{pos:"DH",name:"S. Basallo",hand:"L",team:"BAL"},{pos:"RF",name:"L. Taveras",hand:"S",team:"BAL"},{pos:"CF",name:"C. Cowser",hand:"L",team:"BAL"},{pos:"2B",name:"J. Holliday",hand:"L",team:"BAL"},{pos:"3B",name:"B. Alexander",hand:"R",team:"BAL"}],homeL:[{pos:"DH",name:"S. Ohtani",hand:"L",team:"LAD"},{pos:"CF",name:"Andy Pages",hand:"R",team:"LAD"},{pos:"1B",name:"F. Freeman",hand:"L",team:"LAD"},{pos:"SS",name:"Mookie Betts",hand:"R",team:"LAD"},{pos:"RF",name:"Kyle Tucker",hand:"L",team:"LAD"},{pos:"LF",name:"Alex Call",hand:"R",team:"LAD"},{pos:"3B",name:"Miguel Rojas",hand:"R",team:"LAD"},{pos:"C",name:"D. Rushing",hand:"L",team:"LAD"},{pos:"2B",name:"A. Freeland",hand:"S",team:"LAD"}]},
@@ -4620,38 +4625,37 @@ function renderGame(g) {
 
   // Gascans: either pitcher — HR/9 1.5+ AND BRL% 8%+ AND IP 15+
   function isGascan(pName) {
-    const pb=getPBrl(pName), ps=getPSplit(pName);
-    if(!ps) return false;
-    const r=ps.vsR||{}, l=ps.vsL||{};
-    const ip=(r.ip||0)+(l.ip||0), hr=(r.hr||0)+(l.hr||0);
+    const ps=getPSplit(pName);
+    const pb=getPBrl(pName);
+    if(!ps && !pb) return false;
+    const r=ps?ps.vsR||{}:{}, l=ps?ps.vsL||{}:{};
+    const ip=(r.ip||0)+(l.ip||0);
+    if(!ip && pb && pb.ip>=12) {
+      return Math.min(10, Math.round((pb.hr9||0)/2.0*10)) >= 6;
+    }
     if(ip<12) return false;
-    const hr9=hr/ip*9;
-    const brlPct=pb?(pb.barrel_pct||0):0;
-    return hr9>=1.2 && brlPct>=7;
+    const totalHR=(r.hr||0)+(l.hr||0);
+    const hr9=totalHR/ip*9;
+    const hrScore=Math.min(10, Math.round(hr9/2.0*10));
+    return hrScore >= 6;
   }
   const gascan = isGascan(g.awayP) || isGascan(g.homeP);
 
-  // Loaded: 3+ batters HRIQ 55+ AND facing pitcher WHIP 1.20+
-  function lineupLoaded(lineup, facingP, facingPH, side) {
-    if(g.ou < 8.5) return false;
-    const scores=lineup.map((b,i)=>calcHRIQ({...b,_side:side},facingPH,i+1,g));
-    const topScores = scores.slice().sort((a,b)=>b-a).slice(0,4);
-    const avgTop4 = topScores.length ? topScores.reduce((a,b)=>a+b,0)/topScores.length : 0;
-    return avgTop4 >= 52;
-  }
-  const loaded = lineupLoaded(g.awayL,g.homeP,g.homePH,'away')||lineupLoaded(g.homeL,g.awayP,g.awayPH,'home');
+  // Hot: temp >= 80 (exclude domes)
+  const hotFlag = !g.dome && (g.temp||0) >= 80;
 
-  // Standout: 1 batter 15+ HRIQ above next highest on their team
-  function hasStandout(lineup, facingPH, side) {
-    // Standout: has a player in top 5 HRIQ+ENV combined on the full slate
-    // Computed after all games scored — use top individual combined score
-    const combined = lineup.map((b,i)=>{
-      const bObj={...b,_side:side};
-      return calcHRIQ(bObj,facingPH,i+1,g) + calcEnvIQ(bObj,g);
-    });
-    return combined.some(s=>s>=110); // combined 55+55 threshold
+  // Wind Out: wind direction is out (any speed, exclude domes)
+  const windOutFlag = !g.dome && g.windDir === 'out';
+
+  // Elite ENV: game ENV chip >= 75
+  const eliteEnvFlag = gameEnvIQ >= 75;
+
+  // High BRL%: either starting pitcher's BRL% allowed >= 10%
+  function isHighBrl(pName) {
+    const pb = getPBrl(pName);
+    return pb ? (pb.barrel_pct||0) >= 10 : false;
   }
-  const standout = hasStandout(g.awayL,g.homePH,'away')||hasStandout(g.homeL,g.awayPH,'home');
+  const highBrlFlag = isHighBrl(g.awayP) || isHighBrl(g.homeP);
 
   // SB filter: pitcher net SB leaky AND lineup has active base stealers
   function pitcherSBRisk(pName, pH) {
@@ -4712,7 +4716,8 @@ function renderGame(g) {
   return '<div class="gcard'+(isPost?' postponed':hasHR?' hr-hi':'')+'" id="card-'+g.id+'"'
     +' data-ou="'+g.ou+'" data-bvphr="'+(bvpQual?1:0)+'" data-gid="'+g.id+'" data-time="'+g.time+'"'
     +' data-narr="'+(hasNarr?1:0)+'" data-gascan="'+(gascan?1:0)+'"'
-    +' data-loaded="'+(loaded?1:0)+'" data-standout="'+(standout?1:0)+'" data-sb="'+(sbFlag?1:0)+'"'
+    +' data-hot="'+(hotFlag?1:0)+'" data-windout="'+(windOutFlag?1:0)+'"'
+    +' data-elitenv="'+(eliteEnvFlag?1:0)+'" data-highbrl="'+(highBrlFlag?1:0)+'" data-sb="'+(sbFlag?1:0)+'"'
     +' data-conf="'+(bothConf?1:0)+'">'
     +'<div class="gtop">'
     +'<div class="gtop-row">'
@@ -4792,8 +4797,10 @@ function applyFilters() {
     if(activeFilters.has('bvp'))       show = show && card.dataset.bvphr==='1';
     if(activeFilters.has('narr'))      show = show && card.dataset.narr==='1';
     if(activeFilters.has('gascan'))    show = show && card.dataset.gascan==='1';
-    if(activeFilters.has('loaded'))    show = show && card.dataset.loaded==='1';
-    if(activeFilters.has('standout'))  show = show && card.dataset.standout==='1';
+    if(activeFilters.has('hot'))       show = show && card.dataset.hot==='1';
+    if(activeFilters.has('windout'))   show = show && card.dataset.windout==='1';
+    if(activeFilters.has('elitenv'))   show = show && card.dataset.elitenv==='1';
+    if(activeFilters.has('highbrl'))   show = show && card.dataset.highbrl==='1';
     if(activeFilters.has('sb'))        show = show && card.dataset.sb==='1';
     if(filterByTime) {
       const h = parseGameHour(card.dataset.time||'');
@@ -5238,7 +5245,7 @@ function switchView(view, btn) {
     if(el) el.classList.toggle('on', v===view);
   });
   // list-view tabs also use .on class
-  ['long','slam','anomaly','matchup','thelist','chaos'].forEach(v=>{
+  ['long','slam','anomaly','matchup','thelist','chaos','parlays'].forEach(v=>{
     const el=document.getElementById(v+'View');
     if(el) el.classList.toggle('on', v===view);
   });
@@ -5251,6 +5258,7 @@ function switchView(view, btn) {
   if(view==='matchup') renderMatchups();
   if(view==='thelist') renderTheList();
   if(view==='chaos')    renderExperimental();
+  if(view==='parlays')  renderParlays();
 }
 
 function getInfo(key) {
@@ -6376,15 +6384,6 @@ function renderMatchups() {
            *Math.max(0.8,c.env/55);
   });
 
-  // GREEN LIGHT: sprint speed ≥27.5 gets direct boost
-  // GREEN LIGHT: real steal spots — batter steal rate + sprint speed + pitcher vulnerability
-  // GREEN LIGHT: pSBchip × bSBScore × sprint × close game
-  const greenLight=top3Cat(candidates.filter(c=>c.pSBchip>=3&&c.bSBScore>=2),c=>{
-    const sprintBoost=c.sprintSpeed>=28.0?1.30:c.sprintSpeed>=27.5?1.20:c.sprintSpeed>=27.0?1.10:c.sprintSpeed>=26.5?1.05:1.0;
-    const closeGame=(c.ou>0&&c.ou<=8.0)?1.08:1.0;
-    return c.pSBchip*c.bSBScore*sprintBoost*closeGame;
-  },0);
-
   // ── 10. DEEP THREATS ──
   // Spots 6-9, top 5 across slate by combined score, max 2 per player
   const deepThreats = (()=>{
@@ -6422,8 +6421,6 @@ function renderMatchups() {
       c=>`wRC+ ${c.wrcVsHand} vs hand \xb7 ${c.wrcOther} vs other \xb7 BRL ${f1(c.bBrl)}%`),
     catCard('\ud83d\udca5 TOP BVP MATCHUP','var(--green)',topBVP,
       c=>`${c.bvpHR} HR / ${c.bvpAB} AB vs ${c.pitcher} \xb7 BRL ${f1(c.bBrl)}%`),
-    catCard('\ud83c\udfc3 GREEN LIGHT','var(--text2)',greenLight,
-      c=>`SB chip ${c.pSBchip} \xb7 S score ${c.bSBScore} \xb7 Sprint ${c.sprintSpeed>0?f1(c.sprintSpeed)+'ft/s':'\u2014'}`),
     catCard('\ud83c\udfaf DEEP THREATS','var(--purple)',deepThreats,
       c=>`Spot ${c.spot} \xb7 IQ ${c.hriq} \xb7 ENV ${c.env} \xb7 pHRIQ ${c.phriq}`),
 
@@ -6908,6 +6905,365 @@ function renderExperimental() {
   }
 
   el.innerHTML = html;
+}
+
+// ── PARLAY GENERATOR ─────────────────────────────────────────────────────────
+function renderParlays() {
+  const el = document.getElementById('parlaysList');
+  if(!el) return;
+
+  const LG_BRL=7.0, LG_HARD=38.0, LG_IQ=55, LG_PHRIQ=50, LG_ENV=42;
+  const candidates = [];
+
+  games.forEach(g=>{
+    if(!isGameVisible(g)) return;
+    ['away','home'].forEach(side=>{
+      const lineup   = side==='away'?g.awayL:g.homeL;
+      const facingPH = side==='away'?g.homePH:g.awayPH;
+      const pitcher  = side==='away'?g.homeP:g.awayP;
+      const team     = side==='away'?g.away:g.home;
+      const pb       = getPBrl(pitcher);
+      const ps       = getPSplit(pitcher);
+      const park     = PARK_DATA[g.home];
+      const pScores  = calcPitcherScores(pitcher,lineup,facingPH);
+      const phriq    = pScores?(pScores.phriq||0):0;
+      const pBrlPct  = pb?(pb.barrel_pct||0):0;
+      const pBB9     = pb?(pb.bb9||0):0;
+      const pK9      = pb?(pb.k9||0):0;
+      const pERA     = pb?(pb.era||0):0;
+      let pTotalIP=0;
+      if(ps){const r=ps.vsR||{},l=ps.vsL||{};pTotalIP=(r.ip||0)+(l.ip||0);}
+      if(!pTotalIP && pb) pTotalIP = pb.ip||0;
+
+      lineup.forEach((b,i)=>{
+        const bObj={...b,_side:side};
+        const bb=getBBrl(b.name);
+        const adv=getBAdvSplit(b.name);
+        const bs=getBSplit(b.name);
+        if(!bb||bb.pa<20) return;
+        const hriq=calcHRIQ(bObj,facingPH,i+1,g);
+        const env=calcEnvIQ(bObj,g);
+        const bMaxEV=bb.ev_max||0, bAvgEV=bb.ev_avg||0;
+        const bAvgDist=bb.avg_hr_dist||0;
+        const bPull=bb.pull||0, bHard=bb.hard||0, bBrl=bb.barrel_pct||0;
+        const bChase=adv?(adv.chase||30):30;
+        const effectiveHand=b.hand==='S'?(facingPH==='R'?'L':'R'):b.hand;
+        let pullWallDist=350,pullWallH=8;
+        if(park){const pw=effectiveHand==='L'?park.walls?.RF:park.walls?.LF;if(pw){pullWallDist=pw.dist||350;pullWallH=pw.height||8;}}
+        const facingSplit=facingPH==='R'?(bs?.vsR||{}):(bs?.vsL||{});
+        const otherSplit=facingPH==='R'?(bs?.vsL||{}):(bs?.vsR||{});
+        const wrcVsHand=facingSplit.wrc||0, wrcOther=otherSplit.wrc||0;
+        const _bsbTot=(bs?(((bs.vsR&&bs.vsR.sb)||0)+((bs.vsL&&bs.vsL.sb)||0)):0);
+        const bSBRate=bb.pa>0?(_bsbTot/bb.pa):0;
+        const bSBScore=Math.min(10,Math.round(bSBRate*200));
+        const splitHR=bs?((bs.vsR?.hr||0)+(bs.vsL?.hr||0)):0;
+        const totalHR=adv?(adv.hr||splitHR):splitHR;
+        const hrpa=bb.pa>0?totalHR/bb.pa:0;
+        const lcsData=calcLCS(b.name,i+1,g.id+'|'+side+'|'+b.name);
+        const lcsScore=lcsData?(lcsData.score===null?10:lcsData.score):0;
+        const bvpRow = bvpRaw.find(r=>{
+          const bMatch=r.name&&(r.name===b.name||r.name.toLowerCase().includes(b.name.toLowerCase().split(' ').pop())||b.name.toLowerCase().includes(r.name.toLowerCase().split(' ').pop()));
+          const pMatch=r.pitcher&&(r.pitcher===pitcher||r.pitcher.toLowerCase().includes(pitcher.toLowerCase().split(' ').pop())||pitcher.toLowerCase().includes(r.pitcher.toLowerCase().split(' ').pop()));
+          return bMatch&&pMatch;
+        });
+        const bvpHR=bvpRow?+(bvpRow.hr||0):0;
+        const bvpAB=bvpRow?+(bvpRow.ab||0):0;
+
+        candidates.push({
+          name:b.name,team,pos:b.pos,spot:i+1,
+          game:g.away+'@'+g.home,time:g.time,pitcher,
+          key:g.id+'|'+side+'|'+b.name,gid:g.id,side,ou:g.ou,
+          hriq,phriq,env,bMaxEV,bAvgEV,bAvgDist,bPull,bHard,bBrl,bChase,
+          bSBScore,hrpa:Math.round(hrpa*1000)/10,pa:bb.pa,
+          pBrlPct,pBB9,pK9,pERA,pTotalIP,
+          wrcVsHand,wrcOther,bvpHR,bvpAB,lcsScore,
+          pullWallDist,pullWallH,
+          windDir:g.windDir,windMph:g.windMph||0,dome:g.dome,
+        });
+      });
+    });
+  });
+
+  if(!candidates.length){el.innerHTML='<div class="no-items">No data available</div>';return;}
+
+  // Launchpad top 10 (recompute lightweight version using same scoring approach)
+  const launchpadSorted = candidates.slice().sort((a,b)=>{
+    const sa = a.hriq*0.5+a.env*0.3+a.phriq*0.2;
+    const sb = b.hriq*0.5+b.env*0.3+b.phriq*0.2;
+    return sb-sa;
+  });
+  const launchpadTop10 = launchpadSorted.slice(0,10);
+  const launchpadNames = new Set(launchpadTop10.map(c=>c.name));
+
+  // Track usage across all parlays: max 2 appearances per player
+  const usageCount = {};
+  function canUse(c){ return (usageCount[c.name]||0) < 2; }
+  function markUsed(c){ usageCount[c.name]=(usageCount[c.name]||0)+1; }
+
+  // Track games used per parlay (must be different games, except SGP)
+  function buildParlay(slots, allowSameGame) {
+    const used=[]; const usedGames=new Set();
+    for(const pick of slots) {
+      if(!pick) continue;
+      if(!allowSameGame && usedGames.has(pick.gid)) continue;
+      if(!canUse(pick)) continue;
+      used.push(pick); usedGames.add(pick.gid); markUsed(pick);
+    }
+    return used;
+  }
+
+  // ── PARLAY 1: KAZ SPECIAL (3-man Balanced) ──
+  function buildKazSpecial() {
+    const pool1 = launchpadTop10.filter(c=>canUse(c));
+    const p1 = pool1.length ? pool1[Math.floor(Math.random()*pool1.length)] : null;
+
+    const usedGame1 = p1?p1.gid:null;
+    const teamTopByGame = {};
+    candidates.forEach(c=>{
+      const k=c.gid+'|'+c.team;
+      if(!teamTopByGame[k] || c.hriq>teamTopByGame[k].hriq) teamTopByGame[k]=c;
+    });
+    const pool2 = candidates.filter(c=>{
+      if(!canUse(c)) return false;
+      if(c.gid===usedGame1) return false;
+      const k=c.gid+'|'+c.team;
+      if(teamTopByGame[k] && teamTopByGame[k].name===c.name) return false; // not top batter on team
+      if(c.ou < 8.5) return false;
+      if(c.env < 55) return false;
+      if(c.pBrlPct < 8 && c.phriq < 55) return false; // vulnerable pitcher
+      return true;
+    }).sort((a,b)=>(b.env+b.phriq+b.pBrlPct)-(a.env+a.phriq+a.pBrlPct));
+    const p2 = pool2[0]||null;
+
+    const usedGames2 = new Set([usedGame1, p2?p2.gid:null]);
+    const pool3 = candidates.filter(c=>{
+      if(!canUse(c)) return false;
+      if(usedGames2.has(c.gid)) return false;
+      if(c.wrcVsHand < 100 || c.wrcOther > 90) return false; // platoon split
+      if(!(c.env>=55 || (c.windDir==='out' && !c.dome))) return false;
+      return true;
+    }).sort((a,b)=>(b.wrcVsHand-b.wrcOther)-(a.wrcVsHand-a.wrcOther));
+    const p3 = pool3[0]||null;
+
+    return buildParlay([p1,p2,p3], false);
+  }
+
+  // ── PARLAY 2: DEEP CUTS (3-man Deep) ──
+  function buildDeepCuts() {
+    // Slot 1: BVP + LCS≥3, else best BVP not on Launchpad
+    const bvpLcsPool = candidates.filter(c=>canUse(c) && c.bvpHR>=1 && c.lcsScore>=3)
+      .sort((a,b)=>(b.bvpHR*5+b.lcsScore*3)-(a.bvpHR*5+a.lcsScore*3));
+    let p1 = bvpLcsPool[0]||null;
+    if(!p1) {
+      const bvpOnly = candidates.filter(c=>canUse(c) && c.bvpHR>=1 && !launchpadNames.has(c.name))
+        .sort((a,b)=>b.bvpHR-a.bvpHR);
+      p1 = bvpOnly[0]||null;
+    }
+
+    const usedGame1=p1?p1.gid:null;
+    const pool2 = candidates.filter(c=>{
+      if(!canUse(c)) return false;
+      if(c.gid===usedGame1) return false;
+      if(c.spot<6||c.spot>9) return false;
+      if(c.ou < 8.0) return false;
+      if(c.env < 50) return false;
+      return true;
+    }).sort((a,b)=>(b.hriq*0.5+b.env*0.3+b.phriq*0.2)-(a.hriq*0.5+a.env*0.3+a.phriq*0.2));
+    const p2 = pool2[0]||null;
+
+    const usedGames2=new Set([usedGame1,p2?p2.gid:null]);
+    const pool3 = candidates.filter(c=>{
+      if(!canUse(c)) return false;
+      if(usedGames2.has(c.gid)) return false;
+      if(c.pa<30) return false;
+      if(c.hrpa < 2.8 || c.hrpa > 3.8) return false; // sweet spot
+      return true;
+    }).sort((a,b)=>(b.hriq+b.env)-(a.hriq+a.env));
+    const p3 = pool3[0]||null;
+
+    return buildParlay([p1,p2,p3], false);
+  }
+
+  // ── PARLAY 3: SLEEPER CELL (2-man Sneaky) ──
+  function buildSleeperCell() {
+    const pool1 = candidates.filter(c=>{
+      if(!canUse(c)) return false;
+      if(c.phriq < 55) return false; // high pHRIQ pitcher (chalk is walked context)
+      return true;
+    }).sort((a,b)=>b.phriq-a.phriq);
+    const p1 = pool1[0]||null;
+
+    const usedGame1=p1?p1.gid:null;
+    const pool2 = candidates.filter(c=>{
+      if(!canUse(c)) return false;
+      if(c.gid===usedGame1) return false;
+      if(c.spot>=2&&c.spot<=4) return false; // not positions 2-4
+      if(c.spot<6||c.spot>9) return false; // deep threat range
+      if(c.env < 50) return false;
+      if(c.hriq < 50) return false;
+      return true;
+    }).sort((a,b)=>(b.hriq+b.env)-(a.hriq+a.env));
+    const p2 = pool2[0]||null;
+
+    return buildParlay([p1,p2], false);
+  }
+
+  // ── PARLAY 4: NUKETOWN (4-man Bomb) ──
+  function buildNuketown() {
+    const usedGames=new Set();
+    function pick(filterFn, sortFn) {
+      const pool = candidates.filter(c=>canUse(c)&&!usedGames.has(c.gid)&&filterFn(c)).sort(sortFn);
+      const p = pool[0]||null;
+      if(p) usedGames.add(p.gid);
+      return p;
+    }
+    const p1 = pick(c=>c.bMaxEV>=104, (a,b)=>b.bMaxEV-a.bMaxEV); // Elite EV
+    const p2 = pick(c=>c.bPull>=32&&c.bHard>=30, (a,b)=>(b.bPull+b.bHard)-(a.bPull+a.bHard)); // Pull power + short fence
+    const p3 = pick(c=>!c.dome&&c.windDir==='out'&&c.env>=55, (a,b)=>b.env-a.env); // Deep fly weather
+    const p4 = pick(c=>c.pBrlPct>=8||c.phriq>=55, (a,b)=>(b.pBrlPct+b.phriq)-(a.pBrlPct+a.phriq)); // Gascan special
+    return buildParlay([p1,p2,p3,p4], false);
+  }
+
+  // ── PARLAY 5: SAME GAME SLAM (3-man SGP) ──
+  function buildSGPSlam() {
+    const byGame={};
+    candidates.forEach(c=>{ if(!byGame[c.gid]) byGame[c.gid]=[]; byGame[c.gid].push(c); });
+    let bestGame=null, bestScore=-1;
+    Object.entries(byGame).forEach(([gid,list])=>{
+      if(list.length<3) return;
+      const avgEnv = list.reduce((s,c)=>s+c.env,0)/list.length;
+      const highHRIQCount = list.filter(c=>c.hriq>=55).length;
+      const score = avgEnv + highHRIQCount*10;
+      if(score>bestScore){ bestScore=score; bestGame=list; }
+    });
+    if(!bestGame) return [];
+    const picks = bestGame.filter(c=>canUse(c)).sort((a,b)=>b.hriq-a.hriq).slice(0,3);
+    picks.forEach(markUsed);
+    return picks;
+  }
+
+  // ── PARLAY 6: STEALIN' (3-man SB) ──
+  function buildStealin() {
+    const gameHRIQAvg={}, gameEnvAvg={};
+    const byGame={};
+    candidates.forEach(c=>{ if(!byGame[c.gid]) byGame[c.gid]=[]; byGame[c.gid].push(c); });
+    Object.entries(byGame).forEach(([gid,list])=>{
+      gameHRIQAvg[gid]=list.reduce((s,c)=>s+c.hriq,0)/list.length;
+      gameEnvAvg[gid]=list.reduce((s,c)=>s+c.env,0)/list.length;
+    });
+    const usedGames=new Set();
+    const pool = candidates.filter(c=>{
+      if(!canUse(c)) return false;
+      if(c.bSBScore < 5) return false;
+      if(gameHRIQAvg[c.gid] >= 55) return false;
+      if(gameEnvAvg[c.gid] >= 50) return false;
+      if(c.pBB9 < 3.0) return false;
+      if(c.pK9 > 8.0) return false;
+      return true;
+    }).sort((a,b)=>(b.bSBScore+(b.pBB9-b.pK9))-(a.bSBScore+(a.pBB9-a.pK9)));
+    const picks=[];
+    for(const c of pool){
+      if(picks.length>=3) break;
+      if(usedGames.has(c.gid)) continue;
+      picks.push(c); usedGames.add(c.gid); markUsed(c);
+    }
+    return picks;
+  }
+
+  // ── PARLAY 7: PUNCHOUT PLAY (3 pitchers, K's) ──
+  function buildPunchout() {
+    const pitcherMap={};
+    games.forEach(g=>{
+      if(!isGameVisible(g)) return;
+      ['away','home'].forEach(side=>{
+        const pitcher = side==='away'?g.awayP:g.homeP;
+        const oppLineup = side==='away'?g.homeL:g.awayL;
+        const facingHand = side==='away'?g.awayPH:g.homePH;
+        if(!pitcher || pitcherMap[pitcher]) return;
+        const pb=getPBrl(pitcher); const ps=getPSplit(pitcher);
+        let ip=0; if(ps){const r=ps.vsR||{},l=ps.vsL||{};ip=(r.ip||0)+(l.ip||0);}
+        if(!ip && pb) ip=pb.ip||0;
+        if(ip <= 23) return;
+        const k9 = pb?(pb.k9||0):0;
+        const era = pb?(pb.era||0):0;
+        const kScoreRaw = Math.min(10, Math.round(k9/12*10));
+        // opposing lineup chase% and K% avg
+        let chaseSum=0,kSum=0,n=0;
+        oppLineup.forEach(b=>{
+          const adv=getBAdvSplit(b.name);
+          if(adv){ chaseSum+=(adv.chase||0); kSum+=(adv.k_pct||0); n++; }
+        });
+        const avgChase = n?chaseSum/n:0;
+        const avgK = n?kSum/n:0;
+        const favBoost = (g.line||'').includes(side==='away'?g.away:g.home) ? 1.05 : 1.0;
+        const score = kScoreRaw*3 + (12-era)*0.5 + avgChase*0.15 + avgK*0.15 + (g.ou<8.0?2:0)*favBoost;
+        pitcherMap[pitcher] = {
+          name:pitcher, team:side==='away'?g.away:g.home, pos:'P',
+          game:g.away+'@'+g.home, time:g.time, opp:side==='away'?g.home:g.away,
+          gid:g.id, k9, era, ip, avgChase, avgK, score,
+          key:g.id+'|'+side+'|'+pitcher,
+        };
+      });
+    });
+    const pool = Object.values(pitcherMap).filter(p=>(usageCount[p.name]||0)<2).sort((a,b)=>b.score-a.score);
+    const picks=[]; const usedGames=new Set();
+    for(const p of pool){
+      if(picks.length>=3) break;
+      if(usedGames.has(p.gid)) continue;
+      picks.push(p); usedGames.add(p.gid);
+      usageCount[p.name]=(usageCount[p.name]||0)+1;
+    }
+    return picks;
+  }
+
+  // ── RENDER ──
+  function parlayCard(title, color, icon, legs, isPitcher) {
+    if(!legs || !legs.length) return '<div class="lball-card"><div style="font-size:9px;font-family:var(--mono);font-weight:700;color:'+color+'">'+icon+' '+title+'</div><div class="no-items">Not enough qualifying data today</div></div>';
+    let out = '<div class="lball-card">';
+    out += '<div style="font-size:9px;font-family:var(--mono);font-weight:700;color:'+color+';margin-bottom:6px">'+icon+' '+title+'</div>';
+    legs.forEach((c,i)=>{
+      out += '<div style="'+(i>0?'border-top:1px solid var(--border1);padding-top:6px;margin-top:6px':'')+'">'
+        +'<div style="display:flex;justify-content:space-between;align-items:flex-start">'
+        +'<div><span style="font-size:10px;color:var(--text3);font-family:var(--mono)">'+c.pos+' · '+c.team+(c.spot?' · Spot '+c.spot:'')+'</span>'
+        +'<div style="font-size:14px;font-weight:700;color:var(--text1)">'+c.name+'</div></div>'
+        + (c.key?starBtn(c.key):'')
+        +'</div>'
+        +'<div class="lball-meta">'+c.game+' · '+c.time+(isPitcher?' · IP '+f1(c.ip)+' · K/9 '+f1(c.k9)+' · ERA '+f1(c.era):'')+'</div>'
+        +'</div>';
+    });
+    out += '<div class="lp-share-row">'
+      +'<button class="lp-share-btn" onclick="event.stopPropagation();copyParlay(\''+title+'\')">📋 Copy Text</button>'
+      +'</div>';
+    return out+'</div>';
+  }
+
+  const kaz = buildKazSpecial();
+  const deep = buildDeepCuts();
+  const sleeper = buildSleeperCell();
+  const nuke = buildNuketown();
+  const sgp = buildSGPSlam();
+  const steal = buildStealin();
+  const punch = buildPunchout();
+
+  window._parlayData = { 'Kaz Special':kaz, 'Deep Cuts':deep, 'Sleeper Cell':sleeper, 'Nuketown':nuke, 'Same Game Potential':sgp, "Stealin'":steal, 'Punchout Play':punch };
+
+  let html = '<div style="font-size:10px;color:var(--amber);font-family:var(--mono);padding:4px 0 10px;font-weight:700">🎲 PARLAY GENERATOR</div>';
+  html += parlayCard('Kaz Special','var(--amber)','🎯',kaz,false);
+  html += parlayCard('Deep Cuts','var(--cyan)','💎',deep,false);
+  html += parlayCard('Sleeper Cell','var(--purple)','🕵️',sleeper,false);
+  html += parlayCard('Nuketown','var(--red)','💣',nuke,false);
+  html += parlayCard('Same Game Potential','var(--green)','🎮',sgp,false);
+  html += parlayCard("Stealin'",'var(--text2)','🏃',steal,false);
+  html += parlayCard('Punchout Play','var(--pink)','🔥',punch,true);
+
+  el.innerHTML = html;
+}
+
+function copyParlay(title) {
+  const legs = window._parlayData && window._parlayData[title];
+  if(!legs || !legs.length) return;
+  const lines = [title.toUpperCase()+' PARLAY', ...legs.map(c=>c.name+' · '+c.pos+' · '+c.team+' · '+c.game+' · '+c.time)];
+  try{ navigator.clipboard.writeText(lines.join('\n')); }catch(e){}
 }
 
 function setHdrHeight() {
