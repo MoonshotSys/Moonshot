@@ -4566,9 +4566,17 @@ function lineupPanel(g, side) {
     +'<span class="pname">'+facingP+(scores.isNew?'<span style="font-size:9px;margin-left:3px">🆕</span>':'')+'<span class="phand ph-'+facingPH+'">'+facingPH+'</span></span>'
     +'<div class="pconf"><span style="color:'+(facingConf?'var(--green)':'var(--amber)')+'">'+(facingConf?'✅ Confirmed':'⚠️ Expected')+'</span></div>'
     +'<div class="pstats-row">'
-    +'<div class="pstat"><span class="pstat-val">'+facingEra+'</span><span class="pstat-lbl">ERA</span></div>'
-    +'<div class="pstat"><span class="pstat-val">'+bbeStr+'</span><span class="pstat-lbl">BRL%</span></div>'
-    +'<div class="pstat"><span class="pstat-val">'+evStr+'</span><span class="pstat-lbl">Avg EV</span></div>'
+    +(()=>{
+      const eraV2=parseFloat(facingEra)||0,brlV2=pb?(pb.barrel_pct||0):0,evV2=pb?(pb.ev_avg||0):0,hrfbV2=pb?(pb.hr_fb||0):0;
+      const eraC2=eraV2>=5.5?'var(--cyan)':eraV2>=4.0?'var(--amber)':'var(--text3)';
+      const brlC2=brlV2>=10?'var(--cyan)':brlV2>=6?'var(--amber)':'var(--text3)';
+      const evC2=evV2>=91?'var(--cyan)':evV2>=88?'var(--amber)':'var(--text3)';
+      const hrfbC2=hrfbV2>=18?'var(--cyan)':hrfbV2>=12?'var(--amber)':'var(--text3)';
+      return '<div class="pstat"><span class="pstat-val" style="color:'+eraC2+'">'+facingEra+'</span><span class="pstat-lbl">ERA</span></div>'
+        +'<div class="pstat"><span class="pstat-val" style="color:'+brlC2+'">'+bbeStr+'</span><span class="pstat-lbl">BRL%</span></div>'
+        +'<div class="pstat"><span class="pstat-val" style="color:'+evC2+'">'+evStr+'</span><span class="pstat-lbl">Avg EV</span></div>'
+        +(hrfbV2>0?'<div class="pstat"><span class="pstat-val" style="color:'+hrfbC2+'">'+f1(hrfbV2)+'%</span><span class="pstat-lbl">HR/FB%</span></div>':'');
+    })()
     +'</div>'
     +'</div>'
     +'<div class="score-chips">'+chips+'</div>'
@@ -5041,7 +5049,7 @@ function showPlayer(key, facingPH) {
     const rows=[
       ['HR',vsR.hr||0,vsL.hr||0],['H',vsR.h||0,vsL.h||0],
       ['AVG',f3(vsR.avg),f3(vsL.avg)],['SLG',f3(vsR.slg),f3(vsL.slg)],
-      ['ISO',f3(vsR.iso),f3(vsL.iso)],['K%',vsR.k_pct||'—',vsL.k_pct||'—'],
+      ['HR/FB%',vsR.hr_fb?(vsR.hr_fb+'%'):'--',vsL.hr_fb?(vsL.hr_fb+'%'):'--'],['K%',vsR.k_pct||'—',vsL.k_pct||'—'],
       ['BB%',vsR.bb_pct||'—',vsL.bb_pct||'—'],
       ['SB',vsR.sb||0,vsL.sb||0],['CS',vsR.cs||0,vsL.cs||0],
     ];
@@ -5817,6 +5825,7 @@ function renderLongball() {
   });
 
   all.sort((a,b)=>b.longScore-a.longScore);
+  window._longballList=all.slice();
 
   // Helper: compute sandwich HRIQ score for a candidate
   function sandwichScore(c) {
@@ -6066,6 +6075,7 @@ function renderSlammers() {
   });
 
   allC.sort((a,b)=>b.slamScore-a.slamScore);
+  window._slamPool=allC.slice();
   const topCandidates = allC.filter(c=>c.cement>=2&&c.pitcherWHIP>=1.20&&!topProspectsNames.has(c.name));
   const top3=[], usedTeams=new Set(), usedGamesTop=new Map();
   for(const c of topCandidates){
@@ -6617,6 +6627,8 @@ function renderMatchups() {
     return out+'</div>';
   }
 
+  window._matchupsAssigned=assigned;
+
   el.innerHTML=[
     catCard('\u26a1 ELITE EV MATCHUP','var(--pink)',assigned.eliteEV,
       c=>`Max EV ${f1(c.bMaxEV)} \xb7 Pitcher allows ${f1(c.pMaxEV)} max \xb7 ENV ${c.env}`),
@@ -6970,7 +6982,9 @@ function renderExperimental() {
       const score=c.env*angleMod*xslgMod*paMultiplier(c.pa);
       return {...c,bdlScore:score};
     })
-    .sort((a,b)=>b.bdlScore-a.bdlScore).slice(0,5);
+    .sort((a,b)=>b.bdlScore-a.bdlScore);
+  window._bdlPool=ballDontLie.slice();
+  ballDontLie.splice(5)
 
   // ── 3. BVP + LINEUP MOVEMENT ──────────────────────────────────────────────
   const bvpLcsPlayers = pool.filter(c=>{
@@ -7175,12 +7189,15 @@ function renderExperimental() {
   });
 
   // 🐓 BIG CHALK — top 10 HRIQ batters today
-  const bigChalk = [...pool].sort((a,b)=>b.hriq-a.hriq).slice(0,10);
+  const bigChalk = [...pool].sort((a,b)=>b.hriq-a.hriq);
+  window._bigChalkPool=bigChalk.slice();
+  bigChalk.splice(10)
 
   // MANAGER'S MEN compute
   const managersMen=pool.filter(c=>c.spot>=1&&c.spot<=4&&c.lcsScore>=6)
     .map(c=>({...c,mmScore:c.lcsScore*0.50+c.hriq*0.30+c.env*0.20/55*10}))
     .sort((a,b)=>b.mmScore-a.mmScore);
+  window._managersPool=managersMen.slice();
 
   // SOFT SPLIT compute
   const softSplit=[],usedSS=new Set();
@@ -7424,15 +7441,24 @@ function renderParlays() {
   // ── PARLAY 1: KAZ SPECIAL ─────────────────────────────────────────────────
   function buildKazSpecial() {
     const usedGames=new Set();
-    // Leg 1: Fade the Chalk (challenged elite) — highest ENV
-    const p1 = fadeACands.find(c=>canUse(c)&&!usedGames.has(c.gid))||null;
+    // Leg 1: Challenged Elite top 5 — highest ENV
+    const p1=fadeACands.slice(0,5).filter(c=>canUse(c)&&!usedGames.has(c.gid))
+      .sort((a,b)=>b.env-a.env)[0]||null;
     if(p1){usedGames.add(p1.gid);markUsed(p1);}
-    // Leg 2: Free Lunch (26-50) — highest ENV
-    const p2 = fadeBCands.find(c=>canUse(c)&&!usedGames.has(c.gid))||null;
+    // Leg 2: Manager's Men also in BVP+LCS; fallback highest HRIQ Manager's Men
+    const mmNms=new Set((window._managersPool||[]).map(x=>x.name));
+    const bvpNms=new Set((window._bvpLcsPool||[]).map(x=>x.name));
+    let p2=candidates.filter(c=>mmNms.has(c.name)&&bvpNms.has(c.name)&&canUse(c)&&!usedGames.has(c.gid))
+      .sort((a,b)=>b.hriq-a.hriq)[0]||null;
+    if(!p2) p2=candidates.filter(c=>mmNms.has(c.name)&&canUse(c)&&!usedGames.has(c.gid))
+      .sort((a,b)=>b.hriq-a.hriq)[0]||null;
     if(p2){usedGames.add(p2.gid);markUsed(p2);}
-    // Leg 3: BVP+LCS who is also on Matchups page
-    const p3 = bvpLcsCands.find(c=>canUse(c)&&!usedGames.has(c.gid)&&matchupsNames.has(c.name))||
-               bvpLcsCands.find(c=>canUse(c)&&!usedGames.has(c.gid))||null;
+    // Leg 3: Platoon Hammer batter with lowest Launchpad rank (deepest value)
+    const platPool=(window._matchupsAssigned&&window._matchupsAssigned['Platoon Hammer'])||[];
+    const lp25k=window._launchpadTop25||[],lp50k=window._launchpadPool2||[];
+    const getLPRank=name=>{const r=lp25k.findIndex(x=>x.name===name);if(r>=0)return r+1;const r2=lp50k.findIndex(x=>x.name===name);if(r2>=0)return 26+r2;return 999;};
+    const p3=platPool.filter(c=>canUse(c)&&!usedGames.has(c.gid))
+      .sort((a,b)=>getLPRank(b.name)-getLPRank(a.name))[0]||null;
     if(p3){usedGames.add(p3.gid);markUsed(p3);}
     return [p1,p2,p3].filter(Boolean);
   }
@@ -7440,25 +7466,29 @@ function renderParlays() {
   // ── PARLAY 2: DEEP CUTS ───────────────────────────────────────────────────
   function buildDeepCuts() {
     const usedGames=new Set();
-    // Leg 1: 26-50 Launchpad with best BVP SLG vs today's pitcher
-    const p1 = candidates.filter(c=>lp50Names.has(c.name)&&c.bvpAB>=2&&canUse(c))
-      .sort((a,b)=>b.bvpSLG-a.bvpSLG)
-      .find(c=>!usedGames.has(c.gid))||null;
+    // Leg 1: 26-50, best combined pitcher FB%+HR/FB% and batter FB%+HR/FB%
+    const p1=candidates.filter(c=>lp50Names.has(c.name)&&canUse(c)&&!usedGames.has(c.gid))
+      .map(c=>{
+        const bb3=getBBrl(c.name),pb3=getPBrl(c.pitcher);
+        const bFb=bb3?(bb3.fb_pct||0):0,bHrFb=bb3?(bb3.hr_fb||0):0;
+        const pFb=pb3?Math.max(0,100-(pb3.gb_pct||50)):0,pHrFb=pb3?(pb3.hr_fb||0):0;
+        return {...c,dc1Score:(bFb/36+bHrFb/13+pFb/36+pHrFb/13)/4};})
+      .sort((a,b)=>b.dc1Score-a.dc1Score)[0]||null;
     if(p1){usedGames.add(p1.gid);markUsed(p1);}
-    // Leg 2: Deep Threats — team favored, scored by odds + O/U + dtScore
-    const p2 = deepThreatCands.map(c=>{
-      const ml=Math.abs(parseML(c.line))||150;
-      const favBoost=teamFavored(c)?1.20:1.0;
-      const ouScore=c.ou>0?c.ou/9.0:1.0;
-      return {...c,leg2Score:c.dtScore*favBoost*ouScore*(200/ml)};
-    }).filter(c=>canUse(c)&&!usedGames.has(c.gid))
-      .sort((a,b)=>b.leg2Score-a.leg2Score)[0]||null;
+    // Leg 2: Highest Ball Don't Lie score who also qualifies for Deep Threats (spots 6-9)
+    const bdlP=window._bdlPool||[];
+    const p2=bdlP.filter(c=>c.spot>=6&&c.spot<=9&&canUse(c)&&!usedGames.has(c.gid))
+      .sort((a,b)=>(b.bdlScore||0)-(a.bdlScore||0))[0]||null;
     if(p2){usedGames.add(p2.gid);markUsed(p2);}
-    // Leg 3: 26-50 Launchpad — pitcher angle 12-22° + batter angle 12-22°, avg closest to 18°
-    const p3 = candidates.filter(c=>lp50Names.has(c.name)&&canUse(c)&&!usedGames.has(c.gid)
-      &&c.pAngle>=12&&c.pAngle<=22&&c.bAngle>=12&&c.bAngle<=22)
-      .map(c=>({...c,angleDiff:Math.abs((c.pAngle+c.bAngle)/2-18)}))
-      .sort((a,b)=>a.angleDiff-b.angleDiff)[0]||null;
+    // Leg 3: 26-50, highest total HR (batter HR vs pitcher split + pitcher HR allowed vs batter hand)
+    const p3=candidates.filter(c=>lp50Names.has(c.name)&&canUse(c)&&!usedGames.has(c.gid))
+      .map(c=>{
+        const bs3=getBSplit(c.name),ps3=getPSplit(c.pitcher);
+        const bh=c.hand||'R';
+        const bSpl=bh==='L'?(bs3?.vsL||{}):(bs3?.vsR||{});
+        const pSpl=bh==='L'?(ps3?.vsL||{}):(ps3?.vsR||{});
+        return {...c,dc3Score:(bSpl.hr||0)+(pSpl.hr||0)};})
+      .sort((a,b)=>b.dc3Score-a.dc3Score)[0]||null;
     if(p3){usedGames.add(p3.gid);markUsed(p3);}
     return [p1,p2,p3].filter(Boolean);
   }
@@ -7466,25 +7496,17 @@ function renderParlays() {
   // ── PARLAY 3: SLEEPER CELL ────────────────────────────────────────────────
   function buildSleeperCell() {
     const usedGames=new Set();
-    // Both legs from 26-50 Launchpad
-    // Score: ENV 30% + pHRIQ 30% + HRIQ 15% + closer to 50 25%
-    const lp50List = lp50.map((x,i)=>({...x, lpRank:26+i}));
-    const sleeperPool = candidates.filter(c=>{
-      const lp=lp50List.find(x=>x.name===c.name);
-      return lp&&canUse(c);
-    }).map(c=>{
-      const lp=lp50List.find(x=>x.name===c.name);
-      const rank=lp?lp.lpRank:50;
-      const rankScore=(rank-25)/25; // 0.04 at rank 26, 1.0 at rank 50
-      const envN=c.env/80;
-      const phriqN=c.phriq/80;
-      const iqN=c.hriq/80;
-      return {...c, sleeperScore:rankScore*0.25+envN*0.30+phriqN*0.30+iqN*0.15};
-    }).sort((a,b)=>b.sleeperScore-a.sleeperScore);
-
-    const p1=sleeperPool.find(c=>!usedGames.has(c.gid))||null;
+    const lp50L=lp50.map((x,i)=>({...x,lpRank:26+i}));
+    const slPool=candidates.filter(c=>lp50L.find(x=>x.name===c.name)&&canUse(c))
+      .map(c=>{
+        const lp=lp50L.find(x=>x.name===c.name),rank=lp?lp.lpRank:50;
+        const bb3=getBBrl(c.name),pb3=getPBrl(c.pitcher);
+        const bHrFb=bb3?(bb3.hr_fb||0):0,pHrFb=pb3?(pb3.hr_fb||0):0;
+        return {...c,slScore:((rank-25)/25)*0.25+(c.env/80)*0.15+(c.phriq/80)*0.15+(pHrFb/20)*0.15+(bHrFb/20)*0.15+(c.hriq/80)*0.15};})
+      .sort((a,b)=>b.slScore-a.slScore);
+    const p1=slPool.find(c=>!usedGames.has(c.gid))||null;
     if(p1){usedGames.add(p1.gid);markUsed(p1);}
-    const p2=sleeperPool.find(c=>canUse(c)&&!usedGames.has(c.gid))||null;
+    const p2=slPool.find(c=>canUse(c)&&!usedGames.has(c.gid))||null;
     if(p2){usedGames.add(p2.gid);markUsed(p2);}
     return [p1,p2].filter(Boolean);
   }
@@ -7492,24 +7514,29 @@ function renderParlays() {
   // ── PARLAY 4: NUKETOWN ────────────────────────────────────────────────────
   function buildNuketown() {
     const usedGames=new Set();
-    const hasBarrelData = c => c.bMaxEV > 0 && c.pa >= 20;
+    const hasBarrelData=c=>c.bMaxEV>0&&c.pa>=20;
+    const fbHr=n=>{const b=getBBrl(n);return b?((b.fb_pct||0)/36+(b.hr_fb||0)/13)/2:0;};
+    const pFbHr=n=>{const p=getPBrl(n);return p?(Math.max(0,100-(p.gb_pct||50))/36+(p.hr_fb||0)/13)/2:0;};
     function pick(filterFn,sortFn){
       const p=candidates.filter(c=>canUse(c)&&!usedGames.has(c.gid)&&hasBarrelData(c)&&filterFn(c)).sort(sortFn)[0]||null;
       if(p){usedGames.add(p.gid);markUsed(p);}
       return p;
     }
-    // Leg 1: Elite EV + batter angle 10-25° + ENV (pitcher angle as scoring factor)
+    // Leg 1: Elite EV + angle + ENV + FB/HR factors
     const p1=pick(c=>c.bMaxEV>=100&&c.bAngle>=10&&c.bAngle<=25,
-      (a,b)=>(b.bMaxEV+b.env+(b.pAngle>=10&&b.pAngle<=25?5:0))-(a.bMaxEV+a.env+(a.pAngle>=10&&a.pAngle<=25?5:0)));
-    // Leg 2: Pull Power + short fence + pitcher/batter HRs
+      (a,b)=>(b.bMaxEV+b.env+(b.pAngle>=10&&b.pAngle<=25?5:0)+fbHr(b.name)*20+pFbHr(b.pitcher)*20)
+            -(a.bMaxEV+a.env+(a.pAngle>=10&&a.pAngle<=25?5:0)+fbHr(a.name)*20+pFbHr(a.pitcher)*20));
+    // Leg 2: Pull Power + FB/HR factors
     const p2=pick(c=>c.bPull>=30&&c.bHard>=30,
-      (a,b)=>(b.bPull+b.bHard+b.pHR9*5+b.hrpa*100)-(a.bPull+a.bHard+a.pHR9*5+a.hrpa*100));
-    // Leg 3: Deep fly ball weather + pitcher/batter HRs
+      (a,b)=>(b.bPull+b.bHard+b.pHR9*5+fbHr(b.name)*25+pFbHr(b.pitcher)*25)
+            -(a.bPull+a.bHard+a.pHR9*5+fbHr(a.name)*25+pFbHr(a.pitcher)*25));
+    // Leg 3: Deep fly ball weather
     const p3=pick(c=>!c.dome&&c.env>=50,
       (a,b)=>(b.env+b.pHR9*5+b.hrpa*100)-(a.env+a.pHR9*5+a.hrpa*100));
-    // Leg 4: Gascan from 26-50 Launchpad
+    // Leg 4: Gascan from 26-50 + FB/HR factors
     const p4=pick(c=>lp50Names.has(c.name),
-      (a,b)=>(b.phriq+b.pBrlPct)-(a.phriq+a.pBrlPct));
+      (a,b)=>(b.phriq+b.pBrlPct+pFbHr(b.pitcher)*30+fbHr(b.name)*20)
+            -(a.phriq+a.pBrlPct+pFbHr(a.pitcher)*30+fbHr(a.name)*20));
     return [p1,p2,p3,p4].filter(Boolean);
   }
 
@@ -7595,7 +7622,7 @@ function renderParlays() {
         // EV allowed: lower = nastier stuff
         const evMod=Math.max(0.8,1.0+(90-evAllowed)/30);
         const ouBoost=g.ou>0&&g.ou<=8.0?1.10:1.0;
-        const score=(k9/12*40)+(10-era)*2+(avgK*0.5)+(avgChase*0.3)+((90-evAllowed)*0.5)*evMod*ouBoost;
+        const score=(k9/12*30)+(10-era)*2+(avgK*1.2)+(avgChase*0.8)+((90-evAllowed)*0.5)*evMod*ouBoost;
         pitcherMap[pitcher]={
           name:pitcher, team:side==='away'?g.away:g.home, pos:'P',
           game:g.away+'@'+g.home, time:g.time,
@@ -7611,6 +7638,7 @@ function renderParlays() {
       if(usedGames2.has(p.gid)) continue;
       picks.push(p); usedGames2.add(p.gid);
     }
+    window._punchoutPool=picks.slice();
     return picks;
   }
 
@@ -7621,8 +7649,92 @@ function renderParlays() {
   const nuke   = buildNuketown();
   const sgp    = buildSGPSlam();
   const punch  = buildPunchout();
+  const kregs  = buildKregsKash();
+  const smack  = buildSeansSmackerooni();
+  const milly  = buildMillyMaker();
 
-  window._parlayData = {'Kaz Special':kaz,'Deep Cuts':deep,'Sleeper Cell':sleeper,'Nuketown':nuke,'Same Game Slam':sgp,'Punchout Play':punch};
+  window._parlayData = {'Kaz Special':kaz,'Deep Cuts':deep,'Sleeper Cell':sleeper,'Nuketown':nuke,'Same Game Slam':sgp,'Punchout Play':punch,'Kregs Kash':kregs,'Seans Smackerooni':smack,'Milly Maker':milly};
+
+
+  // ── PARLAY 7: KREG'S KASH ─────────────────────────────────────────────────
+  function buildKregsKash() {
+    const usedGames=new Set();
+    // Leg 1: Top Longball prospect
+    const lbL=window._longballList||[];
+    const p1=lbL.find(c=>canUse(c)&&!usedGames.has(c.gid))||null;
+    if(p1){usedGames.add(p1.gid);markUsed(p1);}
+    // Leg 2: Deep Fly Ball matchup batter with highest pull%
+    const dfbP=(window._matchupsAssigned&&window._matchupsAssigned['Deep Fly Ball'])||[];
+    const p2=dfbP.filter(c=>canUse(c)&&!usedGames.has(c.gid)).sort((a,b)=>(b.bPull||0)-(a.bPull||0))[0]||null;
+    if(p2){usedGames.add(p2.gid);markUsed(p2);}
+    // Legs 3+4: Two highest Big Chalk from same game
+    const bcP=window._bigChalkPool||[];
+    const byG={};
+    bcP.forEach(c=>{if(!canUse(c))return;if(!byG[c.gid])byG[c.gid]=[];byG[c.gid].push(c);});
+    const bestG=Object.values(byG).filter(g=>g.length>=2&&!usedGames.has(g[0].gid))
+      .sort((a,b)=>((b[0].hriq||0)+(b[1]?.hriq||0))-((a[0].hriq||0)+(a[1]?.hriq||0)))[0]||null;
+    let p3=null,p4=null;
+    if(bestG){p3=bestG[0];p4=bestG[1];usedGames.add(p3.gid);markUsed(p3);markUsed(p4);}
+    return [p1,p2,p3,p4].filter(Boolean);
+  }
+
+  // ── PARLAY 8: SEAN'S SMACKEROONI ──────────────────────────────────────────
+  function buildSeansSmackerooni() {
+    const usedGames=new Set();
+    // Leg 1: Top Punchout pitcher (highest K% vs opposing lineup) — already sorted by punchScore
+    const punchP=window._punchoutPool||[];
+    const p1=punchP.find(c=>!usedGames.has(c.gid))||null;
+    if(p1)usedGames.add(p1.gid);
+    // Leg 2: Ball Don't Lie batter with best HRIQ — from different game
+    const bdlP2=window._bdlPool||[];
+    const p2=bdlP2.filter(c=>!usedGames.has(c.gid)).sort((a,b)=>(b.hriq||0)-(a.hriq||0))[0]||null;
+    if(p2)usedGames.add(p2.gid);
+    return [p1,p2].filter(Boolean);
+  }
+
+  // ── PARLAY 9: MOONSHOT MILLY MAKER ────────────────────────────────────────
+  function buildMillyMaker() {
+    const usedG=new Set(),usedN=new Set();
+    function mPick(pool,sortFn){
+      return (pool||[]).filter(c=>c&&!usedN.has(c.name)&&!usedG.has(c.gid))
+        .sort(sortFn||(()=>0))[0]||null;
+    }
+    function mAdd(p){if(p){usedN.add(p.name);usedG.add(p.gid);}}
+    // Leg 1: Kaz Leg 1 — Challenged Elite highest ENV
+    const l1=mPick(fadeACands.slice(0,5),(a,b)=>b.env-a.env); mAdd(l1);
+    // Leg 2: Top Sleeper Cell
+    const lp50M=lp50.map((x,i)=>({...x,lpRank:26+i}));
+    const slM=candidates.filter(c=>lp50M.find(x=>x.name===c.name))
+      .map(c=>{const lp=lp50M.find(x=>x.name===c.name),rank=lp?lp.lpRank:50;
+        const bb3=getBBrl(c.name),pb3=getPBrl(c.pitcher);
+        const bH=bb3?(bb3.hr_fb||0):0,pH=pb3?(pb3.hr_fb||0):0;
+        return {...c,mmSl:((rank-25)/25)*0.25+(c.env/80)*0.15+(c.phriq/80)*0.15+(pH/20)*0.15+(bH/20)*0.15+(c.hriq/80)*0.15};})
+      .sort((a,b)=>b.mmSl-a.mmSl);
+    const l2=mPick(slM); mAdd(l2);
+    // Leg 3: Deep Cuts Leg 1 — 26-50 best FB/HR
+    const dcM=candidates.filter(c=>lp50Names.has(c.name))
+      .map(c=>{const bb3=getBBrl(c.name),pb3=getPBrl(c.pitcher);
+        const bF=bb3?(bb3.fb_pct||0):0,bH=bb3?(bb3.hr_fb||0):0;
+        const pF=pb3?Math.max(0,100-(pb3.gb_pct||50)):0,pH=pb3?(pb3.hr_fb||0):0;
+        return {...c,mmDc:(bF/36+bH/13+pF/36+pH/13)/4};})
+      .sort((a,b)=>b.mmDc-a.mmDc);
+    const l3=mPick(dcM); mAdd(l3);
+    // Leg 4: Highest Platoon Hammer batter (wRC+ vs hand)
+    const platM=(window._matchupsAssigned&&window._matchupsAssigned['Platoon Hammer'])||[];
+    const l4=mPick(platM,(a,b)=>(b.wrcVsHand||0)-(a.wrcVsHand||0)); mAdd(l4);
+    // Leg 5: Top Slammer with highest HRIQ
+    const slamM=window._slamPool||[];
+    const l5=mPick(slamM,(a,b)=>(b.hriq||0)-(a.hriq||0)); mAdd(l5);
+    // Leg 6: Batter with highest pHRIQ + ENV
+    const l6=mPick(candidates.slice().sort((a,b)=>((b.phriq||0)+(b.env||0))-((a.phriq||0)+(a.env||0)))); mAdd(l6);
+    // Leg 7: Kaz Leg 2 — Manager's Men/BVP+LCS
+    const mmN=new Set((window._managersPool||[]).map(x=>x.name));
+    const bvpN=new Set((window._bvpLcsPool||[]).map(x=>x.name));
+    let l7=mPick(candidates.filter(c=>mmN.has(c.name)&&bvpN.has(c.name)),(a,b)=>b.hriq-a.hriq);
+    if(!l7)l7=mPick(candidates.filter(c=>mmN.has(c.name)),(a,b)=>b.hriq-a.hriq);
+    mAdd(l7);
+    return [l1,l2,l3,l4,l5,l6,l7].filter(Boolean);
+  }
 
   // ── RENDER ────────────────────────────────────────────────────────────────
   function f1(v){return v!=null?parseFloat(v).toFixed(1):'—';}
@@ -7667,11 +7779,14 @@ function renderParlays() {
   html+=parlayCard('SLEEPER CELL','var(--purple)','\ud83d\udca4',sleeper,false);
   html+=parlayCard('NUKETOWN','var(--orange)','\ud83d\udca5',nuke,false);
   html+=parlayCard('SAME GAME SLAM','var(--green)','\ud83c\udfd9\ufe0f',sgp,false);
-  html+=parlayCard('PUNCHOUT PLAY','var(--pink)','\ud83e\udd4a',punch,true);
+  html+=parlayCard('PUNCHOUT PLAY','var(--pink)','🥊',punch,true);
+  html+=parlayCard("KREG'S KASH",'#f97316','🎲',kregs,false);
+  html+=parlayCard("SEAN'S SMACKEROONI",'#a855f7','🎯',smack,false);
+  html+=parlayCard('MOONSHOT MILLY MAKER','var(--cyan)','🚀',milly,false);
 
   el.innerHTML=html;
 
-  window._parlayOrder=[...kaz,...deep,...sleeper,...nuke,...sgp];
+  window._parlayOrder=[...kaz,...deep,...sleeper,...nuke,...sgp,...(kregs||[]),...(smack||[]),...(milly||[])];
 }
 
 
@@ -7717,6 +7832,19 @@ starred.forEach(key=>{
 });
 updateCounts();
 
+// ── PRE-POPULATE ALL TABS ──
+// Order matters: Parlays depends on LP, Matchups, Experimental, Longball, Slam pools
+setTimeout(function(){
+  try{renderTheList();}catch(e){}       // populates _launchpadTop25/_launchpadPool2
+  try{renderMatchups();}catch(e){}      // populates _matchupsAssigned
+  try{renderLongball();}catch(e){}      // populates _longballList
+  try{renderSlammers();}catch(e){}      // populates _slamPool
+  try{renderExperimental();}catch(e){}  // populates _managersPool/_bvpLcsPool/_bdlPool/_bigChalkPool
+  try{renderParlays();}catch(e){}       // runs last — uses all pools above
+  try{renderWatchlist();}catch(e){}
+  try{renderPicks();}catch(e){}
+},50);
+
 function timeStrToSlider(t){if(!t)return 720;const m=t.match(/(\d+):(\d+)\s*(AM|PM)/i);if(!m)return 720;let h=parseInt(m[1]),mn=parseInt(m[2]),pm=m[3].toUpperCase()==='PM';if(pm&&h!==12)h+=12;if(!pm&&h===12)h=0;return h*60+mn;}
 function fmtSliderTime(mins){let h=Math.floor(mins/60),m2=mins%60,ap='AM';if(h>=12){ap='PM';if(h>12)h-=12;}if(h===0)h=12;return h+':'+(m2<10?'0':'')+m2+ap;}
 function updateSliderVisuals(){const hl=document.getElementById('sliderHandleL');const hr2=document.getElementById('sliderHandleR');const range=document.getElementById('sliderRange');const ll=document.getElementById('sliderLabelL');const lr=document.getElementById('sliderLabelR');if(!hl||!hr2)return;const lPct=parseFloat(hl.style.left||0);const rPct=parseFloat(hr2.style.left||100);if(range){range.style.left=lPct+'%';range.style.right=(100-rPct)+'%';}const n=window._sliderN||1;const minsArr=window._sliderMins||[];const lIdx=Math.max(0,Math.min(n-1,Math.round(lPct/100*(n-1))));const rIdx=Math.max(0,Math.min(n-1,Math.round(rPct/100*(n-1))));window._sliderMin=minsArr[lIdx]||0;window._sliderMax=minsArr[rIdx]||2400;if(ll)ll.textContent=fmtSliderTime(window._sliderMin);if(lr)lr.textContent=fmtSliderTime(window._sliderMax);const slMin=window._sliderMin,slMax=window._sliderMax;document.querySelectorAll('.slider-notch').forEach((el,i)=>{const mv=minsArr[i]||0;el.classList.toggle('in-range',mv>=slMin&&mv<=slMax);});applyFilters();}
@@ -7725,4 +7853,11 @@ function sliderTrackClick(e){const notch=e.target.closest('.slider-notch');if(!n
 function sliderDrag(e,side){e.preventDefault();const track=document.getElementById('timeSliderTrack');const hl=document.getElementById('sliderHandleL');const hr2=document.getElementById('sliderHandleR');const handle=side==='L'?hl:hr2;if(!track||!handle)return;const n=window._sliderN||1;function snapToNearest(rawPct){const targetIdx=Math.round(rawPct/100*(n-1));return n>1?(Math.max(0,Math.min(n-1,targetIdx))/(n-1)*100).toFixed(2):'50';}function getPos(ev){const rect=track.getBoundingClientRect();const cx=ev.touches?ev.touches[0].clientX:ev.clientX;return Math.max(0,Math.min(100,(cx-rect.left)/rect.width*100));}function onMove(ev){ev.preventDefault();const pct=parseFloat(snapToNearest(getPos(ev)));if(side==='L')handle.style.left=Math.min(pct,parseFloat(hr2.style.left||100))+'%';else handle.style.left=Math.max(pct,parseFloat(hl.style.left||0))+'%';updateSliderVisuals();}function onUp(){document.removeEventListener('mousemove',onMove);document.removeEventListener('mouseup',onUp);document.removeEventListener('touchmove',onMove);document.removeEventListener('touchend',onUp);}document.addEventListener('mousemove',onMove);document.addEventListener('mouseup',onUp);document.addEventListener('touchmove',onMove,{passive:false});document.addEventListener('touchend',onUp);}
 </script>
 </body>
-</html>
+</html    parlayCard("🎲 KREG'S KASH",'#f97316',buildKregsKash(),
+      ['Top Longball','Deep Fly Ball pull%','Big Chalk same game','Big Chalk same game']),
+    parlayCard('🎲 SEAN\'S SMACKEROONI','#a855f7',buildSeansSmackerooni(),
+      ['Top K pitcher','BDL highest HRIQ']),
+    parlayCard('🚀 MOONSHOT MILLY MAKER','var(--cyan)',buildMillyMaker(),
+      ['Challenged Elite ENV','Top Sleeper','Deep Cuts FB/HR','Platoon Hammer','Top Slammer IQ','Best pHRIQ+ENV','Mgrs Men/BVP']),
+  ].join('');
+}
