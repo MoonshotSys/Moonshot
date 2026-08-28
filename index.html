@@ -378,6 +378,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
   <div class="fchip" onclick="toggleFilter('elitenv',this)">⚡ Elite ENV</div>
   <div class="fchip" onclick="toggleFilter('highbrl',this)">💣 High BRL%</div>
   <div class="fchip" onclick="toggleFilter('sb',this)">🏃 SB</div>
+  <div class="fchip" onclick="toggleFilter('split',this)">🍌 SPLIT</div>
 </div>
 </div>
 </div>
@@ -3423,7 +3424,7 @@ const games = [
   {id:"sea-tor",time:"7:15 PM",away:"SEA",home:"TOR",awayRec:"0-0",homeRec:"0-0",awayP:"Emerson Hancock",awayPH:"R",awayEra:"3.37",awayConf:true,awayPrim:false,homeP:"Dylan Cease",homePH:"R",homeEra:"2.37",homeConf:true,homePrim:false,line:"TOR -141",ou:7.0,windDir:"dome",dome:true,postponed:false,rain:0,temp:0,windMph:0,windLabel:"",awayL:[{pos:"LF",name:"R. Arozarena",hand:"R"},{pos:"DH",name:"D. Canzone",hand:"L"},{pos:"CF",name:"Julio Rodriguez",hand:"R"},{pos:"1B",name:"Josh Naylor",hand:"L"},{pos:"C",name:"Cal Raleigh",hand:"S"},{pos:"2B",name:"Cole Young",hand:"L"},{pos:"RF",name:"Taylor Ward",hand:"R"},{pos:"3B",name:"J.P. Crawford",hand:"L"},{pos:"SS",name:"Brock Rodden",hand:"S"}],homeL:[{pos:"CF",name:"B. Bateman",hand:"L"},{pos:"RF",name:"Nathan Lukes",hand:"L"},{pos:"1B",name:"V. Guerrero",hand:"R"},{pos:"DH",name:"G. Springer",hand:"R"},{pos:"LF",name:"J. Sanchez",hand:"L"},{pos:"3B",name:"K. Okamoto",hand:"R"},{pos:"SS",name:"A. Gimenez",hand:"L"},{pos:"2B",name:"E. Clement",hand:"R"},{pos:"C",name:"B. Valenzuela",hand:"S"}]},
   {id:"col-atl",time:"7:15 PM",away:"COL",home:"ATL",awayRec:"0-0",homeRec:"0-0",awayP:"Tomoyuki Sugano",awayPH:"R",awayEra:"4.96",awayConf:true,awayPrim:false,homeP:"Grant Holmes",homePH:"R",homeEra:"3.64",homeConf:true,homePrim:false,line:"ATL -216",ou:9.0,windDir:"in",dome:false,postponed:false,rain:33,temp:83,windMph:1,windLabel:"1mph in",awayL:[{pos:"LF",name:"J. McCarthy",hand:"L"},{pos:"CF",name:"Cole Carrigg",hand:"S"},{pos:"C",name:"H. Goodman",hand:"R"},{pos:"1B",name:"TJ Rumfield",hand:"L"},{pos:"3B",name:"Willi Castro",hand:"S"},{pos:"DH",name:"M. Moniak",hand:"L"},{pos:"2B",name:"Connor Norby",hand:"R"},{pos:"RF",name:"Zac Veen",hand:"L"},{pos:"SS",name:"E. Tovar",hand:"R"}],homeL:[{pos:"DH",name:"D. Baldwin",hand:"L"},{pos:"2B",name:"Ozzie Albies",hand:"S"},{pos:"1B",name:"Matt Olson",hand:"L"},{pos:"RF",name:"Ronald Acuna",hand:"R"},{pos:"CF",name:"M. Harris",hand:"L"},{pos:"3B",name:"M. Dubon",hand:"R"},{pos:"LF",name:"M. Yastrzemski",hand:"L"},{pos:"C",name:"Sean Murphy",hand:"R"},{pos:"SS",name:"Ha-Seong Kim",hand:"R"}]},
   {id:"tex-mil",time:"7:40 PM",away:"TEX",home:"MIL",awayRec:"0-0",homeRec:"0-0",awayP:"Cody Bradford",awayPH:"L",awayEra:"3.05",awayConf:true,awayPrim:false,homeP:"Logan Henderson",homePH:"R",homeEra:"2.60",homeConf:true,homePrim:false,line:"MIL -206",ou:7.5,windDir:"dome",dome:true,postponed:false,rain:0,temp:0,windMph:0,windLabel:"",awayL:[{pos:"DH",name:"Joc Pederson",hand:"L"},{pos:"SS",name:"Corey Seager",hand:"L"},{pos:"LF",name:"W. Langford",hand:"R"},{pos:"RF",name:"B. Nimmo",hand:"L"},{pos:"3B",name:"E. Duran",hand:"R"},{pos:"CF",name:"Evan Carter",hand:"L"},{pos:"1B",name:"Jake Burger",hand:"R"},{pos:"2B",name:"Cody Freeman",hand:"R"},{pos:"C",name:"Danny Jansen",hand:"R"}],homeL:[{pos:"2B",name:"Brice Turang",hand:"L"},{pos:"LF",name:"J. Chourio",hand:"R"},{pos:"1B",name:"Jake Bauers",hand:"L"},{pos:"C",name:"William Contreras",hand:"R"},{pos:"DH",name:"C. Yelich",hand:"L"},{pos:"SS",name:"Joey Ortiz",hand:"R"},{pos:"CF",name:"G. Mitchell",hand:"L"},{pos:"RF",name:"Sal Frelick",hand:"L"},{pos:"3B",name:"D. Hamilton",hand:"L"}]},
-  {id:"cws-min",time:"8:10 PM",away:"CWS",home:"MIN",awayRec:"0-0",homeRec:"0-0",awayP:"Luis Castillo",awayPH:"R",awayEra:"5.19",awayConf:false,awayPrim:false,homeP:"Dean Kremer",homePH:"R",homeEra:"5.22",homeConf:true,homePrim:false,line:"MIN -124",ou:9.0,windDir:"in",dome:false,postponed:false,rain:2,temp:82,windMph:6,windLabel:"6mph in",awayL:[{pos:"LF",name:"S. Antonacci",hand:"L"},{pos:"1B",name:"M. Murakami",hand:"L"},{pos:"3B",name:"M. Vargas",hand:"R"},{pos:"DH",name:"A. Benintendi",hand:"L"},{pos:"RF",name:"B. Montgomery",hand:"S"},{pos:"SS",name:"C. Montgomery",hand:"L"},{pos:"2B",name:"C. Meidroth",hand:"R"},{pos:"CF",name:"T. Peters",hand:"L"},{pos:"C",name:"Drew Romo",hand:"S"}],homeL:[{pos:"RF",name:"L. Keaschall",hand:"R"},{pos:"3B",name:"Brooks Lee",hand:"S"},{pos:"C",name:"Ryan Jeffers",hand:"R"},{pos:"2B",name:"Kody Clemens",hand:"L"},{pos:"DH",name:"Josh Bell",hand:"S"},{pos:"1B",name:"Royce Lewis",hand:"R"},{pos:"LF",name:"T. Larnach",hand:"L"},{pos:"SS",name:"K. Culpepper",hand:"R"},{pos:"CF",name:"W. Jenkins",hand:"L"}]},
+  {id:"cws-min",time:"8:10 PM",away:"CWS",home:"MIN",awayRec:"0-0",homeRec:"0-0",awayP:"Luis Castillo",awayPH:"R",awayEra:"5.19",awayConf:true,awayPrim:false,homeP:"Dean Kremer",homePH:"R",homeEra:"5.22",homeConf:true,homePrim:false,line:"MIN -124",ou:9.0,windDir:"in",dome:false,postponed:false,rain:2,temp:82,windMph:6,windLabel:"6mph in",awayL:[{pos:"LF",name:"S. Antonacci",hand:"L"},{pos:"1B",name:"M. Murakami",hand:"L"},{pos:"3B",name:"M. Vargas",hand:"R"},{pos:"DH",name:"A. Benintendi",hand:"L"},{pos:"RF",name:"B. Montgomery",hand:"S"},{pos:"SS",name:"C. Montgomery",hand:"L"},{pos:"2B",name:"C. Meidroth",hand:"R"},{pos:"CF",name:"T. Peters",hand:"L"},{pos:"C",name:"Drew Romo",hand:"S"}],homeL:[{pos:"RF",name:"L. Keaschall",hand:"R"},{pos:"3B",name:"Brooks Lee",hand:"S"},{pos:"C",name:"Ryan Jeffers",hand:"R"},{pos:"2B",name:"Kody Clemens",hand:"L"},{pos:"DH",name:"Josh Bell",hand:"S"},{pos:"1B",name:"Royce Lewis",hand:"R"},{pos:"LF",name:"T. Larnach",hand:"L"},{pos:"SS",name:"K. Culpepper",hand:"R"},{pos:"CF",name:"W. Jenkins",hand:"L"}]},
   {id:"pit-stl",time:"8:15 PM",away:"PIT",home:"STL",awayRec:"0-0",homeRec:"0-0",awayP:"Jared Jones",awayPH:"R",awayEra:"4.76",awayConf:true,awayPrim:false,homeP:"Quinn Mathews",homePH:"L",homeEra:"6.43",homeConf:true,homePrim:false,line:"PIT -113",ou:7.5,windDir:"in",dome:false,postponed:false,rain:0,temp:84,windMph:3,windLabel:"3mph in",awayL:[{pos:"SS",name:"Jared Triolo",hand:"R"},{pos:"RF",name:"E. Valdez",hand:"R"},{pos:"DH",name:"B. Reynolds",hand:"S"},{pos:"CF",name:"Oneil Cruz",hand:"L"},{pos:"2B",name:"N. Gonzales",hand:"R"},{pos:"1B",name:"R. Flores",hand:"R"},{pos:"LF",name:"Jake Mangum",hand:"S"},{pos:"3B",name:"Nick Yorke",hand:"R"},{pos:"C",name:"Henry Davis",hand:"R"}],homeL:[{pos:"SS",name:"J. Wetherholt",hand:"L"},{pos:"DH",name:"Ivan Herrera",hand:"R"},{pos:"1B",name:"A. Burleson",hand:"L"},{pos:"RF",name:"J. Walker",hand:"R"},{pos:"2B",name:"Jose Fermin",hand:"R"},{pos:"CF",name:"N. Church",hand:"L"},{pos:"LF",name:"Joshua Baez",hand:"R"},{pos:"3B",name:"Nolan Gorman",hand:"L"},{pos:"C",name:"Jimmy Crooks",hand:"L"}]},
   {id:"phi-laa",time:"9:38 PM",away:"PHI",home:"LAA",awayRec:"0-0",homeRec:"0-0",awayP:"Andrew Painter",awayPH:"R",awayEra:"6.04",awayConf:false,awayPrim:false,homeP:"Reid Detmers",homePH:"L",homeEra:"3.62",homeConf:false,homePrim:false,line:"PHI -123",ou:8.0,windDir:"out",dome:false,postponed:false,rain:1,temp:90,windMph:7,windLabel:"7mph out",awayL:[{pos:"DH",name:"K. Schwarber",hand:"L"},{pos:"SS",name:"Trea Turner",hand:"R"},{pos:"RF",name:"Bryce Harper",hand:"L"},{pos:"2B",name:"Luis Arraez",hand:"L"},{pos:"1B",name:"Alec Bohm",hand:"R"},{pos:"3B",name:"Edmundo Sosa",hand:"R"},{pos:"LF",name:"B. De La Cruz",hand:"R"},{pos:"C",name:"J. Realmuto",hand:"R"},{pos:"CF",name:"Derek Hill",hand:"R"}],homeL:[{pos:"SS",name:"Zach Neto",hand:"R"},{pos:"CF",name:"Mike Trout",hand:"R"},{pos:"DH",name:"M. Ballesteros",hand:"L"},{pos:"1B",name:"V. Grissom",hand:"R"},{pos:"RF",name:"Josh Lowe",hand:"L"},{pos:"2B",name:"C. Moore",hand:"R"},{pos:"3B",name:"D. Guzman",hand:"R"},{pos:"LF",name:"Jose Siri",hand:"R"},{pos:"C",name:"T. Heineman",hand:"S"}]},
   {id:"bal-ath",time:"9:40 PM",away:"BAL",home:"ATH",awayRec:"0-0",homeRec:"0-0",awayP:"Brandon Young",awayPH:"R",awayEra:"3.50",awayConf:false,awayPrim:false,homeP:"Jacob Lopez",homePH:"L",homeEra:"4.98",homeConf:false,homePrim:false,line:"BAL -108",ou:9.5,windDir:"neutral",dome:false,postponed:false,rain:1,temp:84,windMph:5,windLabel:"5mph",awayL:[{pos:"2B",name:"J. Holliday",hand:"L"},{pos:"DH",name:"Pete Alonso",hand:"R"},{pos:"SS",name:"G. Henderson",hand:"L"},{pos:"1B",name:"Coby Mayo",hand:"R"},{pos:"3B",name:"C. Encarnacion-Strand",hand:"R"},{pos:"LF",name:"C. Franklin",hand:"R"},{pos:"CF",name:"L. Taveras",hand:"S"},{pos:"RF",name:"D. Beavers",hand:"L"},{pos:"C",name:"C. Narvaez",hand:"R"}],homeL:[{pos:"CF",name:"Henry Bolte",hand:"R"},{pos:"2B",name:"Jeff McNeil",hand:"L"},{pos:"3B",name:"Zack Gelof",hand:"R"},{pos:"LF",name:"C. Cortes",hand:"L"},{pos:"RF",name:"L. Butler",hand:"L"},{pos:"1B",name:"Tommy White",hand:"R"},{pos:"C",name:"Jonah Heim",hand:"S"},{pos:"SS",name:"D. Walton",hand:"L"},{pos:"DH",name:"Max Muncy",hand:"R"}]},
@@ -4448,7 +4449,7 @@ function lineupPanel(g, side) {
   const bbeStr = pb ? f1(pb.barrel_pct)+'%' : '—';
   const bblN   = pb ? (pb.barrel_n||0) : '';
   const spltSp=getPSplit(facingP),spltR=spltSp?(spltSp.vsR||{}):{},spltL=spltSp?(spltSp.vsL||{}):{};  
-  let spltScore=5;
+  let spltScore=5,spltDetail='';
   if((spltR.ip||0)>=10&&(spltL.ip||0)>=10){
     const oppS=facingPH==='R'?spltL:spltR,samS=facingPH==='R'?spltR:spltL;
     const oHR=oppS.hr||0,sHR=samS.hr||0,totHR=oHR+sHR;
@@ -4860,6 +4861,20 @@ function renderGame(g) {
   }
   const awaySBScore = gameSBScore(g.awayP, g.awayPH, g.homeL);
   const homeSBScore = gameSBScore(g.homeP, g.homePH, g.awayL);
+  const calcSPLTScore=(pitcher,facingPH)=>{
+    const sp=getPSplit(pitcher);
+    if(!sp||(sp.vsR&&sp.vsR.ip||0)<10||(sp.vsL&&sp.vsL.ip||0)<10) return 5;
+    const oS=facingPH==='R'?(sp.vsL||{}):(sp.vsR||{}),sS=facingPH==='R'?(sp.vsR||{}):(sp.vsL||{});
+    const oHR=oS.hr||0,sHR=sS.hr||0,totHR=oHR+sHR;
+    const volConf=totHR>=20?1.0:totHR>=10?0.75:totHR>=5?0.50:totHR>=2?0.30:0.10;
+    const hrSc=totHR>0?(oHR/totHR-0.5)*2*volConf:0;
+    const oIP=Math.max(oS.ip||1,1),sIP=Math.max(sS.ip||1,1);
+    const eraSc=Math.min(1,Math.max(-1,((oS.era||4.5)-(sS.era||4.5))/4.0));
+    const hr9Sc=Math.min(1,Math.max(-1,(oHR/oIP*9-sHR/sIP*9)/2.0));
+    return Math.min(10,Math.max(1,Math.round(50+(hrSc*0.25+hr9Sc*0.20+eraSc*0.20)*50)/10));
+  };
+  const awaySPLT=calcSPLTScore(g.homeP,g.homePH);
+  const homeSPLT=calcSPLTScore(g.awayP,g.awayPH);
   const gameSBTotal = Math.max(awaySBScore, homeSBScore);
   // Rank vs all games — top 25%
   const allSBScores = games.map(gx=>{
@@ -4868,9 +4883,6 @@ function renderGame(g) {
     return Math.max(a,h);
   }).filter(s=>s>0).sort((a,b)=>b-a);
   const sbThreshold = allSBScores.length ? allSBScores[Math.floor(allSBScores.length*0.25)] : 0;
-  // SB filter: game SB score high OR either pitcher has SPLT score >= 7
-  const awaySPLT = calcSPLT ? calcSPLT(g.homeP,g.homePH) : 0;
-  const homeSPLT = calcSPLT ? calcSPLT(g.awayP,g.awayPH) : 0;
   const sbFlag = (gameSBTotal>0&&gameSBTotal>=sbThreshold)||(awaySPLT>=7||homeSPLT>=7);
   const isPost = g.postponed===true;
 
@@ -4878,7 +4890,7 @@ function renderGame(g) {
     +' data-ou="'+g.ou+'" data-bvphr="'+(bvpQual?1:0)+'" data-gid="'+g.id+'" data-time="'+g.time+'"'
     +' data-narr="'+(hasNarr?1:0)+'" data-gascan="'+(gascan?1:0)+'"'
     +' data-hot="'+(hotFlag?1:0)+'" data-windout="'+(windOutFlag?1:0)+'"'
-    +' data-elitenv="'+(eliteEnvFlag?1:0)+'" data-highbrl="'+(highBrlFlag?1:0)+'" data-sb="'+(sbFlag?1:0)+'"'
+    +' data-elitenv="'+(eliteEnvFlag?1:0)+'" data-highbrl="'+(highBrlFlag?1:0)+'" data-split="'+((awaySPLT>=7||homeSPLT>=7)?1:0)+'" data-sb="'+(sbFlag?1:0)+'"'
     +' data-conf="'+(bothConf?1:0)+'">'
     +'<div class="gtop">'
     +'<div class="gtop-row">'
@@ -4963,6 +4975,7 @@ function applyFilters() {
     if(activeFilters.has('elitenv'))   show = show && card.dataset.elitenv==='1';
     if(activeFilters.has('highbrl'))   show = show && card.dataset.highbrl==='1';
     if(activeFilters.has('sb'))        show = show && card.dataset.sb==='1';
+    if(activeFilters.has('split'))     show = show && card.dataset.split==='1';
     if(filterByTime) {
       const h = parseGameHour(card.dataset.time||'');
       const inAny = activeTime.some(t =>
@@ -5846,7 +5859,7 @@ function renderLongball() {
 
     // ── COMBINE ──
     const bFb3=bb?(bb.fb_pct||0):0,bHrFb3=bb?(bb.hr_fb||0):0;
-    const pGb3=pb?(pb.gb_pct||0):0,pHrFb3=pb?(pb.hr_fb||0):0;
+    const pGb3=pbl?(pbl.gb_pct||0):0,pHrFb3=pbl?(pbl.hr_fb||0):0;
     const fbMult3=bFb3>0?Math.max(0.85,Math.min(1.20,bFb3/36)):1.0;
     const hrfbMult3=bHrFb3>0?Math.max(0.85,Math.min(1.25,bHrFb3/12)):1.0;
     const pFlyMult3=pGb3>0?Math.max(0.85,Math.min(1.20,(50-pGb3)/20+1)):1.0;
@@ -6611,7 +6624,7 @@ function renderMatchups() {
     c._scoreDeepFly = tempScore2*angleMod2*windBoost2*(c.env/55)*(c.bPull/40)*Math.max(0.8,c.bHard/LG_HARD3)*(c.pGbPct>0?Math.max(0.80,Math.min(1.30,(50-c.pGbPct)/20+1)):1.0)*Math.max(0.90,Math.min(1.20,(c.pHrFb||0)/12||1))*Math.max(0.90,Math.min(1.15,(c.bHrFb||0)/12||1));
 
     // 5. GASCAN — pitcher leakiness × batter power (no gate)
-    c._scoreGascan = (c.phriq/LG_PHRIQ3)*Math.max(0.4,c.bBrl/LG_BRL3)*Math.max(0.6,c.hrpa/0.033+0.7)*Math.max(0.8,c.hriq/LG_IQ3)*Math.max(0.85,Math.min(1.30,(c.spltScore||5)/5))*Math.max(0.90,Math.min(1.20,(c.pHrFb||0)/12||1));
+    c._scoreGascan = (c.phriq/LG_PHRIQ3)*Math.max(0.4,c.bBrl/LG_BRL3)*Math.max(0.6,c.hrpa/0.033+0.7)*Math.max(0.8,c.hriq/LG_IQ3)*Math.max(0.85,Math.min(1.30,(c.spltScore||5)/5))*Math.max(0.90,Math.min(1.20,(c.pHrFb||0)/12||1))*Math.max(0.85,Math.min(1.30,(c.spltScore||5)/5))*Math.max(0.90,Math.min(1.20,(c.pHrFb||0)>0?(c.pHrFb/12):1.0));
 
     // 6. PLATOON HAMMER — wRC+ split edge (no gate, ranked by edge)
     const platoonEdge=c.wrcVsHand-c.wrcOther;
@@ -6777,7 +6790,7 @@ function renderTheList() {
         const paMultLP = bb.pa>=200?1.0:bb.pa>=100?0.95:bb.pa>=60?0.90:bb.pa>=40?0.85:bb.pa>=20?0.80:0.75;
         const wobaMod=(bb.woba||0)>0?Math.max(0.92,Math.min(1.08,(bb.woba||0)/0.320)):1.0;
         // SPLT: pitcher leakiness vs batter hand
-        const lpSpltSp=getPSplit(facingP);
+        const lpSpltSp=getPSplit(pitcher);
         const lpSpltOpp=facingPH==='R'?(lpSpltSp?lpSpltSp.vsL:null):(lpSpltSp?lpSpltSp.vsR:null);
         const lpSpltSam=facingPH==='R'?(lpSpltSp?lpSpltSp.vsR:null):(lpSpltSp?lpSpltSp.vsL:null);
         let spltMod=1.0;
