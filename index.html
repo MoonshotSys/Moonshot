@@ -4318,14 +4318,12 @@ function batterRow(b, gid, side, idx, facingPH, hriq, env) {
   const _eHiQ  = typeof hriq==='number' ? scaleHRIQ(hriq) : 50;
   const _ePQ   = typeof _phriq2==='number' ? _phriq2 : 50;
   const _eEQ   = typeof env==='number'  ? scaleENV(env)  : 50;
-  const _hrN   = _sHR2<=5&&_eHiQ>=70 ? 1.05 : Math.max(0.85, Math.min(1.40, 0.85+(_sHR2/65)*0.55));
-  const _bHN   = _bHrFb>0 ? Math.max(0.80, Math.min(1.50, 0.80+(_bHrFb/25)*0.70)) : 0.90;
-  const _bFN   = _bFb>0   ? Math.max(0.92, Math.min(1.10, 0.92+(_bFb-30)/100*0.18))  : 1.0;
-  const _pGN   = _pGb>0   ? Math.max(0.92, Math.min(1.10, 1.0+(43-_pGb)/150))         : 1.0;
-  const _pHN   = _pHrFb>0 ? Math.max(0.92, Math.min(1.10, 0.92+(_pHrFb/20)*0.18))     : 1.0;
-  const _pQN   = Math.max(0.90, Math.min(1.12, 0.90+(_ePQ/95)*0.22));
-  const _eQN   = Math.max(0.94, Math.min(1.06, 0.94+(_eEQ/95)*0.12));
-  const _ePr   = Math.max(0.025, Math.min(0.50, 0.095 * Math.pow(_eHiQ/50, 0.4) * _hrN * _bHN * _bFN * _pGN * _pHN * _pQN * _eQN));
+  const _hrN   = _sHR2<=5&&_eHiQ>=70 ? 1.05 : Math.max(0.85, Math.min(1.30, 0.85+(_sHR2/55)*0.45));
+  const _bHN   = _bHrFb>0 ? Math.max(0.80, Math.min(1.15, 0.80+(_bHrFb/40)*0.35)) : 0.90;
+  const _bFN   = _bFb>0   ? Math.max(0.93, Math.min(1.08, 0.93+(_bFb-30)/100*0.15))  : 1.0;
+  const _pGN   = _pGb>0   ? Math.max(0.93, Math.min(1.08, 1.0+(43-_pGb)/150))         : 1.0;
+  const _pHN   = _pHrFb>0 ? Math.max(0.93, Math.min(1.08, 0.93+(_pHrFb/20)*0.15))     : 1.0;
+  const _ePr   = Math.max(0.020, Math.min(0.60, 0.165 * Math.pow(_eHiQ/50,0.35) * Math.pow(_ePQ/50,0.16) * Math.pow(_eEQ/50,0.23) * _hrN * _bHN * _bFN * _pGN * _pHN));
   const eODDV  = '+' + Math.min(1500, Math.round((100/_ePr - 100) / 5) * 5);
   const eODDCell='<div class="b-stat-n" style="color:var(--text1)"><span class="b-stat-lbl">ODDS</span>'+eODDV+'</div>';
   const _brlV2=bb?(bb.barrel_pct||0):0;
@@ -5240,14 +5238,12 @@ function playerStatPills(key, g) {
   const pQ    = phriq2;
   const eQ    = typeof env==='number'  ? env  : 50;
   const _sHR2 = adv?(adv.hr||0):(bs?((bs.vsR?.hr||0)+(bs.vsL?.hr||0)):0);
-  const _hrN  = _sHR2<=5&&hiQ>=70 ? 1.05 : Math.max(0.85, Math.min(1.40, 0.85+(_sHR2/65)*0.55));
-  const _bHN  = bHrFb2>0 ? Math.max(0.80, Math.min(1.50, 0.80+(bHrFb2/25)*0.70)) : 0.90;
-  const _bFN  = bFb2>0   ? Math.max(0.92, Math.min(1.10, 0.92+(bFb2-30)/100*0.18)) : 1.0;
-  const _pGN  = pGb2>0   ? Math.max(0.92, Math.min(1.10, 1.0+(43-pGb2)/150))       : 1.0;
-  const _pHN  = pHrFb2>0 ? Math.max(0.92, Math.min(1.10, 0.92+(pHrFb2/20)*0.18))   : 1.0;
-  const _pQN  = Math.max(0.90, Math.min(1.12, 0.90+(pQ/95)*0.22));
-  const _eQN  = Math.max(0.94, Math.min(1.06, 0.94+(eQ/95)*0.12));
-  const eProb = Math.max(0.025, Math.min(0.50, 0.095 * Math.pow(hiQ/50, 0.4) * _hrN * _bHN * _bFN * _pGN * _pHN * _pQN * _eQN));
+  const _hrN  = _sHR2<=5&&hiQ>=70 ? 1.05 : Math.max(0.85, Math.min(1.30, 0.85+(_sHR2/55)*0.45));
+  const _bHN  = bHrFb2>0 ? Math.max(0.80, Math.min(1.15, 0.80+(bHrFb2/40)*0.35)) : 0.90;
+  const _bFN  = bFb2>0   ? Math.max(0.93, Math.min(1.08, 0.93+(bFb2-30)/100*0.15)) : 1.0;
+  const _pGN  = pGb2>0   ? Math.max(0.93, Math.min(1.08, 1.0+(43-pGb2)/150))       : 1.0;
+  const _pHN  = pHrFb2>0 ? Math.max(0.93, Math.min(1.08, 0.93+(pHrFb2/20)*0.15))   : 1.0;
+  const eProb = Math.max(0.020, Math.min(0.60, 0.165 * Math.pow(hiQ/50,0.35) * Math.pow(pQ/50,0.16) * Math.pow(eQ/50,0.23) * _hrN * _bHN * _bFN * _pGN * _pHN));
   const eODD  = '+' + Math.min(1500, Math.round((100/eProb - 100) / 5) * 5);
 
   return '<div class="lcard-pills">'
