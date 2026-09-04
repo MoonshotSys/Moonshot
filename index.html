@@ -4325,8 +4325,8 @@ function batterRow(b, gid, side, idx, facingPH, hriq, env) {
   const _pGN = _pGb>0   ? Math.max(0.93, Math.min(1.08, 1.0+(43-_pGb)/200))        : 1.0;
   const _pHN = _pHrFb>0 ? Math.max(0.94, Math.min(1.08, 0.94+(_pHrFb/18)*0.14))    : 1.0;
   const _ouN = _ou2>0   ? Math.max(0.96, Math.min(1.05, 0.96+(_ou2-7.0)/2.5*0.04)) : 1.0;
-  const _fvN = _lV<-150 ? 1.03 : _lV<-110 ? 1.01 : 1.0;
-  const _eBr = 0.022 * Math.pow(_eHiQ/50, 2.8) * Math.pow(_ePQ/50, 0.5) * Math.pow(_eEQ/50, 0.2);
+  const _fvN = _lineV<-150 ? 1.03 : _lineV<-110 ? 1.01 : 1.0;
+  const _eBr = 0.030 * Math.pow(_eHiQ/50, 2.8) * Math.pow(_ePQ/50, 0.5) * Math.pow(_eEQ/50, 0.2);
   const _ePr = Math.max(0.0625, Math.min(0.40, _eBr * _hrN * _bFN * _bHN * _pGN * _pHN * _ouN * _fvN));
   const eODDV = '+' + Math.round((100/_ePr - 100) / 5) * 5;
   const eODDCell='<div class="b-stat-n" style="color:var(--text1)"><span class="b-stat-lbl">ODDS</span>'+eODDV+'</div>';
@@ -5248,7 +5248,7 @@ function playerStatPills(key, g) {
   const pHN = pHrFb2>0 ? Math.max(0.94, Math.min(1.08, 0.94+(pHrFb2/18)*0.14))    : 1.0;
   const ouN = ou2>0    ? Math.max(0.96, Math.min(1.05, 0.96+(ou2-7.0)/2.5*0.04))  : 1.0;
   const fvN = lineV2<-150 ? 1.03 : lineV2<-110 ? 1.01 : 1.0;
-  const eBase = 0.022 * Math.pow(hiQ/50, 2.8) * Math.pow(pQ/50, 0.5) * Math.pow(eQ/50, 0.2);
+  const eBase = 0.030 * Math.pow(hiQ/50, 2.8) * Math.pow(pQ/50, 0.5) * Math.pow(eQ/50, 0.2);
   const eProb = Math.max(0.0625, Math.min(0.40, eBase * hrN * bFN * bHN * pGN * pHN * ouN * fvN));
   const eODD  = '+' + Math.round((100/eProb - 100) / 5) * 5;
 
