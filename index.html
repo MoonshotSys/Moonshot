@@ -4306,28 +4306,20 @@ function batterRow(b, gid, side, idx, facingPH, hriq, env) {
 
   const hrV  = rel?'<div class="b-stat '+scls+'"><span class="b-stat-lbl">HR</span>'+(rel.hr||0)+'</div>':'<div class="b-stat"></div>';
   const slgV = rel?'<div class="b-stat '+scls+'"><span class="b-stat-lbl">SLG</span>'+f3(rel.slg)+'</div>':'<div class="b-stat"></div>';
-  // eODD calculation
-  const _adv2=typeof batterAdv!=='undefined'?batterAdv[b.name]:null;
-  const _sHR=_adv2?(_adv2.hr||0):0;
-  const _bb=getBBrl(b.name),_pb=getPBrl(facingP2||(gid+'_p'));
-  const _bFb=_bb?(_bb.fb_pct||0):0,_bHrFb=_bb?(_bb.hr_fb||0):0;
-  const _pGb=_pb?(_pb.gb_pct||0):0,_pHrFb=_pb?(_pb.hr_fb||0):0;
-  const _ou2=_gRef?((_gRef.ou)||0):0;
-  const _lineM=(_gRef?(_gRef.line||''):'').match(/(-?\\+?\\d+)\\s*$/);
-  const _lineV=_lineM?parseInt(_lineM[1]):0;
-  // eODD — all vars defined before use
+  // eODD — power metrics drive odds
   const _eHiQ = typeof hriq==='number' ? hriq : 50;
   const _ePQ  = _phriq2;
   const _eEQ  = typeof env==='number'  ? env  : 50;
-  const _hrN = _sHR<=5&&_eHiQ>=70 ? 1.05 : Math.max(0.88, Math.min(1.20, 0.88+(_sHR/60)*0.32));
-  const _bFN = _bFb>0   ? Math.max(0.93, Math.min(1.08, 0.93+(_bFb-25)/100*0.15))  : 1.0;
-  const _bHN = _bHrFb>0 ? Math.max(0.93, Math.min(1.10, 0.93+(_bHrFb/25)*0.17))    : 1.0;
-  const _pGN = _pGb>0   ? Math.max(0.93, Math.min(1.08, 1.0+(43-_pGb)/200))        : 1.0;
-  const _pHN = _pHrFb>0 ? Math.max(0.94, Math.min(1.08, 0.94+(_pHrFb/18)*0.14))    : 1.0;
-  const _ouN = _ou2>0   ? Math.max(0.96, Math.min(1.05, 0.96+(_ou2-7.0)/2.5*0.04)) : 1.0;
-  const _fvN = _lineV<-150 ? 1.03 : _lineV<-110 ? 1.01 : 1.0;
-  const _eBr = 0.030 * Math.pow(_eHiQ/50, 2.8) * Math.pow(_ePQ/50, 0.5) * Math.pow(_eEQ/50, 0.2);
-  const _ePr = Math.max(0.0625, Math.min(0.40, _eBr * _hrN * _bFN * _bHN * _pGN * _pHN * _ouN * _fvN));
+  const _sHR2 = _adv2 ? (_adv2.hr||0) : 0;
+  const _hF   = Math.pow(_eHiQ/50, 1.5);
+  const _pF   = Math.pow(_ePQ/50,  0.35);
+  const _eF   = Math.pow(_eEQ/50,  0.10);
+  const _hrN  = _sHR2<=5&&_eHiQ>=70 ? 1.05 : Math.max(0.85, Math.min(1.35, 0.85+(_sHR2/55)*0.50));
+  const _bHN  = _bHrFb>0 ? Math.max(0.80, Math.min(1.40, 0.80+(_bHrFb/35)*0.60)) : 0.90;
+  const _bFN  = _bFb>0   ? Math.max(0.88, Math.min(1.15, 0.88+(_bFb-25)/100*0.27))  : 1.0;
+  const _pGN  = _pGb>0   ? Math.max(0.88, Math.min(1.15, 1.0+(43-_pGb)/130))         : 1.0;
+  const _pHN  = _pHrFb>0 ? Math.max(0.90, Math.min(1.18, 0.90+(_pHrFb/20)*0.28))     : 1.0;
+  const _ePr  = Math.max(0.0625, Math.min(0.40, 0.055 * _hF * _pF * _eF * _hrN * _bHN * _bFN * _pGN * _pHN));
   const eODDV = '+' + Math.round((100/_ePr - 100) / 5) * 5;
   const eODDCell='<div class="b-stat-n" style="color:var(--text1)"><span class="b-stat-lbl">ODDS</span>'+eODDV+'</div>';
   const _brlV2=bb?(bb.barrel_pct||0):0;
@@ -5237,19 +5229,26 @@ function playerStatPills(key, g) {
   const lineM    = (g ? (g.line||'') : '').match(/(-?\+?\d+)\s*$/);
   const lineV2   = lineM ? parseInt(lineM[1]) : 0;
 
-  // eODD — define ALL vars before use
-  const hiQ = typeof hriq==='number' ? hriq : 50;
-  const pQ  = phriq2;
-  const eQ  = typeof env==='number'  ? env  : 50;
-  const hrN = seasonHR<=5&&hiQ>=70 ? 1.05 : Math.max(0.88, Math.min(1.20, 0.88+(seasonHR/60)*0.32));
-  const bFN = bFb2>0   ? Math.max(0.93, Math.min(1.08, 0.93+(bFb2-25)/100*0.15))  : 1.0;
-  const bHN = bHrFb2>0 ? Math.max(0.93, Math.min(1.10, 0.93+(bHrFb2/25)*0.17))    : 1.0;
-  const pGN = pGb2>0   ? Math.max(0.93, Math.min(1.08, 1.0+(43-pGb2)/200))        : 1.0;
-  const pHN = pHrFb2>0 ? Math.max(0.94, Math.min(1.08, 0.94+(pHrFb2/18)*0.14))    : 1.0;
-  const ouN = ou2>0    ? Math.max(0.96, Math.min(1.05, 0.96+(ou2-7.0)/2.5*0.04))  : 1.0;
-  const fvN = lineV2<-150 ? 1.03 : lineV2<-110 ? 1.01 : 1.0;
-  const eBase = 0.030 * Math.pow(hiQ/50, 2.8) * Math.pow(pQ/50, 0.5) * Math.pow(eQ/50, 0.2);
-  const eProb = Math.max(0.0625, Math.min(0.40, eBase * hrN * bFN * bHN * pGN * pHN * ouN * fvN));
+  // eODD — power metrics drive odds, matchup adjusts
+  const hiQ  = typeof hriq==='number' ? hriq : 50;
+  const pQ   = phriq2;
+  const eQ   = typeof env==='number'  ? env  : 50;
+  const _sHR2 = adv ? (adv.hr||0) : (bs ? ((bs.vsR?.hr||0)+(bs.vsL?.hr||0)) : 0);
+  // Core: HRIQ^1.5 × pHRIQ^0.35 × ENV^0.10
+  const _hF  = Math.pow(hiQ/50, 1.5);
+  const _pF  = Math.pow(pQ/50,  0.35);
+  const _eF  = Math.pow(eQ/50,  0.10);
+  // Season HR: 0HR=0.85, 20HR=1.0, 40HR=1.20, 55HR=1.35
+  const _hrN = _sHR2<=5&&hiQ>=70 ? 1.05 : Math.max(0.85, Math.min(1.35, 0.85+(_sHR2/55)*0.50));
+  // bHR/FB%: key power metric — 0%=0.80, 15%=1.0, 25%=1.20, 35%=1.40
+  const _bHN = bHrFb2>0 ? Math.max(0.80, Math.min(1.40, 0.80+(bHrFb2/35)*0.60)) : 0.90;
+  // bFB%: flyball tendency
+  const _bFN = bFb2>0  ? Math.max(0.88, Math.min(1.15, 0.88+(bFb2-25)/100*0.27))  : 1.0;
+  // pGB%: lower GB% = more flyballs = better
+  const _pGN = pGb2>0  ? Math.max(0.88, Math.min(1.15, 1.0+(43-pGb2)/130))         : 1.0;
+  // pHR/FB%: pitcher home run rate
+  const _pHN = pHrFb2>0? Math.max(0.90, Math.min(1.18, 0.90+(pHrFb2/20)*0.28))     : 1.0;
+  const eProb = Math.max(0.0625, Math.min(0.40, 0.055 * _hF * _pF * _eF * _hrN * _bHN * _bFN * _pGN * _pHN));
   const eODD  = '+' + Math.round((100/eProb - 100) / 5) * 5;
 
   return '<div class="lcard-pills">'
