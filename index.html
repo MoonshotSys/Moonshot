@@ -4306,21 +4306,28 @@ function batterRow(b, gid, side, idx, facingPH, hriq, env) {
 
   const hrV  = rel?'<div class="b-stat '+scls+'"><span class="b-stat-lbl">HR</span>'+(rel.hr||0)+'</div>':'<div class="b-stat"></div>';
   const slgV = rel?'<div class="b-stat '+scls+'"><span class="b-stat-lbl">SLG</span>'+f3(rel.slg)+'</div>':'<div class="b-stat"></div>';
-  // eODD — power metrics drive odds
-  const _eHiQ = typeof hriq==='number' ? hriq : 50;
-  const _ePQ  = _phriq2;
-  const _eEQ  = typeof env==='number'  ? env  : 50;
-  const _sHR2 = _adv2 ? (_adv2.hr||0) : 0;
-  const _hF   = Math.pow(_eHiQ/50, 1.5);
-  const _pF   = Math.pow(_ePQ/50,  0.35);
-  const _eF   = Math.pow(_eEQ/50,  0.10);
-  const _hrN  = _sHR2<=5&&_eHiQ>=70 ? 1.05 : Math.max(0.85, Math.min(1.35, 0.85+(_sHR2/55)*0.50));
-  const _bHN  = _bHrFb>0 ? Math.max(0.80, Math.min(1.40, 0.80+(_bHrFb/35)*0.60)) : 0.90;
-  const _bFN  = _bFb>0   ? Math.max(0.88, Math.min(1.15, 0.88+(_bFb-25)/100*0.27))  : 1.0;
-  const _pGN  = _pGb>0   ? Math.max(0.88, Math.min(1.15, 1.0+(43-_pGb)/130))         : 1.0;
-  const _pHN  = _pHrFb>0 ? Math.max(0.90, Math.min(1.18, 0.90+(_pHrFb/20)*0.28))     : 1.0;
-  const _ePr  = Math.max(0.0625, Math.min(0.40, 0.055 * _hF * _pF * _eF * _hrN * _bHN * _bFN * _pGN * _pHN));
-  const eODDV = '+' + Math.round((100/_ePr - 100) / 5) * 5;
+  // eODD — all data fetched here, fully self-contained
+  const _adv2  = typeof batterAdv!=='undefined' ? batterAdv[b.name] : null;
+  const _sHR2  = _adv2 ? (_adv2.hr||0) : 0;
+  const _bb2   = getBBrl(b.name);
+  const _pb2   = _gRef ? getPBrl(facingP2) : null;
+  const _bFb   = _bb2 ? (_bb2.fb_pct||0)  : 0;
+  const _bHrFb = _bb2 ? (_bb2.hr_fb||0)   : 0;
+  const _pGb   = _pb2 ? (_pb2.gb_pct||0)  : 0;
+  const _pHrFb = _pb2 ? (_pb2.hr_fb||0)   : 0;
+  const _eHiQ  = typeof hriq==='number' ? hriq : 50;
+  const _ePQ   = typeof _phriq2==='number' ? _phriq2 : 50;
+  const _eEQ   = typeof env==='number'  ? env  : 50;
+  const _hF    = Math.pow(_eHiQ/50, 1.5);
+  const _pF    = Math.pow(_ePQ/50,  0.35);
+  const _eF    = Math.pow(_eEQ/50,  0.10);
+  const _hrN   = _sHR2<=5&&_eHiQ>=70 ? 1.05 : Math.max(0.85, Math.min(1.35, 0.85+(_sHR2/55)*0.50));
+  const _bHN   = _bHrFb>0 ? Math.max(0.80, Math.min(1.40, 0.80+(_bHrFb/35)*0.60)) : 0.90;
+  const _bFN   = _bFb>0   ? Math.max(0.88, Math.min(1.15, 0.88+(_bFb-25)/100*0.27))  : 1.0;
+  const _pGN   = _pGb>0   ? Math.max(0.88, Math.min(1.15, 1.0+(43-_pGb)/130))         : 1.0;
+  const _pHN   = _pHrFb>0 ? Math.max(0.90, Math.min(1.18, 0.90+(_pHrFb/20)*0.28))     : 1.0;
+  const _ePr   = Math.max(0.0625, Math.min(0.40, 0.055 * _hF * _pF * _eF * _hrN * _bHN * _bFN * _pGN * _pHN));
+  const eODDV  = '+' + Math.round((100/_ePr - 100) / 5) * 5;
   const eODDCell='<div class="b-stat-n" style="color:var(--text1)"><span class="b-stat-lbl">ODDS</span>'+eODDV+'</div>';
   const _brlV2=bb?(bb.barrel_pct||0):0;
   const _brlC=_brlV2>=3.4?'var(--green)':_brlV2>=2.3?'#eab308':_brlV2>=1.5?'var(--text1)':'var(--text3)';
