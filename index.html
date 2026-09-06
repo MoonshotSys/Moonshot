@@ -4343,7 +4343,7 @@ function batterRow(b, gid, side, idx, facingPH, hriq, env) {
   const _bFN   = _bFb>0   ? Math.max(0.93, Math.min(1.08, 0.93+(_bFb-30)/100*0.15))  : 1.0;
   const _pGN   = _pGb>0   ? Math.max(0.93, Math.min(1.08, 1.0+(43-_pGb)/150))         : 1.0;
   const _pHN   = _pHrFb>0 ? Math.max(0.93, Math.min(1.08, 0.93+(_pHrFb/20)*0.15))     : 1.0;
-  const _ePr   = Math.max(0.017, Math.min(0.60, 0.155 * Math.pow(_eHiQ/50,0.20) * Math.pow(_ePQ/50,0.10) * Math.pow(_eEQ/50,0.23) * _hrN * _bHN * _bFN * _pGN * _pHN));
+  const _ePr   = Math.max(0.017, Math.min(0.60, 0.158 * Math.pow(_eHiQ/50,0.20) * Math.pow(_ePQ/50,0.10) * Math.pow(_eEQ/50,0.23) * _hrN * _bHN * _bFN * _pGN * _pHN));
   const eODDV  = '+' + Math.min(1200, Math.round((100/_ePr - 100) / 5) * 5);
   // L7 hot emoji for name display
   const _l7nameD = typeof batterL7!=='undefined' ? (batterL7[b.name]||null) : null;
@@ -5278,7 +5278,7 @@ function playerStatPills(key, g) {
   const _bFN  = bFb2>0   ? Math.max(0.93, Math.min(1.08, 0.93+(bFb2-30)/100*0.15)) : 1.0;
   const _pGN  = pGb2>0   ? Math.max(0.93, Math.min(1.08, 1.0+(43-pGb2)/150))       : 1.0;
   const _pHN  = pHrFb2>0 ? Math.max(0.93, Math.min(1.08, 0.93+(pHrFb2/20)*0.15))   : 1.0;
-  const eProb = Math.max(0.017, Math.min(0.60, 0.155 * Math.pow(hiQ/50,0.20) * Math.pow(pQ/50,0.10) * Math.pow(eQ/50,0.23) * _hrN * _bHN * _bFN * _pGN * _pHN));
+  const eProb = Math.max(0.017, Math.min(0.60, 0.158 * Math.pow(hiQ/50,0.20) * Math.pow(pQ/50,0.10) * Math.pow(eQ/50,0.23) * _hrN * _bHN * _bFN * _pGN * _pHN));
   const eODD  = '+' + Math.min(1200, Math.round((100/eProb - 100) / 5) * 5);
 
   return '<div class="lcard-pills">'
