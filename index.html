@@ -149,7 +149,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
 /* ── COLUMN HEADER ── */
 .lcol-hdr{
   display:grid;
-  grid-template-columns:13px 18px 1fr 12px 20px 24px 20px 22px 22px 18px 20px 16px 18px 18px;
+  grid-template-columns:13px 18px 1fr 12px 20px 24px 20px 22px 22px 20px 16px 18px 18px;
   align-items:center;padding:3px 7px 2px;
   border-bottom:1px solid var(--border);
   background:var(--bg2);gap:2px;
@@ -163,7 +163,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
 /* ── BATTER ROW ── */
 .brow{
   display:grid;
-  grid-template-columns:13px 18px 1fr 12px 20px 24px 20px 22px 22px 18px 20px 16px 18px 18px;
+  grid-template-columns:13px 18px 1fr 12px 20px 24px 20px 22px 22px 20px 16px 18px 18px;
   align-items:center;padding:5px 7px;
   border-bottom:1px solid var(--border);
   min-height:32px;cursor:pointer;transition:background .1s;gap:2px;
@@ -173,7 +173,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
 .brow.bvp-hr{background:#051a10}
 .b-num{font-family:var(--mono);font-size:9px;color:var(--text3);text-align:center}
 .b-pos{font-family:var(--mono);font-size:8px;color:var(--text3)}
-.b-name-wrap{display:flex;align-items:center;gap:2px;min-width:0}
+.b-name-wrap{display:flex;align-items:center;gap:2px;min-width:0;justify-content:flex-start}
 .b-name{font-size:12px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .b-narr{font-size:9px;line-height:1;flex-shrink:0}
 .b-hand{font-family:var(--mono);font-size:9px;font-weight:700;text-align:center}
@@ -392,6 +392,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
   <button class="tab" onclick="switchView('l7hot',this)">&#x1F525; Hot <span class="tbadge" id="l7Badge">0</span></button>
   <button class="tab" onclick="switchView('picks',this)">Picks <span class="tbadge" id="apBadge">0</span></button>
   <button class="tab" onclick="switchView('watch',this)">Watch <span class="tbadge" id="wlBadge">0</span></button>
+  <button class="tab" onclick="switchView('cerebomb',this)">&#x1F9E0; Cerebomb</button>
   <button class="tab" onclick="switchView('long',this)">&#x1F680; Long</button>
   <button class="tab" onclick="switchView('slam',this)">&#x1F9F9; Slam</button>
   <button class="tab" onclick="switchView('thelist',this)">&#x2604;&#xFE0F; Launchpad</button>
@@ -479,6 +480,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
 </div>
 
 <!-- LONGBALL VIEW -->
+<div id="cerebombView" class="list-view">
+  <div class="list-hdr">&#x1F9E0; Cerebomb &mdash; Pitcher Vulnerability</div>
+  <div id="cerebombList"></div>
+</div>
 <div id="longView" class="list-view">
   <div class="list-hdr">🚀 Longball Prospects</div>
   <div id="longList" class="list-cards"></div>
@@ -4036,7 +4041,6 @@ function lineupPanel(g, side) {
     +'<span class="lch">BRL</span>'
     +'<span class="lch">HRIQ</span>'
     +'<span class="lch">ENV</span>'
-    +'<span class="lch">ODDS</span>'
     +'<span class="lch">BVP</span>'
     
     +'<span class="lch">S</span>'+'<span class="lch">LCS</span>'
@@ -4096,7 +4100,7 @@ function batterRow(b, gid, side, idx, facingPH, hriq, env) {
   const _l7nameD = typeof batterL7!=='undefined' ? (batterL7[b.name]||null) : null;
   const _l7nameHR = _l7nameD ? (_l7nameD.hr||0) : -1;
   const _l7emoji = _l7nameHR >= 3 ? '&#x1F525;' : _l7nameHR === 2 ? '&#x1F7E0;' : _l7nameHR === 1 ? '&#x1F7E1;' : '';
-  const eODDCell='<div class="b-stat-n" style="color:var(--text1)"><span class="b-stat-lbl">ODDS</span>'+eODDV+'</div>';
+  const eODDCell='';
   const _brlV2=bb?(bb.barrel_pct||0):0;
   const _brlC=_brlV2>=3.4?'var(--green)':_brlV2>=2.3?'#eab308':_brlV2>=1.5?'var(--text1)':'var(--text3)';
   const brlV = bb?'<div class="b-stat-n" style="margin-left:4px;color:'+_brlC+'"><span class="b-stat-lbl">BRL</span>'+f1(_brlV2)+'%</div>':'<div class="b-stat-n" style="margin-left:4px"></div>';
@@ -4946,7 +4950,7 @@ function switchView(view, btn) {
     if(el) el.classList.toggle('on', v===view);
   });
   // list-view tabs also use .on class
-  ['long','slam','anomaly','matchup','thelist','chaos','parlays'].forEach(v=>{
+  ['long','slam','anomaly','matchup','thelist','chaos','parlays','cerebomb'].forEach(v=>{
     const el=document.getElementById(v+'View');
     if(el) el.classList.toggle('on', v===view);
   });
@@ -4961,6 +4965,7 @@ function switchView(view, btn) {
   if(view==='l7hot') renderL7Hot();
   if(view==='chaos')    renderExperimental();
   if(view==='parlays')  renderParlays();
+  if(view==='cerebomb') renderCerebomb();
 }
 
 function getInfo(key) {
@@ -5379,6 +5384,88 @@ function isGameVisible(g) {
   if(!card) return true; // card not rendered yet, include by default
   return !card.classList.contains('hidden');
 }
+
+// ── CEREBOMB ─────────────────────────────────────────────────────────────────
+function renderCerebomb() {
+  const el = document.getElementById('cerebombList');
+  if(!el) return;
+
+  const pitcherCards = [];
+  games.forEach(g=>{
+    ['away','home'].forEach(pitcherSide=>{
+      const fP  = pitcherSide==='away' ? g.awayP  : g.homeP;
+      const fPH = pitcherSide==='away' ? g.awayPH : g.homePH;
+      const batSide = pitcherSide==='away' ? 'home' : 'away';
+      const lineup  = batSide==='away' ? g.awayL : g.homeL;
+      const ps = getPSplit ? getPSplit(fP) : null;
+      const pb = getPBrl  ? getPBrl(fP)  : null;
+      const pScores = calcPitcherScores(fP, lineup, fPH);
+      const phriq   = pScores ? scalePHRIQ(pScores.phriq||50) : 50;
+      const pHrFb   = pb ? (pb.hr_fb||0) : 0;
+      const hr9vsR  = ps&&ps.vsR&&ps.vsR.ip ? ((ps.vsR.hr||0)/ps.vsR.ip*9) : 0;
+      const hr9vsL  = ps&&ps.vsL&&ps.vsL.ip ? ((ps.vsL.hr||0)/ps.vsL.ip*9) : 0;
+      const rBats   = lineup.filter(b=>b.hand==='R');
+      const lBats   = lineup.filter(b=>b.hand==='L'||b.hand==='S');
+      const danger  = lineup.length>0 ? (hr9vsR*rBats.length+hr9vsL*lBats.length)/lineup.length : 0;
+      const gameLabel = g.away+'@'+g.home;
+      const hS = lineup.map((b,i)=>calcHRIQ({...b,_side:batSide},fPH,i+1,g));
+      const bList = lineup.map((b,i)=>{
+        const bb    = getBBrl(b.name);
+        const bs    = getBSplit(b.name);
+        const bFb   = bb ? (bb.fb_pct||0) : 0;
+        const bHrFb = bb ? (bb.hr_fb||0)  : 0;
+        const rel   = bs ? (fPH==='R' ? bs.vsR : bs.vsL) : null;
+        const hrVsPH = rel ? (rel.hr||0) : 0;
+        const iq    = scaleHRIQ(typeof hS[i]==='number' ? hS[i] : 50);
+        const redMatch = (b.hand==='R'&&hr9vsR>=1.0)||(b.hand==='L'&&hr9vsL>=1.0)||(b.hand==='S'&&Math.max(hr9vsR,hr9vsL)>=1.0);
+        const fbBolt   = bFb>=38 && bHrFb>=12 && pHrFb>=12;
+        const l7d = typeof batterL7!=='undefined' ? batterL7[b.name] : null;
+        const l7emoji = l7d&&l7d.hr>=3?'\uD83D\uDD25':l7d&&l7d.hr>=2?'\uD83D\uDFE0':l7d&&l7d.hr>=1&&l7d.slg>=0.550?'\uD83D\uDFE1':'';
+        return {name:b.name, hand:b.hand, iq, hrVsPH, redMatch, fbBolt, l7emoji};
+      }).sort((a,b)=>b.iq-a.iq);
+      pitcherCards.push({fP, fPH, gameLabel, phriq, hr9vsR, hr9vsL, pHrFb, danger, bList});
+    });
+  });
+
+  pitcherCards.sort((a,b)=>b.danger-a.danger);
+
+  const f2n = n => n>0 ? n.toFixed(2) : '--';
+  const dColor = d => d>=1.5?'#c94020':d>=0.8?'#c87a00':d>=0.4?'#8a7a00':'var(--text3)';
+  const dIcon  = d => d>=1.5?'\uD83D\uDD34':d>=0.8?'\uD83D\uDFE0':d>=0.4?'\uD83D\uDFE1':'\u26AA';
+
+  el.innerHTML = pitcherCards.map(p=>{
+    const chips = p.bList.map(b=>{
+      const bdr = b.redMatch ? 'border:1.5px solid #c94020' : 'border:0.5px solid var(--border2)';
+      const bolt = b.fbBolt ? '<span style="font-size:10px">\u26A1</span>' : '';
+      const l7   = b.l7emoji ? '<span style="font-size:10px">'+b.l7emoji+'</span>' : '';
+      const hrVs = b.hrVsPH>0 ? '<span style="font-family:var(--mono);font-size:10px;color:#2a8050;font-weight:500">'+b.hrVsPH+'HR</span>' : '';
+      return '<div style="display:inline-flex;align-items:center;gap:3px;background:var(--bg4);'+bdr+';border-radius:6px;padding:3px 7px;font-size:11px;margin:2px">'
+        +'<span style="font-size:10px;font-weight:500;color:var(--text3)">'+b.hand+'</span>'
+        +'<span style="color:var(--text1)">'+b.name+'</span>'
+        +'<span style="font-family:var(--mono);font-size:10px;color:var(--text3)">'+b.iq+'</span>'
+        +hrVs+bolt+l7+'</div>';
+    }).join('');
+
+    const rHot = p.hr9vsR>=1.5, lHot = p.hr9vsL>=1.5;
+    return '<div style="background:var(--bg3);border:0.5px solid var(--border2);border-radius:12px;padding:10px 12px;margin-bottom:8px">'
+      +'<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:7px">'
+      +'<span style="font-size:13px">'+dIcon(p.danger)+'</span>'
+      +'<span style="font-size:14px;font-weight:600;color:var(--text1)">'+p.fP+'</span>'
+      +'<span style="font-size:10px;color:var(--text3);background:var(--bg4);border:0.5px solid var(--border2);border-radius:4px;padding:1px 5px">'+(p.fPH==='R'?'RHP':'LHP')+'</span>'
+      +'<span style="font-size:10px;font-family:var(--mono);color:var(--text3);background:var(--bg4);border:0.5px solid var(--border2);border-radius:4px;padding:1px 5px">pIQ '+p.phriq+'</span>'
+      +'<div style="display:flex;gap:8px;margin-left:auto">'
+      +'<div style="text-align:right"><div style="font-size:12px;font-weight:600;font-family:var(--mono);color:'+(rHot?'#c94020':'var(--text1)')+'">'+f2n(p.hr9vsR)+'</div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.3px">HR/9 vsR</div></div>'
+      +'<div style="width:0.5px;background:var(--border2);align-self:stretch"></div>'
+      +'<div style="text-align:right"><div style="font-size:12px;font-weight:600;font-family:var(--mono);color:'+(lHot?'#c94020':'var(--text1)')+'">'+f2n(p.hr9vsL)+'</div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.3px">HR/9 vsL</div></div>'
+      +'</div>'
+      +'<span style="font-size:10px;color:var(--text3);font-family:var(--mono)">HR/FB '+p.pHrFb.toFixed(1)+'%</span>'
+      +'<span style="font-size:10px;color:var(--text4);margin-left:auto">'+p.gameLabel+'</span>'
+      +'</div>'
+      +'<div style="display:flex;flex-wrap:wrap;gap:2px">'+chips+'</div>'
+      +'</div>';
+  }).join('');
+}
+
 
 // ── LONGBALL PROSPECTS ─────────────────────────────────────────────────────
 function renderLongball() {
