@@ -540,7 +540,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
 // ════════════════════════════════════════════════════
 // SECTION 1 — DATE & COUNT
 // ════════════════════════════════════════════════════
-const DATE_LABEL = "10/16/2026";
+const DATE_LABEL = "10/17/2026";
 const GAME_COUNT = 1;
 
 // ════════════════════════════════════════════════════
@@ -548,6 +548,10 @@ const GAME_COUNT = 1;
 // ════════════════════════════════════════════════════
 const bvpRaw = [
 
+  {name:"Austin Hedges",ab:3,h:2,hr:1,rbi:2,bb:0,k:0,avg:0.667,obp:0.667,slg:1.667,ops:2.333,pitcher:"Nick Martinez"},
+  {name:"Jose Ramirez",ab:11,h:1,hr:0,rbi:0,bb:0,k:1,avg:0.091,obp:0.091,slg:0.091,ops:0.182,pitcher:"Nick Martinez"},
+  {name:"Nathaniel Lowe",ab:6,h:2,hr:0,rbi:0,bb:0,k:1,avg:0.333,obp:0.333,slg:0.500,ops:0.833,pitcher:"Nick Martinez"},
+  {name:"Jo Adell",ab:3,h:0,hr:0,rbi:0,bb:1,k:1,avg:0.000,obp:0.400,slg:0.000,ops:0.400,pitcher:"Nick Martinez"},
   {name:"Brayan Rocchio",ab:4,h:0,hr:0,rbi:0,bb:1,k:1,avg:0.000,obp:0.200,slg:0.000,ops:0.200,pitcher:"Nick Martinez"},
   {name:"Steven Kwan",ab:7,h:3,hr:0,rbi:2,bb:0,k:1,avg:0.429,obp:0.429,slg:0.714,ops:1.143,pitcher:"Nick Martinez"},
   {name:"David Fry",ab:3,h:1,hr:0,rbi:0,bb:0,k:0,avg:0.333,obp:0.333,slg:0.667,ops:1.000,pitcher:"Nick Martinez"},
@@ -557,19 +561,15 @@ const bvpRaw = [
   {name:"Petey Halpin",ab:2,h:0,hr:0,rbi:0,bb:0,k:0,avg:0.000,obp:0.000,slg:0.000,ops:0.000,pitcher:"Nick Martinez"},
   {name:"Chase DeLauter",ab:3,h:1,hr:0,rbi:0,bb:0,k:0,avg:0.333,obp:0.333,slg:0.333,ops:0.667,pitcher:"Nick Martinez"},
   {name:"Travis Bazzana",ab:5,h:1,hr:0,rbi:0,bb:1,k:1,avg:0.200,obp:0.333,slg:0.200,ops:0.533,pitcher:"Nick Martinez"},
-  {name:"Austin Hedges",ab:3,h:2,hr:1,rbi:2,bb:0,k:0,avg:0.667,obp:0.667,slg:1.667,ops:2.333,pitcher:"Nick Martinez"},
-  {name:"Jose Ramirez",ab:11,h:1,hr:0,rbi:0,bb:0,k:1,avg:0.091,obp:0.091,slg:0.091,ops:0.182,pitcher:"Nick Martinez"},
-  {name:"Nathaniel Lowe",ab:6,h:2,hr:0,rbi:0,bb:0,k:1,avg:0.333,obp:0.333,slg:0.500,ops:0.833,pitcher:"Nick Martinez"},
-  {name:"Jo Adell",ab:3,h:0,hr:0,rbi:0,bb:1,k:1,avg:0.000,obp:0.400,slg:0.000,ops:0.400,pitcher:"Nick Martinez"},
-  {name:"Taylor Walls",ab:1,h:1,hr:0,rbi:0,bb:0,k:0,avg:1.000,obp:1.000,slg:2.000,ops:3.000,pitcher:"Shawn Armstrong"},
-  {name:"Jonny DeLuca",ab:1,h:0,hr:0,rbi:0,bb:1,k:0,avg:0.000,obp:0.500,slg:0.000,ops:0.500,pitcher:"Shawn Armstrong"},
-  {name:"Junior Caminero",ab:2,h:0,hr:0,rbi:0,bb:0,k:0,avg:0.000,obp:0.000,slg:0.000,ops:0.000,pitcher:"Shawn Armstrong"},
-  {name:"Liam Hicks",ab:2,h:1,hr:0,rbi:1,bb:0,k:0,avg:0.500,obp:0.500,slg:0.500,ops:1.000,pitcher:"Shawn Armstrong"},
   {name:"Yandy Diaz",ab:4,h:0,hr:0,rbi:0,bb:0,k:2,avg:0.000,obp:0.000,slg:0.000,ops:0.000,pitcher:"Shawn Armstrong"},
   {name:"Jorge Mateo",ab:6,h:0,hr:0,rbi:0,bb:0,k:1,avg:0.000,obp:0.000,slg:0.000,ops:0.000,pitcher:"Shawn Armstrong"},
   {name:"Cedric Mullins",ab:8,h:5,hr:1,rbi:3,bb:0,k:1,avg:0.625,obp:0.625,slg:1.125,ops:1.750,pitcher:"Shawn Armstrong"},
   {name:"Nick Fortes",ab:1,h:1,hr:0,rbi:0,bb:1,k:0,avg:1.000,obp:1.000,slg:1.000,ops:2.000,pitcher:"Shawn Armstrong"},
   {name:"Jonathan Aranda",ab:1,h:0,hr:0,rbi:0,bb:1,k:0,avg:0.000,obp:0.500,slg:0.000,ops:0.500,pitcher:"Shawn Armstrong"},
+  {name:"Taylor Walls",ab:1,h:1,hr:0,rbi:0,bb:0,k:0,avg:1.000,obp:1.000,slg:2.000,ops:3.000,pitcher:"Shawn Armstrong"},
+  {name:"Jonny DeLuca",ab:1,h:0,hr:0,rbi:0,bb:1,k:0,avg:0.000,obp:0.500,slg:0.000,ops:0.500,pitcher:"Shawn Armstrong"},
+  {name:"Junior Caminero",ab:2,h:0,hr:0,rbi:0,bb:0,k:0,avg:0.000,obp:0.000,slg:0.000,ops:0.000,pitcher:"Shawn Armstrong"},
+  {name:"Liam Hicks",ab:2,h:1,hr:0,rbi:1,bb:0,k:0,avg:0.500,obp:0.500,slg:0.500,ops:1.000,pitcher:"Shawn Armstrong"},
 
 ];
 
@@ -672,16 +672,16 @@ const teamGameDates = {
   "CHC": [],
   "CHW": [],
   "CIN": [],
-  "CLE": ["Thu 10/15","Tue 10/13","Mon 10/12"],
+  "CLE": ["Sat 10/17","Thu 10/15","Tue 10/13"],
   "COL": [],
   "DET": [],
   "FA": [],
   "HOU": [],
   "KC": [],
   "LAA": [],
-  "LAD": ["Thu 10/15","Wed 10/14","Mon 10/12","Sun 10/11"],
+  "LAD": ["Thu 10/15","Wed 10/14"],
   "MIA": [],
-  "MIL": ["Thu 10/15","Wed 10/14","Mon 10/12","Sun 10/11"],
+  "MIL": ["Thu 10/15","Wed 10/14"],
   "MIN": [],
   "NYM": [],
   "NYY": [],
@@ -691,7 +691,7 @@ const teamGameDates = {
   "SEA": [],
   "SF": [],
   "STL": [],
-  "TB": ["Thu 10/15","Tue 10/13","Mon 10/12"],
+  "TB": ["Sat 10/17","Thu 10/15","Tue 10/13"],
   "TEX": [],
   "TOR": [],
   "WSH": [],
@@ -699,57 +699,57 @@ const teamGameDates = {
 };
 const lineupHistory = {
 
-  "Steven Kwan": {"Thu 10/15":"R1 (LF)","Tue 10/13":"R1 (CF)","Mon 10/12":"R1 (CF)"},
-  "Jose Ramirez": {"Thu 10/15":"R2 (3B)","Tue 10/13":"R2 (3B)","Mon 10/12":"R2 (3B)"},
-  "Chase DeLauter": {"Thu 10/15":"R3 (RF)","Tue 10/13":"R3 (DH)","Mon 10/12":"R3 (RF)"},
-  "Jo Adell": {"Thu 10/15":"R4 (DH)","Tue 10/13":"R4 (RF)","Mon 10/12":"R4 (DH)"},
-  "Nathaniel Lowe": {"Thu 10/15":"R5 (1B)","Tue 10/13":"R5 (1B)","Mon 10/12":"R5 (1B)"},
-  "Angel Martinez": {"Thu 10/15":"X","Tue 10/13":"X","Mon 10/12":"X"},
-  "Travis Bazzana": {"Thu 10/15":"R6 (2B)","Tue 10/13":"R6 (2B)","Mon 10/12":"R6 (2B)"},
-  "Patrick Bailey": {"Thu 10/15":"R7 (C)","Tue 10/13":"X","Mon 10/12":"R7 (C)"},
-  "Petey Halpin": {"Thu 10/15":"R8 (CF)","Tue 10/13":"R7 (CF)","Mon 10/12":"R8 (CF)"},
-  "Austin Hedges": {"Thu 10/15":"X","Tue 10/13":"R8 (C)","Mon 10/12":"X"},
-  "Brayan Rocchio": {"Thu 10/15":"R9 (SS)","Tue 10/13":"R9 (SS)","Mon 10/12":"R9 (SS)"},
-  "Mookie Betts": {"Thu 10/15":"L2 (SS)","Wed 10/14":"L1 (SS)","Mon 10/12":"R1 (SS)","Sun 10/11":"R1 (SS)"},
-  "Freddie Freeman": {"Thu 10/15":"L3 (1B)","Wed 10/14":"L2 (1B)","Mon 10/12":"R2 (1B)","Sun 10/11":"R2 (1B)"},
-  "Teoscar Hernandez": {"Thu 10/15":"L6 (LF)","Wed 10/14":"L3 (LF)","Mon 10/12":"R3 (LF)","Sun 10/11":"R5 (LF)"},
-  "Will Smith": {"Thu 10/15":"L4 (C)","Wed 10/14":"L7 (C)","Mon 10/12":"R5 (C)","Sun 10/11":"R3 (C)"},
-  "Shohei Ohtani": {"Thu 10/15":"L1 (DH)","Wed 10/14":"L6 (DH)","Mon 10/12":"R4 (DH)","Sun 10/11":"R4 (DH)"},
-  "Max Muncy": {"Thu 10/15":"X","Wed 10/14":"X","Mon 10/12":"R6 (3B)","Sun 10/11":"R6 (3B)"},
-  "Andy Pages": {"Thu 10/15":"L8 (CF)","Wed 10/14":"L5 (CF)","Mon 10/12":"R7 (CF)","Sun 10/11":"R7 (CF)"},
-  "Miguel Rojas": {"Thu 10/15":"L7 (2B)","Wed 10/14":"L8 (3B)","Mon 10/12":"X","Sun 10/11":"X"},
-  "Kyle Tucker": {"Thu 10/15":"L5 (RF)","Wed 10/14":"L4 (RF)","Mon 10/12":"R8 (RF)","Sun 10/11":"R8 (RF)"},
-  "Enrique Hernandez": {"Thu 10/15":"L9 (3B)","Wed 10/14":"X","Mon 10/12":"X","Sun 10/11":"R9 (2B)"},
-  "Tommy Edman": {"Thu 10/15":"X","Wed 10/14":"L9 (2B)","Mon 10/12":"R9 (2B)","Sun 10/11":"X"},
-  "Jackson Chourio": {"Thu 10/15":"R1 (LF)","Wed 10/14":"L1 (LF)","Mon 10/12":"R1 (LF)","Sun 10/11":"R1 (LF)"},
-  "Brice Turang": {"Thu 10/15":"R2 (2B)","Wed 10/14":"L2 (2B)","Mon 10/12":"R2 (2B)","Sun 10/11":"R2 (2B)"},
-  "William Contreras": {"Thu 10/15":"R3 (C)","Wed 10/14":"L3 (C)","Mon 10/12":"R3 (C)","Sun 10/11":"R3 (C)"},
-  "Jake Bauers": {"Thu 10/15":"R4 (1B)","Wed 10/14":"L5 (1B)","Mon 10/12":"R4 (1B)","Sun 10/11":"R4 (1B)"},
-  "Christian Yelich": {"Thu 10/15":"R5 (DH)","Wed 10/14":"X","Mon 10/12":"R5 (DH)","Sun 10/11":"X"},
-  "Andrew Vaughn": {"Thu 10/15":"X","Wed 10/14":"L4 (DH)","Mon 10/12":"X","Sun 10/11":"R5 (DH)"},
-  "Garrett Mitchell": {"Thu 10/15":"R6 (CF)","Wed 10/14":"L6 (CF)","Mon 10/12":"R6 (CF)","Sun 10/11":"R6 (CF)"},
-  "Cooper Pratt": {"Thu 10/15":"R7 (SS)","Wed 10/14":"L7 (SS)","Mon 10/12":"R7 (SS)","Sun 10/11":"R7 (SS)"},
-  "Sal Frelick": {"Thu 10/15":"R8 (RF)","Wed 10/14":"X","Mon 10/12":"R8 (RF)","Sun 10/11":"X"},
-  "Luis Lara": {"Thu 10/15":"X","Wed 10/14":"L8 (RF)","Mon 10/12":"X","Sun 10/11":"R8 (RF)"},
-  "Joey Ortiz": {"Thu 10/15":"X","Wed 10/14":"L9 (3B)","Mon 10/12":"X","Sun 10/11":"R9 (3B)"},
-  "David Hamilton": {"Thu 10/15":"R9 (3B)","Wed 10/14":"X","Mon 10/12":"R9 (3B)","Sun 10/11":"X"},
-  "Yandy Diaz": {"Thu 10/15":"R1 (DH)","Tue 10/13":"L1 (DH)","Mon 10/12":"L1 (DH)"},
-  "Jonathan Aranda": {"Thu 10/15":"R2 (1B)","Tue 10/13":"L2 (1B)","Mon 10/12":"L2 (1B)"},
-  "Junior Caminero": {"Thu 10/15":"R3 (3B)","Tue 10/13":"L3 (3B)","Mon 10/12":"L3 (3B)"},
-  "Victor Mesa": {"Thu 10/15":"R4 (RF)","Tue 10/13":"L4 (RF)","Mon 10/12":"L5 (RF)"},
-  "Victor Mesa Jr.": {"Thu 10/15":"R4 (RF)","Tue 10/13":"L4 (RF)","Mon 10/12":"L5 (RF)"},
-  "Ryan Vilade": {"Thu 10/15":"X","Tue 10/13":"X","Mon 10/12":"L4 (LF)"},
-  "Jonny DeLuca": {"Thu 10/15":"R7 (CF)","Tue 10/13":"L5 (CF)","Mon 10/12":"L6 (LF)"},
-  "Chandler Simpson": {"Thu 10/15":"R5 (LF)","Tue 10/13":"L6 (LF)","Mon 10/12":"X"},
-  "Ben Williamson": {"Thu 10/15":"X","Tue 10/13":"L7 (2B)","Mon 10/12":"L7 (2B)"},
-  "Liam Hicks": {"Thu 10/15":"R6 (C)","Tue 10/13":"L8 (C)","Mon 10/12":"X"},
-  "Richie Palacios": {"Thu 10/15":"R8 (2B)","Tue 10/13":"X","Mon 10/12":"X"},
-  "Taylor Walls": {"Thu 10/15":"R9 (SS)","Tue 10/13":"L9 (SS)","Mon 10/12":"L8 (SS)"},
-  "Nick Fortes": {"Thu 10/15":"X","Tue 10/13":"X","Mon 10/12":"L9 (C)"},
+  "Steven Kwan": {"Sat 10/17":"R1 (LF)","Thu 10/15":"R1 (LF)","Tue 10/13":"R1 (CF)"},
+  "Jose Ramirez": {"Sat 10/17":"R2 (3B)","Thu 10/15":"R2 (3B)","Tue 10/13":"R2 (3B)"},
+  "Chase DeLauter": {"Sat 10/17":"R3 (RF)","Thu 10/15":"R3 (RF)","Tue 10/13":"R3 (DH)"},
+  "Jo Adell": {"Sat 10/17":"R4 (DH)","Thu 10/15":"R4 (DH)","Tue 10/13":"R4 (RF)"},
+  "Nathaniel Lowe": {"Sat 10/17":"R5 (1B)","Thu 10/15":"R5 (1B)","Tue 10/13":"R5 (1B)"},
+  "Angel Martinez": {"Sat 10/17":"X","Thu 10/15":"X","Tue 10/13":"X"},
+  "Travis Bazzana": {"Sat 10/17":"R6 (2B)","Thu 10/15":"R6 (2B)","Tue 10/13":"R6 (2B)"},
+  "Patrick Bailey": {"Sat 10/17":"R7 (C)","Thu 10/15":"R7 (C)","Tue 10/13":"X"},
+  "Petey Halpin": {"Sat 10/17":"R8 (CF)","Thu 10/15":"R8 (CF)","Tue 10/13":"R7 (CF)"},
+  "Austin Hedges": {"Sat 10/17":"X","Thu 10/15":"X","Tue 10/13":"R8 (C)"},
+  "Brayan Rocchio": {"Sat 10/17":"R9 (SS)","Thu 10/15":"R9 (SS)","Tue 10/13":"R9 (SS)"},
+  "Mookie Betts": {"Thu 10/15":"L2 (SS)","Wed 10/14":"L1 (SS)"},
+  "Freddie Freeman": {"Thu 10/15":"L3 (1B)","Wed 10/14":"L2 (1B)"},
+  "Shohei Ohtani": {"Thu 10/15":"L1 (DH)","Wed 10/14":"L6 (DH)"},
+  "Teoscar Hernandez": {"Thu 10/15":"L6 (LF)","Wed 10/14":"L3 (LF)"},
+  "Will Smith": {"Thu 10/15":"L4 (C)","Wed 10/14":"L7 (C)"},
+  "Max Muncy": {"Thu 10/15":"X","Wed 10/14":"X"},
+  "Kyle Tucker": {"Thu 10/15":"L5 (RF)","Wed 10/14":"L4 (RF)"},
+  "Andy Pages": {"Thu 10/15":"L8 (CF)","Wed 10/14":"L5 (CF)"},
+  "Miguel Rojas": {"Thu 10/15":"L7 (2B)","Wed 10/14":"L8 (3B)"},
+  "Enrique Hernandez": {"Thu 10/15":"L9 (2B)","Wed 10/14":"X"},
+  "Tommy Edman": {"Thu 10/15":"X","Wed 10/14":"L9 (2B)"},
+  "Jackson Chourio": {"Thu 10/15":"R1 (LF)","Wed 10/14":"L1 (LF)"},
+  "Brice Turang": {"Thu 10/15":"R2 (2B)","Wed 10/14":"L2 (2B)"},
+  "William Contreras": {"Thu 10/15":"R3 (C)","Wed 10/14":"L3 (C)"},
+  "Jake Bauers": {"Thu 10/15":"R4 (1B)","Wed 10/14":"L5 (1B)"},
+  "Andrew Vaughn": {"Thu 10/15":"X","Wed 10/14":"L4 (DH)"},
+  "Christian Yelich": {"Thu 10/15":"R5 (DH)","Wed 10/14":"X"},
+  "Garrett Mitchell": {"Thu 10/15":"R6 (CF)","Wed 10/14":"L6 (CF)"},
+  "Cooper Pratt": {"Thu 10/15":"R7 (SS)","Wed 10/14":"L7 (SS)"},
+  "Luis Lara": {"Thu 10/15":"X","Wed 10/14":"L8 (RF)"},
+  "Sal Frelick": {"Thu 10/15":"R8 (RF)","Wed 10/14":"X"},
+  "Joey Ortiz": {"Thu 10/15":"X","Wed 10/14":"L9 (3B)"},
+  "David Hamilton": {"Thu 10/15":"R9 (3B)","Wed 10/14":"X"},
+  "Yandy Diaz": {"Sat 10/17":"R1 (DH)","Thu 10/15":"R1 (DH)","Tue 10/13":"L1 (DH)"},
+  "Jonathan Aranda": {"Sat 10/17":"R2 (1B)","Thu 10/15":"R2 (1B)","Tue 10/13":"L2 (1B)"},
+  "Junior Caminero": {"Sat 10/17":"R4 (3B)","Thu 10/15":"R3 (3B)","Tue 10/13":"L3 (3B)"},
+  "Ryan Vilade": {"Sat 10/17":"X","Thu 10/15":"X","Tue 10/13":"X"},
+  "Victor Mesa": {"Sat 10/17":"R6 (RF)","Thu 10/15":"R4 (RF)","Tue 10/13":"L4 (RF)"},
+  "Victor Mesa Jr.": {"Sat 10/17":"R6 (RF)","Thu 10/15":"R4 (RF)","Tue 10/13":"L4 (RF)"},
+  "Chandler Simpson": {"Sat 10/17":"R3 (LF)","Thu 10/15":"R5 (LF)","Tue 10/13":"L6 (LF)"},
+  "Jonny DeLuca": {"Sat 10/17":"R7 (CF)","Thu 10/15":"R7 (CF)","Tue 10/13":"L5 (CF)"},
+  "Ben Williamson": {"Sat 10/17":"X","Thu 10/15":"X","Tue 10/13":"L7 (2B)"},
+  "Liam Hicks": {"Sat 10/17":"R5 (C)","Thu 10/15":"R6 (C)","Tue 10/13":"L8 (C)"},
+  "Richie Palacios": {"Sat 10/17":"R8 (2B)","Thu 10/15":"R8 (2B)","Tue 10/13":"X"},
+  "Taylor Walls": {"Sat 10/17":"R9 (SS)","Thu 10/15":"R9 (SS)","Tue 10/13":"L9 (SS)"},
+  "Nick Fortes": {"Sat 10/17":"X","Thu 10/15":"X","Tue 10/13":"X"},
 
 };
-const historyDates = ["Thu 10/15","Wed 10/14","Tue 10/13","Mon 10/12","Sun 10/11"];
-const TODAY_DATE = "Fri 10/16";
+const historyDates = ["Thu 10/15","Wed 10/14","Tue 10/13"];
+const TODAY_DATE = "Sat 10/17";
 
 // ════════════════════════════════════════════════════
 // SECTION 8 — NARRATIVES
@@ -1709,7 +1709,7 @@ const projPitchers = {
 // ════════════════════════════════════════════════════
 const games = [
 
-  {id:"tb-cle",time:"8:00 PM",away:"TB",home:"CLE",awayRec:"0-0",homeRec:"0-0",awayP:"Nick Martinez",awayPH:"R",awayEra:"3.10",awayConf:true,awayPrim:false,homeP:"Tanner Bibee",homePH:"R",homeEra:"4.36",homeConf:false,homePrim:true,line:"TB -114",ou:6.5,windDir:"neutral",dome:false,postponed:false,rain:41,temp:54,windMph:26,windLabel:"26mph",awayL:[{pos:"DH",name:"Yandy Diaz",hand:"R"},{pos:"1B",name:"J. Aranda",hand:"L"},{pos:"LF",name:"C. Simpson",hand:"L"},{pos:"3B",name:"J. Caminero",hand:"R"},{pos:"C",name:"Liam Hicks",hand:"L"},{pos:"RF",name:"Victor Mesa",hand:"L"},{pos:"CF",name:"Jonny DeLuca",hand:"R"},{pos:"2B",name:"R. Palacios",hand:"L"},{pos:"SS",name:"Taylor Walls",hand:"S"}],homeL:[{pos:"LF",name:"Steven Kwan",hand:"L"},{pos:"3B",name:"Jose Ramirez",hand:"S"},{pos:"RF",name:"C. DeLauter",hand:"L"},{pos:"DH",name:"Jo Adell",hand:"R"},{pos:"1B",name:"N. Lowe",hand:"L"},{pos:"2B",name:"T. Bazzana",hand:"L"},{pos:"C",name:"P. Bailey",hand:"S"},{pos:"CF",name:"Petey Halpin",hand:"L"},{pos:"SS",name:"B. Rocchio",hand:"S"}]},
+  {id:"tb-cle",time:"8:08 PM",away:"TB",home:"CLE",awayRec:"0-0",homeRec:"0-0",awayP:"Nick Martinez",awayPH:"R",awayEra:"3.10",awayConf:true,awayPrim:false,homeP:"Tanner Bibee",homePH:"R",homeEra:"4.36",homeConf:false,homePrim:true,line:"TB -112",ou:6.5,windDir:"L-R",dome:false,postponed:false,rain:0,temp:49,windMph:7,windLabel:"7mph L-R",awayL:[{pos:"DH",name:"Yandy Diaz",hand:"R"},{pos:"1B",name:"J. Aranda",hand:"L"},{pos:"LF",name:"C. Simpson",hand:"L"},{pos:"3B",name:"J. Caminero",hand:"R"},{pos:"C",name:"Liam Hicks",hand:"L"},{pos:"RF",name:"Victor Mesa",hand:"L"},{pos:"CF",name:"Jonny DeLuca",hand:"R"},{pos:"2B",name:"R. Palacios",hand:"L"},{pos:"SS",name:"Taylor Walls",hand:"S"}],homeL:[{pos:"LF",name:"Steven Kwan",hand:"L"},{pos:"3B",name:"Jose Ramirez",hand:"S"},{pos:"RF",name:"C. DeLauter",hand:"L"},{pos:"DH",name:"Jo Adell",hand:"R"},{pos:"1B",name:"N. Lowe",hand:"L"},{pos:"2B",name:"T. Bazzana",hand:"L"},{pos:"C",name:"P. Bailey",hand:"S"},{pos:"CF",name:"Petey Halpin",hand:"L"},{pos:"SS",name:"B. Rocchio",hand:"S"}]},
 
 ];
 
